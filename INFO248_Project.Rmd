@@ -1,0 +1,68 @@
+---
+title: "INFO 248 Project"
+author: "Rinija Raja"
+date: "4/16/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Load in necessary libraries
+library(tidyverse)
+```
+
+## GDP by State
+This data shows the GDP for each state or region in the United States. The GDP value is shown in millions or out of the total percent in the U.S. 
+```{r}
+gdp_state <- read.csv("C:/Users/Rinija/Documents/UMass/JR-S2/INFO 248/Project/state_gdp_value.csv")
+dim(gdp_state)
+#Change the name of the first column
+names(gdp_state)[1] <- "Name"
+head(gdp_state)
+```
+```{r}
+state_info <- read.csv("C:/Users/Rinija/Documents/UMass/JR-S2/INFO 248/Project/COVID19_state.csv")
+glimpse(state_info)
+head(state_info)
+```
+# Visualization of GDP in CA vs. TX, RI vs. UT
+```{r}
+CA <- state_info %>% 
+  select(State, GDP) %>% 
+  filter(State == "California")
+
+
+```
+
+
+## Visualization of GDP in CA vs. TX, RI vs. UT
+```{r}
+CA <- gdp_state %>% 
+  select(Name, Year, GDP) %>% 
+  filter(Name == "California") 
+dim(CA)
+
+TX <- gdp_state %>% 
+  select(Name, Year, GDP) %>% 
+  filter(Name == "Texas") 
+dim(TX)
+
+RI <- gdp_state %>% 
+  select(Name, Year, GDP,) %>% 
+  filter(Name == "Rhode Island") 
+dim(RI)
+
+UT <- gdp_state %>% 
+  select(Name, Year, GDP) %>% 
+  filter(Name == "Utah") 
+dim(UT)
+
+ggplot(data=TX)+
+  geom_point(aes(x=Year, y=GDP))
+```
+##################### FOR SOME REASON THE VALUES ARE EMPTY ##########################
+
+
