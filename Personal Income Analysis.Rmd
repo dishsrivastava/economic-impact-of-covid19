@@ -1,0 +1,23 @@
+---
+title: "Analysis of COVID-19's Impact on Personal Income"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+## R Markdown
+
+```{r load libraries}
+```
+
+## Load dataset  
+
+```{r dataset libraries}
+pi.state <- read.table("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Personal Income Cleaned.xlsx")
+pi.industry
+```
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
