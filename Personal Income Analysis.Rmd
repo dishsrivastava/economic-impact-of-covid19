@@ -1,5 +1,5 @@
 ---
-title: "Analysis of COVID-19's Impact on Personal Income"
+title: "Analysis of COVID-19's Impact on Personal Income in the U.S."
 output: html_document
 editor_options: 
   chunk_output_type: console
@@ -8,16 +8,24 @@ editor_options:
 ## R Markdown
 
 ```{r load libraries}
+library(tidyverse)
 ```
 
 ## Load dataset  
 
-```{r dataset libraries}
-pi.state <- read.table("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Personal Income Cleaned.xlsx")
-pi.industry
+```{r dataset}
+pi.resident <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/cleaned/Personal-Income-Resident-Cleaned.csv")
+
+pi.industry <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/cleaned/Personal-Income-Industry-Cleaned.csv")
+
+covid19.health <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/cleaned/COVID-19-Health-Data.csv")
 ```
 
 ```{r pressure, echo=FALSE}
-plot(pressure)
+head(pi.resident) 
+head(pi.industry)
+head(covid19.health)
+
+plot(covid19.health$State, covid19.health$Infected)
 ```
 
