@@ -1,61 +1,1321 @@
-﻿State,"Agriculture, forestry, fishing, and hunting","Mining, quarrying, and oil and gas extraction",Utilities,Construction,Durable goods manufacturing,Nondurable goods manufacturing,Wholesale trade,Retail trade,Transportation and warehousing,Information,Finance and insurance,Real estate and rental and leasing,"Professional, scientific, and technical services",Management of companies and enterprises,Administrative and support and waste management and remediation services,Educational services,Health care and social assistance,"Arts, entertainment, and recreation",Accomodation and food services,Other services (except government and government enterprises),Government and government enterprises
-United States,0.04,-0.11,0.05,-0.08,-0.23,-0.07,-0.23,-0.16,-0.4,0.16,0.13,-0.07,-0.12,0,-0.16,-0.09,-0.42,-0.43,-0.76,-0.28,-0.26
-New England ,0,0,0.05,-0.08,-0.17,-0.04,-0.15,-0.23,-0.23,0.12,-0.11,-0.11,-0.21,-0.02,-0.16,-0.2,-0.56,-0.51,-0.78,-0.29,-0.37
-Connecticut,0,0,0.04,-0.12,-0.11,-0.08,-0.15,-0.31,-0.24,0.4,-0.4,-0.17,-0.4,-0.08,-0.13,-0.16,-0.52,-0.35,-0.6,-0.3,-0.41
-Maine ,0,0,0.18,0.08,-0.19,-0.03,-0.13,-0.24,-0.3,-0.11,0.04,-0.1,-0.09,-0.04,-0.1,-0.17,-0.68,-0.44,-1.14,-0.31,-0.35
-Massachusetts ,0.01,0,0.04,-0.09,-0.15,-0.01,-0.11,-0.16,-0.24,0.05,-0.09,-0.03,-0.15,-0.02,-0.18,-0.23,-0.55,-0.56,-0.72,-0.27,-0.33
-New Hampshire ,-0.01,0,0.12,0.02,-0.4,-0.06,-0.36,-0.32,-0.18,0.04,0.2,-0.29,-0.17,0.11,-0.12,-0.13,-0.49,-0.84,-1.06,-0.28,-0.48
-Rhode Island ,0,0,0.01,-0.09,-0.16,-0.06,-0.31,-0.23,-0.18,-0.08,0.42,-0.33,-0.12,0.05,-0.18,-0.26,-0.8,-0.4,-1.04,-0.37,-0.41
-Vermont ,-0.27,-0.04,0.1,-0.08,-0.47,-0.02,-0.12,-0.36,-0.23,0.04,-0.02,-0.25,0.03,0.12,-0.19,-0.3,-0.67,-0.48,-1.47,-0.37,-0.37
-Mideast ,-0.02,-0.05,0.03,-0.2,-0.13,-0.06,-0.25,-0.29,-0.4,0.28,-0.01,-0.16,-0.27,-0.04,-0.34,-0.15,-0.52,-0.63,-0.93,-0.3,-0.29
-Delaware ,-0.1,0,0.08,0.03,-0.15,-0.26,-0.09,-0.1,-0.22,-0.03,-0.4,-0.39,-0.38,-0.02,-0.08,-0.06,-0.48,-0.18,-0.58,-0.2,-0.26
-District of Columbia ,0,0,0.03,0.03,0,0,0.02,-0.03,-0.06,0.12,-0.02,-0.24,-0.06,0.23,-0.1,-0.14,-0.25,-0.41,-1.15,-0.34,0.91
-Maryland ,0.02,0,-0.04,-0.04,0,0.11,-0.14,-0.11,-0.24,-0.09,0.21,-0.14,-0.28,-0.08,-0.13,-0.13,-0.43,-0.39,-0.61,-0.28,0.15
-New Jersey,0.01,0,0.03,-0.14,-0.1,0,-0.34,-0.23,-0.5,0.28,-0.04,-0.29,-0.18,0.21,-0.22,-0.12,-0.59,-0.44,-0.63,-0.34,-0.42
-New York,-0.02,0,0.02,-0.35,-0.14,-0.1,-0.28,-0.43,-0.38,0.53,-0.09,-0.15,-0.33,-0.12,-0.55,-0.15,-0.55,-0.85,-1.27,-0.27,-0.44
-Pennsylvania ,-0.06,-0.23,0.07,-0.09,-0.21,-0.1,-0.24,-0.22,-0.56,0,0.14,-0.05,-0.23,-0.08,-0.16,-0.2,-0.5,-0.49,-0.6,-0.33,-0.28
-Great Lakes ,0.18,-0.06,0.04,-0.08,-0.61,-0.1,-0.34,-0.16,-0.45,-0.02,0.22,-0.09,-0.26,0,-0.2,-0.1,-0.47,-0.37,-0.69,-0.29,-0.34
-Illinois ,0.38,-0.03,-0.02,-0.16,-0.42,0.03,-0.39,-0.12,-0.57,0.04,0.24,-0.13,-0.26,-0.02,-0.19,-0.12,-0.4,-0.5,-0.73,-0.29,-0.33
-Indiana,0.4,-0.02,0.03,0.01,-0.5,-0.11,-0.24,-0.14,-0.42,-0.08,0.17,-0.07,-0.09,-0.03,-0.11,-0.11,-0.46,-0.3,-0.53,-0.28,-0.19
-Michigan ,0.01,-0.02,0.08,-0.12,-1.18,-0.16,-0.37,-0.23,-0.28,0.02,0.23,-0.03,-0.52,0,-0.29,-0.1,-0.55,-0.29,-0.85,-0.36,-0.36
-Ohio ,0.06,-0.16,0.06,-0.02,-0.52,-0.14,-0.35,-0.16,-0.46,0.01,0.27,-0.12,-0.19,0.09,-0.2,-0.09,-0.43,-0.39,-0.63,-0.25,-0.33
-Wisconsin ,-0.07,-0.04,0.08,-0.02,-0.5,-0.21,-0.26,-0.13,-0.39,-0.23,0.12,-0.05,-0.18,-0.08,-0.18,-0.09,-0.63,-0.23,-0.6,-0.27,-0.53
-Plains ,0.31,-0.06,0.06,-0.02,-0.24,0.01,-0.25,-0.14,-0.58,-0.03,0.15,-0.11,-0.13,-0.05,-0.11,-0.08,-0.4,-0.25,-0.58,-0.28,-0.35
-Iowa ,0.46,0,0.12,-0.1,0,-0.09,-0.24,-0.13,-0.47,-0.03,0.31,-0.05,-0.07,0.03,-0.1,-0.07,-0.41,-0.2,-0.53,-0.31,-0.42
-Kansas,0.16,-0.05,0.05,-0.11,-0.16,0.32,-0.33,-0.11,-0.57,0,0.22,-0.26,-0.09,-0.06,-0.16,-0.05,-0.18,-0.17,-0.59,-0.3,-0.52
-Minnesota ,0.22,0,0.1,0.03,-0.18,-0.12,-0.23,-0.16,-0.41,-0.11,0.03,-0.11,-0.24,-0.25,-0.14,-0.09,-0.5,-0.32,-0.58,-0.29,-0.35
-Missouri ,0.03,-0.02,0.04,0.03,-0.57,0.01,-0.28,-0.13,-0.48,-0.03,0.05,-0.09,-0.13,0.07,-0.06,-0.12,-0.43,-0.32,-0.65,-0.28,-0.24
-Nebraska,0.54,0.01,-0.08,0.1,-0.06,0.06,-0.13,-0.11,-1.42,0.08,0.83,-0.07,-0.04,0.03,-0.13,-0.07,-0.32,-0.19,-0.43,-0.22,-0.47
-North Dakota ,1.21,-1.17,0.06,-0.52,-0.18,0.02,-0.42,-0.15,-0.98,-0.01,0.01,-0.07,-0.1,0.05,-0.06,0,-0.35,-0.11,-0.54,-0.2,-0.03
-South Dakota ,1.12,0,0.12,0.16,-0.16,0.06,-0.16,-0.21,-0.37,0.06,-0.44,-0.1,-0.01,0.05,0.01,-0.03,-0.48,-0.12,-0.63,-0.24,-0.31
-Southeast ,0,-0.06,0.11,-0.03,-0.17,-0.11,-0.17,-0.14,-0.36,-0.06,0.2,-0.09,-0.08,0.04,-0.15,-0.06,-0.46,-0.31,-0.79,-0.27,-0.21
-Alabama ,0.03,-0.05,0.06,0.02,-0.15,0.1,-0.19,-0.19,-0.39,-0.07,0.01,-0.13,0.22,-0.04,-0.09,-0.05,-0.57,-0.12,-0.6,-0.32,-0.13
-Arkansas,0.09,-0.05,0.3,0.1,-0.47,-0.08,-0.09,-0.07,-0.54,0.02,0.16,-0.1,-0.04,0.03,-0.04,-0.03,-0.49,-0.03,-0.6,-0.33,-0.37
-Florida ,0.03,-0.01,0.14,0,0.08,-0.07,-0.19,-0.11,-0.34,-0.08,0.38,-0.08,-0.07,0.02,-0.2,-0.08,-0.34,-0.39,-0.99,-0.34,-0.22
-Georgia ,-0.07,-0.01,0.11,0.01,-0.22,-0.09,-0.35,-0.05,-0.42,-0.03,0.28,-0.2,-0.11,0.05,-0.09,-0.04,-0.3,-0.13,-0.56,-0.2,-0.11
-Kentucky,0.12,-0.12,0.15,0.03,-0.24,-0.06,-0.29,-0.19,-0.57,-0.04,0.03,-0.03,-0.18,-0.04,-0.15,-0.06,-0.56,-0.09,-0.73,-0.3,-0.37
-Louisiana ,0.07,-0.46,0.19,-0.4,-0.1,-0.7,-0.22,-0.18,-0.4,-0.12,0.06,-0.12,-0.16,0.06,-0.13,-0.07,-1.23,-0.27,-0.79,-0.27,-0.25
-Mississippi ,0.02,-0.04,0.38,-0.03,-0.23,0.07,-0.14,-0.16,-0.49,-0.05,0,-0.07,0.02,0.11,-0.1,-0.06,-0.58,-0.14,-0.8,-0.25,-0.27
-North Carolina ,-0.03,0,0.06,-0.05,-0.48,0.02,0.05,-0.12,-0.14,-0.04,0.26,-0.03,-0.04,0.04,-0.08,-0.09,-0.35,-0.3,-0.76,-0.21,-0.21
-South Carolina ,-0.02,-0.03,0,-0.19,-0.44,-0.16,-0.15,-0.18,-0.32,-0.01,0.17,-0.04,-0.1,0.02,-0.26,-0.06,-0.4,-0.23,-1.02,-0.26,-0.4
-Tennessee ,0,-0.01,0.05,0.01,-0.21,-0.24,-0.16,-0.3,-0.56,0,0.16,-0.06,-0.16,-0.02,-0.22,-0.08,-0.62,-0.96,-0.92,-0.3,-0.26
-Virginia ,-0.05,-0.02,0.06,0.1,-0.08,-0.11,-0.08,-0.11,-0.27,-0.13,0.08,-0.08,-0.13,0.17,-0.18,-0.03,-0.43,-0.26,-0.59,-0.24,-0.11
-West Virginia ,0.01,-0.92,0.09,-0.76,0.1,-0.19,-0.48,-0.29,-0.48,0,-0.04,-0.12,-0.26,-0.02,-0.23,-0.05,-0.57,-0.12,-0.86,-0.29,-0.03
-Southwest ,-0.09,-0.78,0,-0.1,-0.11,-0.23,-0.3,-0.06,-0.45,0.02,0.18,-0.1,0.03,0.01,-0.07,-0.04,-0.26,-0.26,-0.46,-0.21,0.01
-Arizona ,0.06,0,0.08,0.12,0.01,0.01,0.08,0.13,-0.25,0.16,0.3,0.05,-0.11,0.17,-0.12,-0.06,-0.27,-0.39,-0.62,-0.21,-0.06
-New Mexico,-0.2,-0.98,0.12,-0.07,-0.09,-0.02,-0.12,-0.1,-0.35,-0.13,0.02,0,-0.04,0.04,-0.03,-0.04,-0.37,-0.23,-0.58,-0.25,0.34
-Oklahoma,-0.17,-2.31,-0.09,-0.26,-0.53,-0.03,-0.33,0.07,-1.13,0.04,0.09,-0.11,-0.27,0.37,-0.14,-0.08,-0.3,-0.18,-0.44,-0.24,-0.04
-Texas,-0.11,-0.77,-0.01,-0.13,-0.08,-0.31,-0.39,-0.11,-0.42,0,0.17,-0.13,0.1,-0.06,-0.06,-0.04,-0.25,-0.25,-0.43,-0.2,0.01
-Rocky Mountain ,-0.11,-0.17,0.09,0.22,0.04,0.01,-0.09,-0.05,-0.45,0.42,0.32,0.01,-0.07,0.08,-0.07,-0.02,-0.27,-0.44,-0.6,-0.24,-0.1
-Colorado ,-0.16,-0.02,0.08,0.05,0.07,-0.03,-0.1,-0.06,-0.38,0.73,0.3,0.02,0.01,0.13,-0.1,-0.03,-0.32,-0.58,-0.65,-0.26,-0.16
-Idaho ,-0.19,-0.03,0.19,0.4,0.18,0.05,-0.06,-0.14,-0.34,-0.12,0.25,0.04,0.08,0.05,0.05,-0.03,-0.3,-0.27,-0.59,-0.27,-0.08
-Montana ,0.53,-0.14,0.22,0.16,-0.01,-0.31,-0.12,-0.25,-0.7,0.02,-0.02,0.01,-0.05,0,-0.02,-0.04,-0.56,-0.32,-0.78,-0.28,-0.35
-Utah ,-0.08,-0.02,0.02,0.61,-0.06,0.16,-0.02,0.05,-0.32,0.22,0.58,0.01,-0.31,0.04,-0.06,0.02,-0.09,-0.34,-0.45,-0.2,0.15
-Wyoming ,-0.35,-2.48,0.11,-0.15,-0.02,0.03,-0.3,0.08,-1.66,-0.07,-0.1,-0.2,-0.1,-0.04,-0.14,-0.01,-0.19,-0.1,-0.63,-0.23,-0.41
-Far West,0.1,-0.03,0.06,-0.07,-0.23,-0.05,-0.21,-0.1,-0.4,0.54,0.12,0.07,-0.02,0,-0.06,-0.08,-0.31,-0.53,-0.89,-0.29,-0.32
-Alaska ,-0.01,-0.69,0.15,0.02,0,-0.04,-0.12,-0.16,-1.09,-0.09,0.02,-0.13,-0.13,-0.05,0,-0.06,-0.59,-0.24,-0.83,-0.21,-0.64
-California ,0.1,-0.04,0.04,-0.09,-0.18,-0.05,-0.21,-0.18,-0.38,0.4,0.14,0.08,-0.04,0,-0.07,-0.08,-0.31,-0.57,-0.73,-0.3,-0.32
-Hawaii ,0.03,0,0.09,-0.09,-0.02,-0.18,-0.36,-0.27,-1.05,-0.13,0.12,-0.3,-0.13,-0.09,-0.21,-0.16,-0.27,-0.51,-3.9,-0.35,-0.24
-Nevada,-0.05,0.14,0.09,0.14,0.18,0.04,-0.19,-0.24,-0.41,-0.1,0.19,0.08,-0.11,0,-0.21,-0.06,-0.16,-0.71,-2.61,-0.22,-0.39
-Oregon ,0.14,0,0.09,0.06,-0.3,-0.07,-0.09,-0.09,-0.3,0.09,0.02,0.07,-0.11,0.21,-0.04,-0.1,-0.35,-0.39,-0.92,-0.27,-0.48
-Washington,0.13,-0.01,0.1,-0.12,-0.61,-0.06,-0.24,0.35,-0.38,1.78,0.04,0.09,0.19,-0.08,0.01,-0.06,-0.34,-0.37,-0.7,-0.27,-0.2
+﻿Name,Industry,PercentChange
+United States,Percent change in real GDP by state,-3.5
+New England ,Percent change in real GDP by state,-4
+Connecticut,Percent change in real GDP by state,-4.1
+Maine ,Percent change in real GDP by state,-4.1
+Massachusetts ,Percent change in real GDP by state,-3.8
+New Hampshire ,Percent change in real GDP by state,-4.7
+Rhode Island ,Percent change in real GDP by state,-4.5
+Vermont ,Percent change in real GDP by state,-5.4
+Mideast ,Percent change in real GDP by state,-4.7
+Delaware ,Percent change in real GDP by state,-3.9
+District of Columbia ,Percent change in real GDP by state,-1.5
+Maryland ,Percent change in real GDP by state,-2.6
+New Jersey,Percent change in real GDP by state,-4.1
+New York,Percent change in real GDP by state,-5.9
+Pennsylvania ,Percent change in real GDP by state,-4.4
+Great Lakes ,Percent change in real GDP by state,-4.2
+Illinois ,Percent change in real GDP by state,-4
+Indiana,Percent change in real GDP by state,-3.1
+Michigan ,Percent change in real GDP by state,-5.4
+Ohio ,Percent change in real GDP by state,-4
+Wisconsin ,Percent change in real GDP by state,-4.5
+Plains ,Percent change in real GDP by state,-3.1
+Iowa ,Percent change in real GDP by state,-2.3
+Kansas,Percent change in real GDP by state,-3
+Minnesota ,Percent change in real GDP by state,-3.7
+Missouri ,Percent change in real GDP by state,-3.6
+Nebraska,Percent change in real GDP by state,-2.1
+North Dakota ,Percent change in real GDP by state,-3.5
+South Dakota ,Percent change in real GDP by state,-1.7
+Southeast ,Percent change in real GDP by state,-3.2
+Alabama ,Percent change in real GDP by state,-2.7
+Arkansas,Percent change in real GDP by state,-2.6
+Florida ,Percent change in real GDP by state,-2.9
+Georgia ,Percent change in real GDP by state,-2.5
+Kentucky,Percent change in real GDP by state,-3.7
+Louisiana ,Percent change in real GDP by state,-5.5
+Mississippi ,Percent change in real GDP by state,-2.8
+North Carolina ,Percent change in real GDP by state,-2.5
+South Carolina ,Percent change in real GDP by state,-4.1
+Tennessee ,Percent change in real GDP by state,-4.9
+Virginia ,Percent change in real GDP by state,-2.5
+West Virginia ,Percent change in real GDP by state,-5.5
+Southwest ,Percent change in real GDP by state,-3.3
+Arizona ,Percent change in real GDP by state,-0.9
+New Mexico,Percent change in real GDP by state,-3.1
+Oklahoma,Percent change in real GDP by state,-6.1
+Texas,Percent change in real GDP by state,-3.5
+Rocky Mountain ,Percent change in real GDP by state,-1.5
+Colorado ,Percent change in real GDP by state,-1.5
+Idaho ,Percent change in real GDP by state,-1.1
+Montana ,Percent change in real GDP by state,-3
+Utah ,Percent change in real GDP by state,-0.1
+Wyoming ,Percent change in real GDP by state,-7
+Far West,Percent change in real GDP by state,-2.7
+Alaska ,Percent change in real GDP by state,-4.9
+California ,Percent change in real GDP by state,-2.8
+Hawaii ,Percent change in real GDP by state,-8
+Nevada,Percent change in real GDP by state,-4.6
+Oregon ,Percent change in real GDP by state,-2.8
+Washington,Percent change in real GDP by state,-0.7
+United States,"Agriculture, forestry, fishing, and hunting",0.04
+New England ,"Agriculture, forestry, fishing, and hunting",0
+Connecticut,"Agriculture, forestry, fishing, and hunting",0
+Maine ,"Agriculture, forestry, fishing, and hunting",0
+Massachusetts ,"Agriculture, forestry, fishing, and hunting",0.01
+New Hampshire ,"Agriculture, forestry, fishing, and hunting",-0.01
+Rhode Island ,"Agriculture, forestry, fishing, and hunting",0
+Vermont ,"Agriculture, forestry, fishing, and hunting",-0.27
+Mideast ,"Agriculture, forestry, fishing, and hunting",-0.02
+Delaware ,"Agriculture, forestry, fishing, and hunting",-0.1
+District of Columbia ,"Agriculture, forestry, fishing, and hunting",0
+Maryland ,"Agriculture, forestry, fishing, and hunting",0.02
+New Jersey,"Agriculture, forestry, fishing, and hunting",0.01
+New York,"Agriculture, forestry, fishing, and hunting",-0.02
+Pennsylvania ,"Agriculture, forestry, fishing, and hunting",-0.06
+Great Lakes ,"Agriculture, forestry, fishing, and hunting",0.18
+Illinois ,"Agriculture, forestry, fishing, and hunting",0.38
+Indiana,"Agriculture, forestry, fishing, and hunting",0.4
+Michigan ,"Agriculture, forestry, fishing, and hunting",0.01
+Ohio ,"Agriculture, forestry, fishing, and hunting",0.06
+Wisconsin ,"Agriculture, forestry, fishing, and hunting",-0.07
+Plains ,"Agriculture, forestry, fishing, and hunting",0.31
+Iowa ,"Agriculture, forestry, fishing, and hunting",0.46
+Kansas,"Agriculture, forestry, fishing, and hunting",0.16
+Minnesota ,"Agriculture, forestry, fishing, and hunting",0.22
+Missouri ,"Agriculture, forestry, fishing, and hunting",0.03
+Nebraska,"Agriculture, forestry, fishing, and hunting",0.54
+North Dakota ,"Agriculture, forestry, fishing, and hunting",1.21
+South Dakota ,"Agriculture, forestry, fishing, and hunting",1.12
+Southeast ,"Agriculture, forestry, fishing, and hunting",0
+Alabama ,"Agriculture, forestry, fishing, and hunting",0.03
+Arkansas,"Agriculture, forestry, fishing, and hunting",0.09
+Florida ,"Agriculture, forestry, fishing, and hunting",0.03
+Georgia ,"Agriculture, forestry, fishing, and hunting",-0.07
+Kentucky,"Agriculture, forestry, fishing, and hunting",0.12
+Louisiana ,"Agriculture, forestry, fishing, and hunting",0.07
+Mississippi ,"Agriculture, forestry, fishing, and hunting",0.02
+North Carolina ,"Agriculture, forestry, fishing, and hunting",-0.03
+South Carolina ,"Agriculture, forestry, fishing, and hunting",-0.02
+Tennessee ,"Agriculture, forestry, fishing, and hunting",0
+Virginia ,"Agriculture, forestry, fishing, and hunting",-0.05
+West Virginia ,"Agriculture, forestry, fishing, and hunting",0.01
+Southwest ,"Agriculture, forestry, fishing, and hunting",-0.09
+Arizona ,"Agriculture, forestry, fishing, and hunting",0.06
+New Mexico,"Agriculture, forestry, fishing, and hunting",-0.2
+Oklahoma,"Agriculture, forestry, fishing, and hunting",-0.17
+Texas,"Agriculture, forestry, fishing, and hunting",-0.11
+Rocky Mountain ,"Agriculture, forestry, fishing, and hunting",-0.11
+Colorado ,"Agriculture, forestry, fishing, and hunting",-0.16
+Idaho ,"Agriculture, forestry, fishing, and hunting",-0.19
+Montana ,"Agriculture, forestry, fishing, and hunting",0.53
+Utah ,"Agriculture, forestry, fishing, and hunting",-0.08
+Wyoming ,"Agriculture, forestry, fishing, and hunting",-0.35
+Far West,"Agriculture, forestry, fishing, and hunting",0.1
+Alaska ,"Agriculture, forestry, fishing, and hunting",-0.01
+California ,"Agriculture, forestry, fishing, and hunting",0.1
+Hawaii ,"Agriculture, forestry, fishing, and hunting",0.03
+Nevada,"Agriculture, forestry, fishing, and hunting",-0.05
+Oregon ,"Agriculture, forestry, fishing, and hunting",0.14
+Washington,"Agriculture, forestry, fishing, and hunting",0.13
+United States,"Mining, quarrying, and oil and gas extraction",-0.11
+New England ,"Mining, quarrying, and oil and gas extraction",0
+Connecticut,"Mining, quarrying, and oil and gas extraction",0
+Maine ,"Mining, quarrying, and oil and gas extraction",0
+Massachusetts ,"Mining, quarrying, and oil and gas extraction",0
+New Hampshire ,"Mining, quarrying, and oil and gas extraction",0
+Rhode Island ,"Mining, quarrying, and oil and gas extraction",0
+Vermont ,"Mining, quarrying, and oil and gas extraction",-0.04
+Mideast ,"Mining, quarrying, and oil and gas extraction",-0.05
+Delaware ,"Mining, quarrying, and oil and gas extraction",0
+District of Columbia ,"Mining, quarrying, and oil and gas extraction",0
+Maryland ,"Mining, quarrying, and oil and gas extraction",0
+New Jersey,"Mining, quarrying, and oil and gas extraction",0
+New York,"Mining, quarrying, and oil and gas extraction",0
+Pennsylvania ,"Mining, quarrying, and oil and gas extraction",-0.23
+Great Lakes ,"Mining, quarrying, and oil and gas extraction",-0.06
+Illinois ,"Mining, quarrying, and oil and gas extraction",-0.03
+Indiana,"Mining, quarrying, and oil and gas extraction",-0.02
+Michigan ,"Mining, quarrying, and oil and gas extraction",-0.02
+Ohio ,"Mining, quarrying, and oil and gas extraction",-0.16
+Wisconsin ,"Mining, quarrying, and oil and gas extraction",-0.04
+Plains ,"Mining, quarrying, and oil and gas extraction",-0.06
+Iowa ,"Mining, quarrying, and oil and gas extraction",0
+Kansas,"Mining, quarrying, and oil and gas extraction",-0.05
+Minnesota ,"Mining, quarrying, and oil and gas extraction",0
+Missouri ,"Mining, quarrying, and oil and gas extraction",-0.02
+Nebraska,"Mining, quarrying, and oil and gas extraction",0.01
+North Dakota ,"Mining, quarrying, and oil and gas extraction",-1.17
+South Dakota ,"Mining, quarrying, and oil and gas extraction",0
+Southeast ,"Mining, quarrying, and oil and gas extraction",-0.06
+Alabama ,"Mining, quarrying, and oil and gas extraction",-0.05
+Arkansas,"Mining, quarrying, and oil and gas extraction",-0.05
+Florida ,"Mining, quarrying, and oil and gas extraction",-0.01
+Georgia ,"Mining, quarrying, and oil and gas extraction",-0.01
+Kentucky,"Mining, quarrying, and oil and gas extraction",-0.12
+Louisiana ,"Mining, quarrying, and oil and gas extraction",-0.46
+Mississippi ,"Mining, quarrying, and oil and gas extraction",-0.04
+North Carolina ,"Mining, quarrying, and oil and gas extraction",0
+South Carolina ,"Mining, quarrying, and oil and gas extraction",-0.03
+Tennessee ,"Mining, quarrying, and oil and gas extraction",-0.01
+Virginia ,"Mining, quarrying, and oil and gas extraction",-0.02
+West Virginia ,"Mining, quarrying, and oil and gas extraction",-0.92
+Southwest ,"Mining, quarrying, and oil and gas extraction",-0.78
+Arizona ,"Mining, quarrying, and oil and gas extraction",0
+New Mexico,"Mining, quarrying, and oil and gas extraction",-0.98
+Oklahoma,"Mining, quarrying, and oil and gas extraction",-2.31
+Texas,"Mining, quarrying, and oil and gas extraction",-0.77
+Rocky Mountain ,"Mining, quarrying, and oil and gas extraction",-0.17
+Colorado ,"Mining, quarrying, and oil and gas extraction",-0.02
+Idaho ,"Mining, quarrying, and oil and gas extraction",-0.03
+Montana ,"Mining, quarrying, and oil and gas extraction",-0.14
+Utah ,"Mining, quarrying, and oil and gas extraction",-0.02
+Wyoming ,"Mining, quarrying, and oil and gas extraction",-2.48
+Far West,"Mining, quarrying, and oil and gas extraction",-0.03
+Alaska ,"Mining, quarrying, and oil and gas extraction",-0.69
+California ,"Mining, quarrying, and oil and gas extraction",-0.04
+Hawaii ,"Mining, quarrying, and oil and gas extraction",0
+Nevada,"Mining, quarrying, and oil and gas extraction",0.14
+Oregon ,"Mining, quarrying, and oil and gas extraction",0
+Washington,"Mining, quarrying, and oil and gas extraction",-0.01
+United States,Utilities,0.05
+New England ,Utilities,0.05
+Connecticut,Utilities,0.04
+Maine ,Utilities,0.18
+Massachusetts ,Utilities,0.04
+New Hampshire ,Utilities,0.12
+Rhode Island ,Utilities,0.01
+Vermont ,Utilities,0.1
+Mideast ,Utilities,0.03
+Delaware ,Utilities,0.08
+District of Columbia ,Utilities,0.03
+Maryland ,Utilities,-0.04
+New Jersey,Utilities,0.03
+New York,Utilities,0.02
+Pennsylvania ,Utilities,0.07
+Great Lakes ,Utilities,0.04
+Illinois ,Utilities,-0.02
+Indiana,Utilities,0.03
+Michigan ,Utilities,0.08
+Ohio ,Utilities,0.06
+Wisconsin ,Utilities,0.08
+Plains ,Utilities,0.06
+Iowa ,Utilities,0.12
+Kansas,Utilities,0.05
+Minnesota ,Utilities,0.1
+Missouri ,Utilities,0.04
+Nebraska,Utilities,-0.08
+North Dakota ,Utilities,0.06
+South Dakota ,Utilities,0.12
+Southeast ,Utilities,0.11
+Alabama ,Utilities,0.06
+Arkansas,Utilities,0.3
+Florida ,Utilities,0.14
+Georgia ,Utilities,0.11
+Kentucky,Utilities,0.15
+Louisiana ,Utilities,0.19
+Mississippi ,Utilities,0.38
+North Carolina ,Utilities,0.06
+South Carolina ,Utilities,0
+Tennessee ,Utilities,0.05
+Virginia ,Utilities,0.06
+West Virginia ,Utilities,0.09
+Southwest ,Utilities,0
+Arizona ,Utilities,0.08
+New Mexico,Utilities,0.12
+Oklahoma,Utilities,-0.09
+Texas,Utilities,-0.01
+Rocky Mountain ,Utilities,0.09
+Colorado ,Utilities,0.08
+Idaho ,Utilities,0.19
+Montana ,Utilities,0.22
+Utah ,Utilities,0.02
+Wyoming ,Utilities,0.11
+Far West,Utilities,0.06
+Alaska ,Utilities,0.15
+California ,Utilities,0.04
+Hawaii ,Utilities,0.09
+Nevada,Utilities,0.09
+Oregon ,Utilities,0.09
+Washington,Utilities,0.1
+United States,Construction,-0.08
+New England ,Construction,-0.08
+Connecticut,Construction,-0.12
+Maine ,Construction,0.08
+Massachusetts ,Construction,-0.09
+New Hampshire ,Construction,0.02
+Rhode Island ,Construction,-0.09
+Vermont ,Construction,-0.08
+Mideast ,Construction,-0.2
+Delaware ,Construction,0.03
+District of Columbia ,Construction,0.03
+Maryland ,Construction,-0.04
+New Jersey,Construction,-0.14
+New York,Construction,-0.35
+Pennsylvania ,Construction,-0.09
+Great Lakes ,Construction,-0.08
+Illinois ,Construction,-0.16
+Indiana,Construction,0.01
+Michigan ,Construction,-0.12
+Ohio ,Construction,-0.02
+Wisconsin ,Construction,-0.02
+Plains ,Construction,-0.02
+Iowa ,Construction,-0.1
+Kansas,Construction,-0.11
+Minnesota ,Construction,0.03
+Missouri ,Construction,0.03
+Nebraska,Construction,0.1
+North Dakota ,Construction,-0.52
+South Dakota ,Construction,0.16
+Southeast ,Construction,-0.03
+Alabama ,Construction,0.02
+Arkansas,Construction,0.1
+Florida ,Construction,0
+Georgia ,Construction,0.01
+Kentucky,Construction,0.03
+Louisiana ,Construction,-0.4
+Mississippi ,Construction,-0.03
+North Carolina ,Construction,-0.05
+South Carolina ,Construction,-0.19
+Tennessee ,Construction,0.01
+Virginia ,Construction,0.1
+West Virginia ,Construction,-0.76
+Southwest ,Construction,-0.1
+Arizona ,Construction,0.12
+New Mexico,Construction,-0.07
+Oklahoma,Construction,-0.26
+Texas,Construction,-0.13
+Rocky Mountain ,Construction,0.22
+Colorado ,Construction,0.05
+Idaho ,Construction,0.4
+Montana ,Construction,0.16
+Utah ,Construction,0.61
+Wyoming ,Construction,-0.15
+Far West,Construction,-0.07
+Alaska ,Construction,0.02
+California ,Construction,-0.09
+Hawaii ,Construction,-0.09
+Nevada,Construction,0.14
+Oregon ,Construction,0.06
+Washington,Construction,-0.12
+United States,Durable goods manufacturing,-0.23
+New England ,Durable goods manufacturing,-0.17
+Connecticut,Durable goods manufacturing,-0.11
+Maine ,Durable goods manufacturing,-0.19
+Massachusetts ,Durable goods manufacturing,-0.15
+New Hampshire ,Durable goods manufacturing,-0.4
+Rhode Island ,Durable goods manufacturing,-0.16
+Vermont ,Durable goods manufacturing,-0.47
+Mideast ,Durable goods manufacturing,-0.13
+Delaware ,Durable goods manufacturing,-0.15
+District of Columbia ,Durable goods manufacturing,0
+Maryland ,Durable goods manufacturing,0
+New Jersey,Durable goods manufacturing,-0.1
+New York,Durable goods manufacturing,-0.14
+Pennsylvania ,Durable goods manufacturing,-0.21
+Great Lakes ,Durable goods manufacturing,-0.61
+Illinois ,Durable goods manufacturing,-0.42
+Indiana,Durable goods manufacturing,-0.5
+Michigan ,Durable goods manufacturing,-1.18
+Ohio ,Durable goods manufacturing,-0.52
+Wisconsin ,Durable goods manufacturing,-0.5
+Plains ,Durable goods manufacturing,-0.24
+Iowa ,Durable goods manufacturing,0
+Kansas,Durable goods manufacturing,-0.16
+Minnesota ,Durable goods manufacturing,-0.18
+Missouri ,Durable goods manufacturing,-0.57
+Nebraska,Durable goods manufacturing,-0.06
+North Dakota ,Durable goods manufacturing,-0.18
+South Dakota ,Durable goods manufacturing,-0.16
+Southeast ,Durable goods manufacturing,-0.17
+Alabama ,Durable goods manufacturing,-0.15
+Arkansas,Durable goods manufacturing,-0.47
+Florida ,Durable goods manufacturing,0.08
+Georgia ,Durable goods manufacturing,-0.22
+Kentucky,Durable goods manufacturing,-0.24
+Louisiana ,Durable goods manufacturing,-0.1
+Mississippi ,Durable goods manufacturing,-0.23
+North Carolina ,Durable goods manufacturing,-0.48
+South Carolina ,Durable goods manufacturing,-0.44
+Tennessee ,Durable goods manufacturing,-0.21
+Virginia ,Durable goods manufacturing,-0.08
+West Virginia ,Durable goods manufacturing,0.1
+Southwest ,Durable goods manufacturing,-0.11
+Arizona ,Durable goods manufacturing,0.01
+New Mexico,Durable goods manufacturing,-0.09
+Oklahoma,Durable goods manufacturing,-0.53
+Texas,Durable goods manufacturing,-0.08
+Rocky Mountain ,Durable goods manufacturing,0.04
+Colorado ,Durable goods manufacturing,0.07
+Idaho ,Durable goods manufacturing,0.18
+Montana ,Durable goods manufacturing,-0.01
+Utah ,Durable goods manufacturing,-0.06
+Wyoming ,Durable goods manufacturing,-0.02
+Far West,Durable goods manufacturing,-0.23
+Alaska ,Durable goods manufacturing,0
+California ,Durable goods manufacturing,-0.18
+Hawaii ,Durable goods manufacturing,-0.02
+Nevada,Durable goods manufacturing,0.18
+Oregon ,Durable goods manufacturing,-0.3
+Washington,Durable goods manufacturing,-0.61
+United States,Nondurable goods manufacturing,-0.07
+New England ,Nondurable goods manufacturing,-0.04
+Connecticut,Nondurable goods manufacturing,-0.08
+Maine ,Nondurable goods manufacturing,-0.03
+Massachusetts ,Nondurable goods manufacturing,-0.01
+New Hampshire ,Nondurable goods manufacturing,-0.06
+Rhode Island ,Nondurable goods manufacturing,-0.06
+Vermont ,Nondurable goods manufacturing,-0.02
+Mideast ,Nondurable goods manufacturing,-0.06
+Delaware ,Nondurable goods manufacturing,-0.26
+District of Columbia ,Nondurable goods manufacturing,0
+Maryland ,Nondurable goods manufacturing,0.11
+New Jersey,Nondurable goods manufacturing,0
+New York,Nondurable goods manufacturing,-0.1
+Pennsylvania ,Nondurable goods manufacturing,-0.1
+Great Lakes ,Nondurable goods manufacturing,-0.1
+Illinois ,Nondurable goods manufacturing,0.03
+Indiana,Nondurable goods manufacturing,-0.11
+Michigan ,Nondurable goods manufacturing,-0.16
+Ohio ,Nondurable goods manufacturing,-0.14
+Wisconsin ,Nondurable goods manufacturing,-0.21
+Plains ,Nondurable goods manufacturing,0.01
+Iowa ,Nondurable goods manufacturing,-0.09
+Kansas,Nondurable goods manufacturing,0.32
+Minnesota ,Nondurable goods manufacturing,-0.12
+Missouri ,Nondurable goods manufacturing,0.01
+Nebraska,Nondurable goods manufacturing,0.06
+North Dakota ,Nondurable goods manufacturing,0.02
+South Dakota ,Nondurable goods manufacturing,0.06
+Southeast ,Nondurable goods manufacturing,-0.11
+Alabama ,Nondurable goods manufacturing,0.1
+Arkansas,Nondurable goods manufacturing,-0.08
+Florida ,Nondurable goods manufacturing,-0.07
+Georgia ,Nondurable goods manufacturing,-0.09
+Kentucky,Nondurable goods manufacturing,-0.06
+Louisiana ,Nondurable goods manufacturing,-0.7
+Mississippi ,Nondurable goods manufacturing,0.07
+North Carolina ,Nondurable goods manufacturing,0.02
+South Carolina ,Nondurable goods manufacturing,-0.16
+Tennessee ,Nondurable goods manufacturing,-0.24
+Virginia ,Nondurable goods manufacturing,-0.11
+West Virginia ,Nondurable goods manufacturing,-0.19
+Southwest ,Nondurable goods manufacturing,-0.23
+Arizona ,Nondurable goods manufacturing,0.01
+New Mexico,Nondurable goods manufacturing,-0.02
+Oklahoma,Nondurable goods manufacturing,-0.03
+Texas,Nondurable goods manufacturing,-0.31
+Rocky Mountain ,Nondurable goods manufacturing,0.01
+Colorado ,Nondurable goods manufacturing,-0.03
+Idaho ,Nondurable goods manufacturing,0.05
+Montana ,Nondurable goods manufacturing,-0.31
+Utah ,Nondurable goods manufacturing,0.16
+Wyoming ,Nondurable goods manufacturing,0.03
+Far West,Nondurable goods manufacturing,-0.05
+Alaska ,Nondurable goods manufacturing,-0.04
+California ,Nondurable goods manufacturing,-0.05
+Hawaii ,Nondurable goods manufacturing,-0.18
+Nevada,Nondurable goods manufacturing,0.04
+Oregon ,Nondurable goods manufacturing,-0.07
+Washington,Nondurable goods manufacturing,-0.06
+United States,Wholesale trade,-0.23
+New England ,Wholesale trade,-0.15
+Connecticut,Wholesale trade,-0.15
+Maine ,Wholesale trade,-0.13
+Massachusetts ,Wholesale trade,-0.11
+New Hampshire ,Wholesale trade,-0.36
+Rhode Island ,Wholesale trade,-0.31
+Vermont ,Wholesale trade,-0.12
+Mideast ,Wholesale trade,-0.25
+Delaware ,Wholesale trade,-0.09
+District of Columbia ,Wholesale trade,0.02
+Maryland ,Wholesale trade,-0.14
+New Jersey,Wholesale trade,-0.34
+New York,Wholesale trade,-0.28
+Pennsylvania ,Wholesale trade,-0.24
+Great Lakes ,Wholesale trade,-0.34
+Illinois ,Wholesale trade,-0.39
+Indiana,Wholesale trade,-0.24
+Michigan ,Wholesale trade,-0.37
+Ohio ,Wholesale trade,-0.35
+Wisconsin ,Wholesale trade,-0.26
+Plains ,Wholesale trade,-0.25
+Iowa ,Wholesale trade,-0.24
+Kansas,Wholesale trade,-0.33
+Minnesota ,Wholesale trade,-0.23
+Missouri ,Wholesale trade,-0.28
+Nebraska,Wholesale trade,-0.13
+North Dakota ,Wholesale trade,-0.42
+South Dakota ,Wholesale trade,-0.16
+Southeast ,Wholesale trade,-0.17
+Alabama ,Wholesale trade,-0.19
+Arkansas,Wholesale trade,-0.09
+Florida ,Wholesale trade,-0.19
+Georgia ,Wholesale trade,-0.35
+Kentucky,Wholesale trade,-0.29
+Louisiana ,Wholesale trade,-0.22
+Mississippi ,Wholesale trade,-0.14
+North Carolina ,Wholesale trade,0.05
+South Carolina ,Wholesale trade,-0.15
+Tennessee ,Wholesale trade,-0.16
+Virginia ,Wholesale trade,-0.08
+West Virginia ,Wholesale trade,-0.48
+Southwest ,Wholesale trade,-0.3
+Arizona ,Wholesale trade,0.08
+New Mexico,Wholesale trade,-0.12
+Oklahoma,Wholesale trade,-0.33
+Texas,Wholesale trade,-0.39
+Rocky Mountain ,Wholesale trade,-0.09
+Colorado ,Wholesale trade,-0.1
+Idaho ,Wholesale trade,-0.06
+Montana ,Wholesale trade,-0.12
+Utah ,Wholesale trade,-0.02
+Wyoming ,Wholesale trade,-0.3
+Far West,Wholesale trade,-0.21
+Alaska ,Wholesale trade,-0.12
+California ,Wholesale trade,-0.21
+Hawaii ,Wholesale trade,-0.36
+Nevada,Wholesale trade,-0.19
+Oregon ,Wholesale trade,-0.09
+Washington,Wholesale trade,-0.24
+United States,Retail trade,-0.16
+New England ,Retail trade,-0.23
+Connecticut,Retail trade,-0.31
+Maine ,Retail trade,-0.24
+Massachusetts ,Retail trade,-0.16
+New Hampshire ,Retail trade,-0.32
+Rhode Island ,Retail trade,-0.23
+Vermont ,Retail trade,-0.36
+Mideast ,Retail trade,-0.29
+Delaware ,Retail trade,-0.1
+District of Columbia ,Retail trade,-0.03
+Maryland ,Retail trade,-0.11
+New Jersey,Retail trade,-0.23
+New York,Retail trade,-0.43
+Pennsylvania ,Retail trade,-0.22
+Great Lakes ,Retail trade,-0.16
+Illinois ,Retail trade,-0.12
+Indiana,Retail trade,-0.14
+Michigan ,Retail trade,-0.23
+Ohio ,Retail trade,-0.16
+Wisconsin ,Retail trade,-0.13
+Plains ,Retail trade,-0.14
+Iowa ,Retail trade,-0.13
+Kansas,Retail trade,-0.11
+Minnesota ,Retail trade,-0.16
+Missouri ,Retail trade,-0.13
+Nebraska,Retail trade,-0.11
+North Dakota ,Retail trade,-0.15
+South Dakota ,Retail trade,-0.21
+Southeast ,Retail trade,-0.14
+Alabama ,Retail trade,-0.19
+Arkansas,Retail trade,-0.07
+Florida ,Retail trade,-0.11
+Georgia ,Retail trade,-0.05
+Kentucky,Retail trade,-0.19
+Louisiana ,Retail trade,-0.18
+Mississippi ,Retail trade,-0.16
+North Carolina ,Retail trade,-0.12
+South Carolina ,Retail trade,-0.18
+Tennessee ,Retail trade,-0.3
+Virginia ,Retail trade,-0.11
+West Virginia ,Retail trade,-0.29
+Southwest ,Retail trade,-0.06
+Arizona ,Retail trade,0.13
+New Mexico,Retail trade,-0.1
+Oklahoma,Retail trade,0.07
+Texas,Retail trade,-0.11
+Rocky Mountain ,Retail trade,-0.05
+Colorado ,Retail trade,-0.06
+Idaho ,Retail trade,-0.14
+Montana ,Retail trade,-0.25
+Utah ,Retail trade,0.05
+Wyoming ,Retail trade,0.08
+Far West,Retail trade,-0.1
+Alaska ,Retail trade,-0.16
+California ,Retail trade,-0.18
+Hawaii ,Retail trade,-0.27
+Nevada,Retail trade,-0.24
+Oregon ,Retail trade,-0.09
+Washington,Retail trade,0.35
+United States,Transportation and warehousing,-0.4
+New England ,Transportation and warehousing,-0.23
+Connecticut,Transportation and warehousing,-0.24
+Maine ,Transportation and warehousing,-0.3
+Massachusetts ,Transportation and warehousing,-0.24
+New Hampshire ,Transportation and warehousing,-0.18
+Rhode Island ,Transportation and warehousing,-0.18
+Vermont ,Transportation and warehousing,-0.23
+Mideast ,Transportation and warehousing,-0.4
+Delaware ,Transportation and warehousing,-0.22
+District of Columbia ,Transportation and warehousing,-0.06
+Maryland ,Transportation and warehousing,-0.24
+New Jersey,Transportation and warehousing,-0.5
+New York,Transportation and warehousing,-0.38
+Pennsylvania ,Transportation and warehousing,-0.56
+Great Lakes ,Transportation and warehousing,-0.45
+Illinois ,Transportation and warehousing,-0.57
+Indiana,Transportation and warehousing,-0.42
+Michigan ,Transportation and warehousing,-0.28
+Ohio ,Transportation and warehousing,-0.46
+Wisconsin ,Transportation and warehousing,-0.39
+Plains ,Transportation and warehousing,-0.58
+Iowa ,Transportation and warehousing,-0.47
+Kansas,Transportation and warehousing,-0.57
+Minnesota ,Transportation and warehousing,-0.41
+Missouri ,Transportation and warehousing,-0.48
+Nebraska,Transportation and warehousing,-1.42
+North Dakota ,Transportation and warehousing,-0.98
+South Dakota ,Transportation and warehousing,-0.37
+Southeast ,Transportation and warehousing,-0.36
+Alabama ,Transportation and warehousing,-0.39
+Arkansas,Transportation and warehousing,-0.54
+Florida ,Transportation and warehousing,-0.34
+Georgia ,Transportation and warehousing,-0.42
+Kentucky,Transportation and warehousing,-0.57
+Louisiana ,Transportation and warehousing,-0.4
+Mississippi ,Transportation and warehousing,-0.49
+North Carolina ,Transportation and warehousing,-0.14
+South Carolina ,Transportation and warehousing,-0.32
+Tennessee ,Transportation and warehousing,-0.56
+Virginia ,Transportation and warehousing,-0.27
+West Virginia ,Transportation and warehousing,-0.48
+Southwest ,Transportation and warehousing,-0.45
+Arizona ,Transportation and warehousing,-0.25
+New Mexico,Transportation and warehousing,-0.35
+Oklahoma,Transportation and warehousing,-1.13
+Texas,Transportation and warehousing,-0.42
+Rocky Mountain ,Transportation and warehousing,-0.45
+Colorado ,Transportation and warehousing,-0.38
+Idaho ,Transportation and warehousing,-0.34
+Montana ,Transportation and warehousing,-0.7
+Utah ,Transportation and warehousing,-0.32
+Wyoming ,Transportation and warehousing,-1.66
+Far West,Transportation and warehousing,-0.4
+Alaska ,Transportation and warehousing,-1.09
+California ,Transportation and warehousing,-0.38
+Hawaii ,Transportation and warehousing,-1.05
+Nevada,Transportation and warehousing,-0.41
+Oregon ,Transportation and warehousing,-0.3
+Washington,Transportation and warehousing,-0.38
+United States,Information,0.16
+New England ,Information,0.12
+Connecticut,Information,0.4
+Maine ,Information,-0.11
+Massachusetts ,Information,0.05
+New Hampshire ,Information,0.04
+Rhode Island ,Information,-0.08
+Vermont ,Information,0.04
+Mideast ,Information,0.28
+Delaware ,Information,-0.03
+District of Columbia ,Information,0.12
+Maryland ,Information,-0.09
+New Jersey,Information,0.28
+New York,Information,0.53
+Pennsylvania ,Information,0
+Great Lakes ,Information,-0.02
+Illinois ,Information,0.04
+Indiana,Information,-0.08
+Michigan ,Information,0.02
+Ohio ,Information,0.01
+Wisconsin ,Information,-0.23
+Plains ,Information,-0.03
+Iowa ,Information,-0.03
+Kansas,Information,0
+Minnesota ,Information,-0.11
+Missouri ,Information,-0.03
+Nebraska,Information,0.08
+North Dakota ,Information,-0.01
+South Dakota ,Information,0.06
+Southeast ,Information,-0.06
+Alabama ,Information,-0.07
+Arkansas,Information,0.02
+Florida ,Information,-0.08
+Georgia ,Information,-0.03
+Kentucky,Information,-0.04
+Louisiana ,Information,-0.12
+Mississippi ,Information,-0.05
+North Carolina ,Information,-0.04
+South Carolina ,Information,-0.01
+Tennessee ,Information,0
+Virginia ,Information,-0.13
+West Virginia ,Information,0
+Southwest ,Information,0.02
+Arizona ,Information,0.16
+New Mexico,Information,-0.13
+Oklahoma,Information,0.04
+Texas,Information,0
+Rocky Mountain ,Information,0.42
+Colorado ,Information,0.73
+Idaho ,Information,-0.12
+Montana ,Information,0.02
+Utah ,Information,0.22
+Wyoming ,Information,-0.07
+Far West,Information,0.54
+Alaska ,Information,-0.09
+California ,Information,0.4
+Hawaii ,Information,-0.13
+Nevada,Information,-0.1
+Oregon ,Information,0.09
+Washington,Information,1.78
+United States,Finance and insurance,0.13
+New England ,Finance and insurance,-0.11
+Connecticut,Finance and insurance,-0.4
+Maine ,Finance and insurance,0.04
+Massachusetts ,Finance and insurance,-0.09
+New Hampshire ,Finance and insurance,0.2
+Rhode Island ,Finance and insurance,0.42
+Vermont ,Finance and insurance,-0.02
+Mideast ,Finance and insurance,-0.01
+Delaware ,Finance and insurance,-0.4
+District of Columbia ,Finance and insurance,-0.02
+Maryland ,Finance and insurance,0.21
+New Jersey,Finance and insurance,-0.04
+New York,Finance and insurance,-0.09
+Pennsylvania ,Finance and insurance,0.14
+Great Lakes ,Finance and insurance,0.22
+Illinois ,Finance and insurance,0.24
+Indiana,Finance and insurance,0.17
+Michigan ,Finance and insurance,0.23
+Ohio ,Finance and insurance,0.27
+Wisconsin ,Finance and insurance,0.12
+Plains ,Finance and insurance,0.15
+Iowa ,Finance and insurance,0.31
+Kansas,Finance and insurance,0.22
+Minnesota ,Finance and insurance,0.03
+Missouri ,Finance and insurance,0.05
+Nebraska,Finance and insurance,0.83
+North Dakota ,Finance and insurance,0.01
+South Dakota ,Finance and insurance,-0.44
+Southeast ,Finance and insurance,0.2
+Alabama ,Finance and insurance,0.01
+Arkansas,Finance and insurance,0.16
+Florida ,Finance and insurance,0.38
+Georgia ,Finance and insurance,0.28
+Kentucky,Finance and insurance,0.03
+Louisiana ,Finance and insurance,0.06
+Mississippi ,Finance and insurance,0
+North Carolina ,Finance and insurance,0.26
+South Carolina ,Finance and insurance,0.17
+Tennessee ,Finance and insurance,0.16
+Virginia ,Finance and insurance,0.08
+West Virginia ,Finance and insurance,-0.04
+Southwest ,Finance and insurance,0.18
+Arizona ,Finance and insurance,0.3
+New Mexico,Finance and insurance,0.02
+Oklahoma,Finance and insurance,0.09
+Texas,Finance and insurance,0.17
+Rocky Mountain ,Finance and insurance,0.32
+Colorado ,Finance and insurance,0.3
+Idaho ,Finance and insurance,0.25
+Montana ,Finance and insurance,-0.02
+Utah ,Finance and insurance,0.58
+Wyoming ,Finance and insurance,-0.1
+Far West,Finance and insurance,0.12
+Alaska ,Finance and insurance,0.02
+California ,Finance and insurance,0.14
+Hawaii ,Finance and insurance,0.12
+Nevada,Finance and insurance,0.19
+Oregon ,Finance and insurance,0.02
+Washington,Finance and insurance,0.04
+United States,Real estate and rental and leasing,-0.07
+New England ,Real estate and rental and leasing,-0.11
+Connecticut,Real estate and rental and leasing,-0.17
+Maine ,Real estate and rental and leasing,-0.1
+Massachusetts ,Real estate and rental and leasing,-0.03
+New Hampshire ,Real estate and rental and leasing,-0.29
+Rhode Island ,Real estate and rental and leasing,-0.33
+Vermont ,Real estate and rental and leasing,-0.25
+Mideast ,Real estate and rental and leasing,-0.16
+Delaware ,Real estate and rental and leasing,-0.39
+District of Columbia ,Real estate and rental and leasing,-0.24
+Maryland ,Real estate and rental and leasing,-0.14
+New Jersey,Real estate and rental and leasing,-0.29
+New York,Real estate and rental and leasing,-0.15
+Pennsylvania ,Real estate and rental and leasing,-0.05
+Great Lakes ,Real estate and rental and leasing,-0.09
+Illinois ,Real estate and rental and leasing,-0.13
+Indiana,Real estate and rental and leasing,-0.07
+Michigan ,Real estate and rental and leasing,-0.03
+Ohio ,Real estate and rental and leasing,-0.12
+Wisconsin ,Real estate and rental and leasing,-0.05
+Plains ,Real estate and rental and leasing,-0.11
+Iowa ,Real estate and rental and leasing,-0.05
+Kansas,Real estate and rental and leasing,-0.26
+Minnesota ,Real estate and rental and leasing,-0.11
+Missouri ,Real estate and rental and leasing,-0.09
+Nebraska,Real estate and rental and leasing,-0.07
+North Dakota ,Real estate and rental and leasing,-0.07
+South Dakota ,Real estate and rental and leasing,-0.1
+Southeast ,Real estate and rental and leasing,-0.09
+Alabama ,Real estate and rental and leasing,-0.13
+Arkansas,Real estate and rental and leasing,-0.1
+Florida ,Real estate and rental and leasing,-0.08
+Georgia ,Real estate and rental and leasing,-0.2
+Kentucky,Real estate and rental and leasing,-0.03
+Louisiana ,Real estate and rental and leasing,-0.12
+Mississippi ,Real estate and rental and leasing,-0.07
+North Carolina ,Real estate and rental and leasing,-0.03
+South Carolina ,Real estate and rental and leasing,-0.04
+Tennessee ,Real estate and rental and leasing,-0.06
+Virginia ,Real estate and rental and leasing,-0.08
+West Virginia ,Real estate and rental and leasing,-0.12
+Southwest ,Real estate and rental and leasing,-0.1
+Arizona ,Real estate and rental and leasing,0.05
+New Mexico,Real estate and rental and leasing,0
+Oklahoma,Real estate and rental and leasing,-0.11
+Texas,Real estate and rental and leasing,-0.13
+Rocky Mountain ,Real estate and rental and leasing,0.01
+Colorado ,Real estate and rental and leasing,0.02
+Idaho ,Real estate and rental and leasing,0.04
+Montana ,Real estate and rental and leasing,0.01
+Utah ,Real estate and rental and leasing,0.01
+Wyoming ,Real estate and rental and leasing,-0.2
+Far West,Real estate and rental and leasing,0.07
+Alaska ,Real estate and rental and leasing,-0.13
+California ,Real estate and rental and leasing,0.08
+Hawaii ,Real estate and rental and leasing,-0.3
+Nevada,Real estate and rental and leasing,0.08
+Oregon ,Real estate and rental and leasing,0.07
+Washington,Real estate and rental and leasing,0.09
+United States,"Professional, scientific, and technical services",-0.12
+New England ,"Professional, scientific, and technical services",-0.21
+Connecticut,"Professional, scientific, and technical services",-0.4
+Maine ,"Professional, scientific, and technical services",-0.09
+Massachusetts ,"Professional, scientific, and technical services",-0.15
+New Hampshire ,"Professional, scientific, and technical services",-0.17
+Rhode Island ,"Professional, scientific, and technical services",-0.12
+Vermont ,"Professional, scientific, and technical services",0.03
+Mideast ,"Professional, scientific, and technical services",-0.27
+Delaware ,"Professional, scientific, and technical services",-0.38
+District of Columbia ,"Professional, scientific, and technical services",-0.06
+Maryland ,"Professional, scientific, and technical services",-0.28
+New Jersey,"Professional, scientific, and technical services",-0.18
+New York,"Professional, scientific, and technical services",-0.33
+Pennsylvania ,"Professional, scientific, and technical services",-0.23
+Great Lakes ,"Professional, scientific, and technical services",-0.26
+Illinois ,"Professional, scientific, and technical services",-0.26
+Indiana,"Professional, scientific, and technical services",-0.09
+Michigan ,"Professional, scientific, and technical services",-0.52
+Ohio ,"Professional, scientific, and technical services",-0.19
+Wisconsin ,"Professional, scientific, and technical services",-0.18
+Plains ,"Professional, scientific, and technical services",-0.13
+Iowa ,"Professional, scientific, and technical services",-0.07
+Kansas,"Professional, scientific, and technical services",-0.09
+Minnesota ,"Professional, scientific, and technical services",-0.24
+Missouri ,"Professional, scientific, and technical services",-0.13
+Nebraska,"Professional, scientific, and technical services",-0.04
+North Dakota ,"Professional, scientific, and technical services",-0.1
+South Dakota ,"Professional, scientific, and technical services",-0.01
+Southeast ,"Professional, scientific, and technical services",-0.08
+Alabama ,"Professional, scientific, and technical services",0.22
+Arkansas,"Professional, scientific, and technical services",-0.04
+Florida ,"Professional, scientific, and technical services",-0.07
+Georgia ,"Professional, scientific, and technical services",-0.11
+Kentucky,"Professional, scientific, and technical services",-0.18
+Louisiana ,"Professional, scientific, and technical services",-0.16
+Mississippi ,"Professional, scientific, and technical services",0.02
+North Carolina ,"Professional, scientific, and technical services",-0.04
+South Carolina ,"Professional, scientific, and technical services",-0.1
+Tennessee ,"Professional, scientific, and technical services",-0.16
+Virginia ,"Professional, scientific, and technical services",-0.13
+West Virginia ,"Professional, scientific, and technical services",-0.26
+Southwest ,"Professional, scientific, and technical services",0.03
+Arizona ,"Professional, scientific, and technical services",-0.11
+New Mexico,"Professional, scientific, and technical services",-0.04
+Oklahoma,"Professional, scientific, and technical services",-0.27
+Texas,"Professional, scientific, and technical services",0.1
+Rocky Mountain ,"Professional, scientific, and technical services",-0.07
+Colorado ,"Professional, scientific, and technical services",0.01
+Idaho ,"Professional, scientific, and technical services",0.08
+Montana ,"Professional, scientific, and technical services",-0.05
+Utah ,"Professional, scientific, and technical services",-0.31
+Wyoming ,"Professional, scientific, and technical services",-0.1
+Far West,"Professional, scientific, and technical services",-0.02
+Alaska ,"Professional, scientific, and technical services",-0.13
+California ,"Professional, scientific, and technical services",-0.04
+Hawaii ,"Professional, scientific, and technical services",-0.13
+Nevada,"Professional, scientific, and technical services",-0.11
+Oregon ,"Professional, scientific, and technical services",-0.11
+Washington,"Professional, scientific, and technical services",0.19
+United States,Management of companies and enterprises,0
+New England ,Management of companies and enterprises,-0.02
+Connecticut,Management of companies and enterprises,-0.08
+Maine ,Management of companies and enterprises,-0.04
+Massachusetts ,Management of companies and enterprises,-0.02
+New Hampshire ,Management of companies and enterprises,0.11
+Rhode Island ,Management of companies and enterprises,0.05
+Vermont ,Management of companies and enterprises,0.12
+Mideast ,Management of companies and enterprises,-0.04
+Delaware ,Management of companies and enterprises,-0.02
+District of Columbia ,Management of companies and enterprises,0.23
+Maryland ,Management of companies and enterprises,-0.08
+New Jersey,Management of companies and enterprises,0.21
+New York,Management of companies and enterprises,-0.12
+Pennsylvania ,Management of companies and enterprises,-0.08
+Great Lakes ,Management of companies and enterprises,0
+Illinois ,Management of companies and enterprises,-0.02
+Indiana,Management of companies and enterprises,-0.03
+Michigan ,Management of companies and enterprises,0
+Ohio ,Management of companies and enterprises,0.09
+Wisconsin ,Management of companies and enterprises,-0.08
+Plains ,Management of companies and enterprises,-0.05
+Iowa ,Management of companies and enterprises,0.03
+Kansas,Management of companies and enterprises,-0.06
+Minnesota ,Management of companies and enterprises,-0.25
+Missouri ,Management of companies and enterprises,0.07
+Nebraska,Management of companies and enterprises,0.03
+North Dakota ,Management of companies and enterprises,0.05
+South Dakota ,Management of companies and enterprises,0.05
+Southeast ,Management of companies and enterprises,0.04
+Alabama ,Management of companies and enterprises,-0.04
+Arkansas,Management of companies and enterprises,0.03
+Florida ,Management of companies and enterprises,0.02
+Georgia ,Management of companies and enterprises,0.05
+Kentucky,Management of companies and enterprises,-0.04
+Louisiana ,Management of companies and enterprises,0.06
+Mississippi ,Management of companies and enterprises,0.11
+North Carolina ,Management of companies and enterprises,0.04
+South Carolina ,Management of companies and enterprises,0.02
+Tennessee ,Management of companies and enterprises,-0.02
+Virginia ,Management of companies and enterprises,0.17
+West Virginia ,Management of companies and enterprises,-0.02
+Southwest ,Management of companies and enterprises,0.01
+Arizona ,Management of companies and enterprises,0.17
+New Mexico,Management of companies and enterprises,0.04
+Oklahoma,Management of companies and enterprises,0.37
+Texas,Management of companies and enterprises,-0.06
+Rocky Mountain ,Management of companies and enterprises,0.08
+Colorado ,Management of companies and enterprises,0.13
+Idaho ,Management of companies and enterprises,0.05
+Montana ,Management of companies and enterprises,0
+Utah ,Management of companies and enterprises,0.04
+Wyoming ,Management of companies and enterprises,-0.04
+Far West,Management of companies and enterprises,0
+Alaska ,Management of companies and enterprises,-0.05
+California ,Management of companies and enterprises,0
+Hawaii ,Management of companies and enterprises,-0.09
+Nevada,Management of companies and enterprises,0
+Oregon ,Management of companies and enterprises,0.21
+Washington,Management of companies and enterprises,-0.08
+United States,Administrative and support and waste management and remediation services,-0.16
+New England ,Administrative and support and waste management and remediation services,-0.16
+Connecticut,Administrative and support and waste management and remediation services,-0.13
+Maine ,Administrative and support and waste management and remediation services,-0.1
+Massachusetts ,Administrative and support and waste management and remediation services,-0.18
+New Hampshire ,Administrative and support and waste management and remediation services,-0.12
+Rhode Island ,Administrative and support and waste management and remediation services,-0.18
+Vermont ,Administrative and support and waste management and remediation services,-0.19
+Mideast ,Administrative and support and waste management and remediation services,-0.34
+Delaware ,Administrative and support and waste management and remediation services,-0.08
+District of Columbia ,Administrative and support and waste management and remediation services,-0.1
+Maryland ,Administrative and support and waste management and remediation services,-0.13
+New Jersey,Administrative and support and waste management and remediation services,-0.22
+New York,Administrative and support and waste management and remediation services,-0.55
+Pennsylvania ,Administrative and support and waste management and remediation services,-0.16
+Great Lakes ,Administrative and support and waste management and remediation services,-0.2
+Illinois ,Administrative and support and waste management and remediation services,-0.19
+Indiana,Administrative and support and waste management and remediation services,-0.11
+Michigan ,Administrative and support and waste management and remediation services,-0.29
+Ohio ,Administrative and support and waste management and remediation services,-0.2
+Wisconsin ,Administrative and support and waste management and remediation services,-0.18
+Plains ,Administrative and support and waste management and remediation services,-0.11
+Iowa ,Administrative and support and waste management and remediation services,-0.1
+Kansas,Administrative and support and waste management and remediation services,-0.16
+Minnesota ,Administrative and support and waste management and remediation services,-0.14
+Missouri ,Administrative and support and waste management and remediation services,-0.06
+Nebraska,Administrative and support and waste management and remediation services,-0.13
+North Dakota ,Administrative and support and waste management and remediation services,-0.06
+South Dakota ,Administrative and support and waste management and remediation services,0.01
+Southeast ,Administrative and support and waste management and remediation services,-0.15
+Alabama ,Administrative and support and waste management and remediation services,-0.09
+Arkansas,Administrative and support and waste management and remediation services,-0.04
+Florida ,Administrative and support and waste management and remediation services,-0.2
+Georgia ,Administrative and support and waste management and remediation services,-0.09
+Kentucky,Administrative and support and waste management and remediation services,-0.15
+Louisiana ,Administrative and support and waste management and remediation services,-0.13
+Mississippi ,Administrative and support and waste management and remediation services,-0.1
+North Carolina ,Administrative and support and waste management and remediation services,-0.08
+South Carolina ,Administrative and support and waste management and remediation services,-0.26
+Tennessee ,Administrative and support and waste management and remediation services,-0.22
+Virginia ,Administrative and support and waste management and remediation services,-0.18
+West Virginia ,Administrative and support and waste management and remediation services,-0.23
+Southwest ,Administrative and support and waste management and remediation services,-0.07
+Arizona ,Administrative and support and waste management and remediation services,-0.12
+New Mexico,Administrative and support and waste management and remediation services,-0.03
+Oklahoma,Administrative and support and waste management and remediation services,-0.14
+Texas,Administrative and support and waste management and remediation services,-0.06
+Rocky Mountain ,Administrative and support and waste management and remediation services,-0.07
+Colorado ,Administrative and support and waste management and remediation services,-0.1
+Idaho ,Administrative and support and waste management and remediation services,0.05
+Montana ,Administrative and support and waste management and remediation services,-0.02
+Utah ,Administrative and support and waste management and remediation services,-0.06
+Wyoming ,Administrative and support and waste management and remediation services,-0.14
+Far West,Administrative and support and waste management and remediation services,-0.06
+Alaska ,Administrative and support and waste management and remediation services,0
+California ,Administrative and support and waste management and remediation services,-0.07
+Hawaii ,Administrative and support and waste management and remediation services,-0.21
+Nevada,Administrative and support and waste management and remediation services,-0.21
+Oregon ,Administrative and support and waste management and remediation services,-0.04
+Washington,Administrative and support and waste management and remediation services,0.01
+United States,Educational services,-0.09
+New England ,Educational services,-0.2
+Connecticut,Educational services,-0.16
+Maine ,Educational services,-0.17
+Massachusetts ,Educational services,-0.23
+New Hampshire ,Educational services,-0.13
+Rhode Island ,Educational services,-0.26
+Vermont ,Educational services,-0.3
+Mideast ,Educational services,-0.15
+Delaware ,Educational services,-0.06
+District of Columbia ,Educational services,-0.14
+Maryland ,Educational services,-0.13
+New Jersey,Educational services,-0.12
+New York,Educational services,-0.15
+Pennsylvania ,Educational services,-0.2
+Great Lakes ,Educational services,-0.1
+Illinois ,Educational services,-0.12
+Indiana,Educational services,-0.11
+Michigan ,Educational services,-0.1
+Ohio ,Educational services,-0.09
+Wisconsin ,Educational services,-0.09
+Plains ,Educational services,-0.08
+Iowa ,Educational services,-0.07
+Kansas,Educational services,-0.05
+Minnesota ,Educational services,-0.09
+Missouri ,Educational services,-0.12
+Nebraska,Educational services,-0.07
+North Dakota ,Educational services,0
+South Dakota ,Educational services,-0.03
+Southeast ,Educational services,-0.06
+Alabama ,Educational services,-0.05
+Arkansas,Educational services,-0.03
+Florida ,Educational services,-0.08
+Georgia ,Educational services,-0.04
+Kentucky,Educational services,-0.06
+Louisiana ,Educational services,-0.07
+Mississippi ,Educational services,-0.06
+North Carolina ,Educational services,-0.09
+South Carolina ,Educational services,-0.06
+Tennessee ,Educational services,-0.08
+Virginia ,Educational services,-0.03
+West Virginia ,Educational services,-0.05
+Southwest ,Educational services,-0.04
+Arizona ,Educational services,-0.06
+New Mexico,Educational services,-0.04
+Oklahoma,Educational services,-0.08
+Texas,Educational services,-0.04
+Rocky Mountain ,Educational services,-0.02
+Colorado ,Educational services,-0.03
+Idaho ,Educational services,-0.03
+Montana ,Educational services,-0.04
+Utah ,Educational services,0.02
+Wyoming ,Educational services,-0.01
+Far West,Educational services,-0.08
+Alaska ,Educational services,-0.06
+California ,Educational services,-0.08
+Hawaii ,Educational services,-0.16
+Nevada,Educational services,-0.06
+Oregon ,Educational services,-0.1
+Washington,Educational services,-0.06
+United States,Health care and social assistance,-0.42
+New England ,Health care and social assistance,-0.56
+Connecticut,Health care and social assistance,-0.52
+Maine ,Health care and social assistance,-0.68
+Massachusetts ,Health care and social assistance,-0.55
+New Hampshire ,Health care and social assistance,-0.49
+Rhode Island ,Health care and social assistance,-0.8
+Vermont ,Health care and social assistance,-0.67
+Mideast ,Health care and social assistance,-0.52
+Delaware ,Health care and social assistance,-0.48
+District of Columbia ,Health care and social assistance,-0.25
+Maryland ,Health care and social assistance,-0.43
+New Jersey,Health care and social assistance,-0.59
+New York,Health care and social assistance,-0.55
+Pennsylvania ,Health care and social assistance,-0.5
+Great Lakes ,Health care and social assistance,-0.47
+Illinois ,Health care and social assistance,-0.4
+Indiana,Health care and social assistance,-0.46
+Michigan ,Health care and social assistance,-0.55
+Ohio ,Health care and social assistance,-0.43
+Wisconsin ,Health care and social assistance,-0.63
+Plains ,Health care and social assistance,-0.4
+Iowa ,Health care and social assistance,-0.41
+Kansas,Health care and social assistance,-0.18
+Minnesota ,Health care and social assistance,-0.5
+Missouri ,Health care and social assistance,-0.43
+Nebraska,Health care and social assistance,-0.32
+North Dakota ,Health care and social assistance,-0.35
+South Dakota ,Health care and social assistance,-0.48
+Southeast ,Health care and social assistance,-0.46
+Alabama ,Health care and social assistance,-0.57
+Arkansas,Health care and social assistance,-0.49
+Florida ,Health care and social assistance,-0.34
+Georgia ,Health care and social assistance,-0.3
+Kentucky,Health care and social assistance,-0.56
+Louisiana ,Health care and social assistance,-1.23
+Mississippi ,Health care and social assistance,-0.58
+North Carolina ,Health care and social assistance,-0.35
+South Carolina ,Health care and social assistance,-0.4
+Tennessee ,Health care and social assistance,-0.62
+Virginia ,Health care and social assistance,-0.43
+West Virginia ,Health care and social assistance,-0.57
+Southwest ,Health care and social assistance,-0.26
+Arizona ,Health care and social assistance,-0.27
+New Mexico,Health care and social assistance,-0.37
+Oklahoma,Health care and social assistance,-0.3
+Texas,Health care and social assistance,-0.25
+Rocky Mountain ,Health care and social assistance,-0.27
+Colorado ,Health care and social assistance,-0.32
+Idaho ,Health care and social assistance,-0.3
+Montana ,Health care and social assistance,-0.56
+Utah ,Health care and social assistance,-0.09
+Wyoming ,Health care and social assistance,-0.19
+Far West,Health care and social assistance,-0.31
+Alaska ,Health care and social assistance,-0.59
+California ,Health care and social assistance,-0.31
+Hawaii ,Health care and social assistance,-0.27
+Nevada,Health care and social assistance,-0.16
+Oregon ,Health care and social assistance,-0.35
+Washington,Health care and social assistance,-0.34
+United States,"Arts, entertainment, and recreation",-0.43
+New England ,"Arts, entertainment, and recreation",-0.51
+Connecticut,"Arts, entertainment, and recreation",-0.35
+Maine ,"Arts, entertainment, and recreation",-0.44
+Massachusetts ,"Arts, entertainment, and recreation",-0.56
+New Hampshire ,"Arts, entertainment, and recreation",-0.84
+Rhode Island ,"Arts, entertainment, and recreation",-0.4
+Vermont ,"Arts, entertainment, and recreation",-0.48
+Mideast ,"Arts, entertainment, and recreation",-0.63
+Delaware ,"Arts, entertainment, and recreation",-0.18
+District of Columbia ,"Arts, entertainment, and recreation",-0.41
+Maryland ,"Arts, entertainment, and recreation",-0.39
+New Jersey,"Arts, entertainment, and recreation",-0.44
+New York,"Arts, entertainment, and recreation",-0.85
+Pennsylvania ,"Arts, entertainment, and recreation",-0.49
+Great Lakes ,"Arts, entertainment, and recreation",-0.37
+Illinois ,"Arts, entertainment, and recreation",-0.5
+Indiana,"Arts, entertainment, and recreation",-0.3
+Michigan ,"Arts, entertainment, and recreation",-0.29
+Ohio ,"Arts, entertainment, and recreation",-0.39
+Wisconsin ,"Arts, entertainment, and recreation",-0.23
+Plains ,"Arts, entertainment, and recreation",-0.25
+Iowa ,"Arts, entertainment, and recreation",-0.2
+Kansas,"Arts, entertainment, and recreation",-0.17
+Minnesota ,"Arts, entertainment, and recreation",-0.32
+Missouri ,"Arts, entertainment, and recreation",-0.32
+Nebraska,"Arts, entertainment, and recreation",-0.19
+North Dakota ,"Arts, entertainment, and recreation",-0.11
+South Dakota ,"Arts, entertainment, and recreation",-0.12
+Southeast ,"Arts, entertainment, and recreation",-0.31
+Alabama ,"Arts, entertainment, and recreation",-0.12
+Arkansas,"Arts, entertainment, and recreation",-0.03
+Florida ,"Arts, entertainment, and recreation",-0.39
+Georgia ,"Arts, entertainment, and recreation",-0.13
+Kentucky,"Arts, entertainment, and recreation",-0.09
+Louisiana ,"Arts, entertainment, and recreation",-0.27
+Mississippi ,"Arts, entertainment, and recreation",-0.14
+North Carolina ,"Arts, entertainment, and recreation",-0.3
+South Carolina ,"Arts, entertainment, and recreation",-0.23
+Tennessee ,"Arts, entertainment, and recreation",-0.96
+Virginia ,"Arts, entertainment, and recreation",-0.26
+West Virginia ,"Arts, entertainment, and recreation",-0.12
+Southwest ,"Arts, entertainment, and recreation",-0.26
+Arizona ,"Arts, entertainment, and recreation",-0.39
+New Mexico,"Arts, entertainment, and recreation",-0.23
+Oklahoma,"Arts, entertainment, and recreation",-0.18
+Texas,"Arts, entertainment, and recreation",-0.25
+Rocky Mountain ,"Arts, entertainment, and recreation",-0.44
+Colorado ,"Arts, entertainment, and recreation",-0.58
+Idaho ,"Arts, entertainment, and recreation",-0.27
+Montana ,"Arts, entertainment, and recreation",-0.32
+Utah ,"Arts, entertainment, and recreation",-0.34
+Wyoming ,"Arts, entertainment, and recreation",-0.1
+Far West,"Arts, entertainment, and recreation",-0.53
+Alaska ,"Arts, entertainment, and recreation",-0.24
+California ,"Arts, entertainment, and recreation",-0.57
+Hawaii ,"Arts, entertainment, and recreation",-0.51
+Nevada,"Arts, entertainment, and recreation",-0.71
+Oregon ,"Arts, entertainment, and recreation",-0.39
+Washington,"Arts, entertainment, and recreation",-0.37
+United States,Accomodation and food services,-0.76
+New England ,Accomodation and food services,-0.78
+Connecticut,Accomodation and food services,-0.6
+Maine ,Accomodation and food services,-1.14
+Massachusetts ,Accomodation and food services,-0.72
+New Hampshire ,Accomodation and food services,-1.06
+Rhode Island ,Accomodation and food services,-1.04
+Vermont ,Accomodation and food services,-1.47
+Mideast ,Accomodation and food services,-0.93
+Delaware ,Accomodation and food services,-0.58
+District of Columbia ,Accomodation and food services,-1.15
+Maryland ,Accomodation and food services,-0.61
+New Jersey,Accomodation and food services,-0.63
+New York,Accomodation and food services,-1.27
+Pennsylvania ,Accomodation and food services,-0.6
+Great Lakes ,Accomodation and food services,-0.69
+Illinois ,Accomodation and food services,-0.73
+Indiana,Accomodation and food services,-0.53
+Michigan ,Accomodation and food services,-0.85
+Ohio ,Accomodation and food services,-0.63
+Wisconsin ,Accomodation and food services,-0.6
+Plains ,Accomodation and food services,-0.58
+Iowa ,Accomodation and food services,-0.53
+Kansas,Accomodation and food services,-0.59
+Minnesota ,Accomodation and food services,-0.58
+Missouri ,Accomodation and food services,-0.65
+Nebraska,Accomodation and food services,-0.43
+North Dakota ,Accomodation and food services,-0.54
+South Dakota ,Accomodation and food services,-0.63
+Southeast ,Accomodation and food services,-0.79
+Alabama ,Accomodation and food services,-0.6
+Arkansas,Accomodation and food services,-0.6
+Florida ,Accomodation and food services,-0.99
+Georgia ,Accomodation and food services,-0.56
+Kentucky,Accomodation and food services,-0.73
+Louisiana ,Accomodation and food services,-0.79
+Mississippi ,Accomodation and food services,-0.8
+North Carolina ,Accomodation and food services,-0.76
+South Carolina ,Accomodation and food services,-1.02
+Tennessee ,Accomodation and food services,-0.92
+Virginia ,Accomodation and food services,-0.59
+West Virginia ,Accomodation and food services,-0.86
+Southwest ,Accomodation and food services,-0.46
+Arizona ,Accomodation and food services,-0.62
+New Mexico,Accomodation and food services,-0.58
+Oklahoma,Accomodation and food services,-0.44
+Texas,Accomodation and food services,-0.43
+Rocky Mountain ,Accomodation and food services,-0.6
+Colorado ,Accomodation and food services,-0.65
+Idaho ,Accomodation and food services,-0.59
+Montana ,Accomodation and food services,-0.78
+Utah ,Accomodation and food services,-0.45
+Wyoming ,Accomodation and food services,-0.63
+Far West,Accomodation and food services,-0.89
+Alaska ,Accomodation and food services,-0.83
+California ,Accomodation and food services,-0.73
+Hawaii ,Accomodation and food services,-3.9
+Nevada,Accomodation and food services,-2.61
+Oregon ,Accomodation and food services,-0.92
+Washington,Accomodation and food services,-0.7
+United States,Other services (except government and government enterprises),-0.28
+New England ,Other services (except government and government enterprises),-0.29
+Connecticut,Other services (except government and government enterprises),-0.3
+Maine ,Other services (except government and government enterprises),-0.31
+Massachusetts ,Other services (except government and government enterprises),-0.27
+New Hampshire ,Other services (except government and government enterprises),-0.28
+Rhode Island ,Other services (except government and government enterprises),-0.37
+Vermont ,Other services (except government and government enterprises),-0.37
+Mideast ,Other services (except government and government enterprises),-0.3
+Delaware ,Other services (except government and government enterprises),-0.2
+District of Columbia ,Other services (except government and government enterprises),-0.34
+Maryland ,Other services (except government and government enterprises),-0.28
+New Jersey,Other services (except government and government enterprises),-0.34
+New York,Other services (except government and government enterprises),-0.27
+Pennsylvania ,Other services (except government and government enterprises),-0.33
+Great Lakes ,Other services (except government and government enterprises),-0.29
+Illinois ,Other services (except government and government enterprises),-0.29
+Indiana,Other services (except government and government enterprises),-0.28
+Michigan ,Other services (except government and government enterprises),-0.36
+Ohio ,Other services (except government and government enterprises),-0.25
+Wisconsin ,Other services (except government and government enterprises),-0.27
+Plains ,Other services (except government and government enterprises),-0.28
+Iowa ,Other services (except government and government enterprises),-0.31
+Kansas,Other services (except government and government enterprises),-0.3
+Minnesota ,Other services (except government and government enterprises),-0.29
+Missouri ,Other services (except government and government enterprises),-0.28
+Nebraska,Other services (except government and government enterprises),-0.22
+North Dakota ,Other services (except government and government enterprises),-0.2
+South Dakota ,Other services (except government and government enterprises),-0.24
+Southeast ,Other services (except government and government enterprises),-0.27
+Alabama ,Other services (except government and government enterprises),-0.32
+Arkansas,Other services (except government and government enterprises),-0.33
+Florida ,Other services (except government and government enterprises),-0.34
+Georgia ,Other services (except government and government enterprises),-0.2
+Kentucky,Other services (except government and government enterprises),-0.3
+Louisiana ,Other services (except government and government enterprises),-0.27
+Mississippi ,Other services (except government and government enterprises),-0.25
+North Carolina ,Other services (except government and government enterprises),-0.21
+South Carolina ,Other services (except government and government enterprises),-0.26
+Tennessee ,Other services (except government and government enterprises),-0.3
+Virginia ,Other services (except government and government enterprises),-0.24
+West Virginia ,Other services (except government and government enterprises),-0.29
+Southwest ,Other services (except government and government enterprises),-0.21
+Arizona ,Other services (except government and government enterprises),-0.21
+New Mexico,Other services (except government and government enterprises),-0.25
+Oklahoma,Other services (except government and government enterprises),-0.24
+Texas,Other services (except government and government enterprises),-0.2
+Rocky Mountain ,Other services (except government and government enterprises),-0.24
+Colorado ,Other services (except government and government enterprises),-0.26
+Idaho ,Other services (except government and government enterprises),-0.27
+Montana ,Other services (except government and government enterprises),-0.28
+Utah ,Other services (except government and government enterprises),-0.2
+Wyoming ,Other services (except government and government enterprises),-0.23
+Far West,Other services (except government and government enterprises),-0.29
+Alaska ,Other services (except government and government enterprises),-0.21
+California ,Other services (except government and government enterprises),-0.3
+Hawaii ,Other services (except government and government enterprises),-0.35
+Nevada,Other services (except government and government enterprises),-0.22
+Oregon ,Other services (except government and government enterprises),-0.27
+Washington,Other services (except government and government enterprises),-0.27
+United States,Government and government enterprises,-0.26
+New England ,Government and government enterprises,-0.37
+Connecticut,Government and government enterprises,-0.41
+Maine ,Government and government enterprises,-0.35
+Massachusetts ,Government and government enterprises,-0.33
+New Hampshire ,Government and government enterprises,-0.48
+Rhode Island ,Government and government enterprises,-0.41
+Vermont ,Government and government enterprises,-0.37
+Mideast ,Government and government enterprises,-0.29
+Delaware ,Government and government enterprises,-0.26
+District of Columbia ,Government and government enterprises,0.91
+Maryland ,Government and government enterprises,0.15
+New Jersey,Government and government enterprises,-0.42
+New York,Government and government enterprises,-0.44
+Pennsylvania ,Government and government enterprises,-0.28
+Great Lakes ,Government and government enterprises,-0.34
+Illinois ,Government and government enterprises,-0.33
+Indiana,Government and government enterprises,-0.19
+Michigan ,Government and government enterprises,-0.36
+Ohio ,Government and government enterprises,-0.33
+Wisconsin ,Government and government enterprises,-0.53
+Plains ,Government and government enterprises,-0.35
+Iowa ,Government and government enterprises,-0.42
+Kansas,Government and government enterprises,-0.52
+Minnesota ,Government and government enterprises,-0.35
+Missouri ,Government and government enterprises,-0.24
+Nebraska,Government and government enterprises,-0.47
+North Dakota ,Government and government enterprises,-0.03
+South Dakota ,Government and government enterprises,-0.31
+Southeast ,Government and government enterprises,-0.21
+Alabama ,Government and government enterprises,-0.13
+Arkansas,Government and government enterprises,-0.37
+Florida ,Government and government enterprises,-0.22
+Georgia ,Government and government enterprises,-0.11
+Kentucky,Government and government enterprises,-0.37
+Louisiana ,Government and government enterprises,-0.25
+Mississippi ,Government and government enterprises,-0.27
+North Carolina ,Government and government enterprises,-0.21
+South Carolina ,Government and government enterprises,-0.4
+Tennessee ,Government and government enterprises,-0.26
+Virginia ,Government and government enterprises,-0.11
+West Virginia ,Government and government enterprises,-0.03
+Southwest ,Government and government enterprises,0.01
+Arizona ,Government and government enterprises,-0.06
+New Mexico,Government and government enterprises,0.34
+Oklahoma,Government and government enterprises,-0.04
+Texas,Government and government enterprises,0.01
+Rocky Mountain ,Government and government enterprises,-0.1
+Colorado ,Government and government enterprises,-0.16
+Idaho ,Government and government enterprises,-0.08
+Montana ,Government and government enterprises,-0.35
+Utah ,Government and government enterprises,0.15
+Wyoming ,Government and government enterprises,-0.41
+Far West,Government and government enterprises,-0.32
+Alaska ,Government and government enterprises,-0.64
+California ,Government and government enterprises,-0.32
+Hawaii ,Government and government enterprises,-0.24
+Nevada,Government and government enterprises,-0.39
+Oregon ,Government and government enterprises,-0.48
+Washington,Government and government enterprises,-0.2

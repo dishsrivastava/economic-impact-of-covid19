@@ -15,54 +15,38 @@ library(tidyverse)
 ```
 
 ## GDP by State
-This data shows the GDP for each state or region in the United States. The GDP value is shown in millions or out of the total percent in the U.S. 
+This data shows the GDP change for each state or region in the United States from 2017 to 2020
 ```{r}
-gdp_state <- read.csv("C:/Users/Rinija/Documents/UMass/JR-S2/INFO 248/Project/state_gdp_value.csv")
+gdp_state <- read.csv("C:/Users/Rinija/Documents/UMass/JR-S2/INFO 248/Project/Data/gdp_change.csv", check.names=FALSE)
 dim(gdp_state)
 #Change the name of the first column
 names(gdp_state)[1] <- "Name"
-head(gdp_state)
+gdp_state
 ```
-```{r}
-state_info <- read.csv("C:/Users/Rinija/Documents/UMass/JR-S2/INFO 248/Project/COVID19_state.csv")
-glimpse(state_info)
-head(state_info)
-```
-# Visualization of GDP in CA vs. TX, RI vs. UT
-```{r}
-CA <- state_info %>% 
-  select(State, GDP) %>% 
-  filter(State == "California")
-
-
-```
-
 
 ## Visualization of GDP in CA vs. TX, RI vs. UT
-```{r}
-CA <- gdp_state %>% 
-  select(Name, Year, GDP) %>% 
-  filter(Name == "California") 
-dim(CA)
-
-TX <- gdp_state %>% 
-  select(Name, Year, GDP) %>% 
-  filter(Name == "Texas") 
-dim(TX)
-
-RI <- gdp_state %>% 
-  select(Name, Year, GDP,) %>% 
-  filter(Name == "Rhode Island") 
-dim(RI)
-
-UT <- gdp_state %>% 
-  select(Name, Year, GDP) %>% 
-  filter(Name == "Utah") 
-dim(UT)
-
-ggplot(data=TX)+
-  geom_point(aes(x=Year, y=GDP))
-```
 ##################### FOR SOME REASON THE VALUES ARE EMPTY ##########################
+```{r}
+TX <- gdp_state %>% 
+  filter(Name == "Texas") 
 
+barplot(TX$Percent_Change, ylim=c(-4,4), col=ifelse(TX$Percent_Change>0,"darkolivegreen3","brown1"))
+abline(h=0)
+title(main="Texas Percent Change in GDP from 2017 to 2020", ylab="Percent Change (%)", xlab("Year"))
+```
+## GDP per Industry
+This data file lists the gdp change from 2019 to 2020 in each inustry by state or region
+```{r}
+gdp_industry <- read.csv("C:/Users/Rinija/Documents/UMass/JR-S2/INFO 248/Project/Data/gdp_industry.csv", check.names=FALSE)
+glimpse(gdp_industry)
+#Change the name of the first column
+names(gdp_industry)[1] <- "Name"
+gdp_industry
+```
+We are looking into industries that had drastic changes since the pandemic
+```{r}
+industries <- gdp_industry %>% 
+  filter(Name == "California")
+industries
+```
 

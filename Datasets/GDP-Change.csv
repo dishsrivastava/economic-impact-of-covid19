@@ -1,0 +1,241 @@
+﻿Name,Year,Percent_Change
+United States,2017,2.3
+New England ,2017,1.7
+Connecticut,2017,0.9
+Maine ,2017,1.6
+Massachusetts ,2017,2.4
+New Hampshire ,2017,1.7
+Rhode Island ,2017,-0.6
+Vermont ,2017,0.4
+Mideast ,2017,1.2
+Delaware ,2017,-1.7
+District of Columbia ,2017,0.7
+Maryland ,2017,1.6
+New Jersey,2017,0.1
+New York,2017,1.9
+Pennsylvania ,2017,0.6
+Great Lakes ,2017,1.2
+Illinois ,2017,0.8
+Indiana,2017,2
+Michigan ,2017,1.4
+Ohio ,2017,1.3
+Wisconsin ,2017,1
+Plains ,2017,1.1
+Iowa ,2017,-0.3
+Kansas,2017,1.3
+Minnesota ,2017,1.8
+Missouri ,2017,1.1
+Nebraska,2017,1.9
+North Dakota ,2017,0.3
+South Dakota ,2017,0.6
+Southeast ,2017,2.5
+Alabama ,2017,1.1
+Arkansas,2017,1.3
+Florida ,2017,3.6
+Georgia ,2017,3.7
+Kentucky,2017,0.6
+Louisiana ,2017,1.5
+Mississippi ,2017,0.7
+North Carolina ,2017,2.4
+South Carolina ,2017,3.1
+Tennessee ,2017,2.2
+Virginia ,2017,1.7
+West Virginia ,2017,0.7
+Southwest ,2017,2.6
+Arizona ,2017,3.7
+New Mexico,2017,0.1
+Oklahoma,2017,0
+Texas,2017,2.8
+Rocky Mountain ,2017,3.7
+Colorado ,2017,4
+Idaho ,2017,4.2
+Montana ,2017,2
+Utah ,2017,4.4
+Wyoming ,2017,-0.6
+Far West,2017,4.3
+Alaska ,2017,-0.9
+California ,2017,4.3
+Hawaii ,2017,2.5
+Nevada,2017,3.6
+Oregon ,2017,4.2
+Washington,2017,5.5
+United States,2018,3
+New England ,2018,2.3
+Connecticut,2018,0.4
+Maine ,2018,2.4
+Massachusetts ,2018,3.4
+New Hampshire ,2018,2.6
+Rhode Island ,2018,0.8
+Vermont ,2018,0.9
+Mideast ,2018,2.2
+Delaware ,2018,2.1
+District of Columbia ,2018,2
+Maryland ,2018,0.8
+New Jersey,2018,1.5
+New York,2018,3
+Pennsylvania ,2018,1.9
+Great Lakes ,2018,2.5
+Illinois ,2018,2.3
+Indiana,2018,2.8
+Michigan ,2018,2.3
+Ohio ,2018,2.3
+Wisconsin ,2018,3.3
+Plains ,2018,2.4
+Iowa ,2018,2.3
+Kansas,2018,2.4
+Minnesota ,2018,2.9
+Missouri ,2018,1.9
+Nebraska,2018,1.2
+North Dakota ,2018,4.3
+South Dakota ,2018,2.7
+Southeast ,2018,2.9
+Alabama ,2018,2.3
+Arkansas,2018,1.5
+Florida ,2018,3.8
+Georgia ,2018,3.7
+Kentucky,2018,1.6
+Louisiana ,2018,2.7
+Mississippi ,2018,1
+North Carolina ,2018,2.6
+South Carolina ,2018,3.1
+Tennessee ,2018,2.7
+Virginia ,2018,2.3
+West Virginia ,2018,3
+Southwest ,2018,3.7
+Arizona ,2018,3.9
+New Mexico,2018,2.3
+Oklahoma,2018,2.7
+Texas,2018,3.9
+Rocky Mountain ,2018,4.6
+Colorado ,2018,4.4
+Idaho ,2018,5.9
+Montana ,2018,2.5
+Utah ,2018,5.6
+Wyoming ,2018,2.2
+Far West,2018,3.7
+Alaska ,2018,0.2
+California ,2018,3.1
+Hawaii ,2018,1.4
+Nevada,2018,4.2
+Oregon ,2018,4.6
+Washington,2018,7.2
+United States,2019,2.2
+New England ,2019,1.8
+Connecticut,2019,0.9
+Maine ,2019,2.6
+Massachusetts ,2019,2.4
+New Hampshire ,2019,1.4
+Rhode Island ,2019,1
+Vermont ,2019,0.8
+Mideast ,2019,1.7
+Delaware ,2019,1.8
+District of Columbia ,2019,1
+Maryland ,2019,1.4
+New Jersey,2019,1.4
+New York,2019,1.6
+Pennsylvania ,2019,2.4
+Great Lakes ,2019,1.1
+Illinois ,2019,0.5
+Indiana,2019,1.6
+Michigan ,2019,0.8
+Ohio ,2019,1.5
+Wisconsin ,2019,1.4
+Plains ,2019,1.1
+Iowa ,2019,0.4
+Kansas,2019,1.2
+Minnesota ,2019,1.1
+Missouri ,2019,1
+Nebraska,2019,2
+North Dakota ,2019,0.9
+South Dakota ,2019,0.6
+Southeast ,2019,2
+Alabama ,2019,1.4
+Arkansas,2019,0.6
+Florida ,2019,2.8
+Georgia ,2019,1.6
+Kentucky,2019,1.8
+Louisiana ,2019,2.1
+Mississippi ,2019,0.6
+North Carolina ,2019,1.9
+South Carolina ,2019,2.8
+Tennessee ,2019,1.6
+Virginia ,2019,2.2
+West Virginia ,2019,0.7
+Southwest ,2019,3
+Arizona ,2019,3.1
+New Mexico,2019,5.2
+Oklahoma,2019,2.4
+Texas,2019,2.9
+Rocky Mountain ,2019,3.6
+Colorado ,2019,3.9
+Idaho ,2019,3.4
+Montana ,2019,2.8
+Utah ,2019,3.8
+Wyoming ,2019,1.3
+Far West,2019,3.4
+Alaska ,2019,0.6
+California ,2019,3.4
+Hawaii ,2019,0.3
+Nevada,2019,2.7
+Oregon ,2019,2.8
+Washington,2019,4.6
+United States,2020,-3.5
+New England ,2020,-4
+Connecticut,2020,-4.1
+Maine ,2020,-4.1
+Massachusetts ,2020,-3.8
+New Hampshire ,2020,-4.7
+Rhode Island ,2020,-4.5
+Vermont ,2020,-5.4
+Mideast ,2020,-4.7
+Delaware ,2020,-3.9
+District of Columbia ,2020,-1.5
+Maryland ,2020,-2.6
+New Jersey,2020,-4.1
+New York,2020,-5.9
+Pennsylvania ,2020,-4.4
+Great Lakes ,2020,-4.2
+Illinois ,2020,-4
+Indiana,2020,-3.1
+Michigan ,2020,-5.4
+Ohio ,2020,-4
+Wisconsin ,2020,-4.5
+Plains ,2020,-3.1
+Iowa ,2020,-2.3
+Kansas,2020,-3
+Minnesota ,2020,-3.7
+Missouri ,2020,-3.6
+Nebraska,2020,-2.1
+North Dakota ,2020,-3.5
+South Dakota ,2020,-1.7
+Southeast ,2020,-3.2
+Alabama ,2020,-2.7
+Arkansas,2020,-2.6
+Florida ,2020,-2.9
+Georgia ,2020,-2.5
+Kentucky,2020,-3.7
+Louisiana ,2020,-5.5
+Mississippi ,2020,-2.8
+North Carolina ,2020,-2.5
+South Carolina ,2020,-4.1
+Tennessee ,2020,-4.9
+Virginia ,2020,-2.5
+West Virginia ,2020,-5.5
+Southwest ,2020,-3.3
+Arizona ,2020,-0.9
+New Mexico,2020,-3.1
+Oklahoma,2020,-6.1
+Texas,2020,-3.5
+Rocky Mountain ,2020,-1.5
+Colorado ,2020,-1.5
+Idaho ,2020,-1.1
+Montana ,2020,-3
+Utah ,2020,-0.1
+Wyoming ,2020,-7
+Far West,2020,-2.7
+Alaska ,2020,-4.9
+California ,2020,-2.8
+Hawaii ,2020,-8
+Nevada,2020,-4.6
+Oregon ,2020,-2.8
+Washington,2020,-0.7
