@@ -1,21 +1,105 @@
 ---
-title: "INFO 248 Project"
+title: "Analysis of COVID-19's Impact on State and Industry GDP in the U.S."
+output: html_document
 author: "Rinija Raja"
 date: "4/16/2021"
-output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+### Load libraries 
+```{r libraries}
+# Load in necessary libraries
+library(tidyverse) 
 ```
+
+### Load datasets  
+```{r dataset}
+# This dataset shows the percent change in GDP for each state in the United States from 2017 to 2020.
+gdp.state.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
+
+# This dataset shows the percent change in GDP for each industry in each state in the United States from 2019 to 2020.
+gdp.industry.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-Industry.csv")
+
+covid19.health <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
+```
+
+### Cleaning and organizing GDP-State dataframe 
+TODO: It looks like some states have extra spaces or no spaces at all, this makes it really difficult to filter and you'll need to check the output of line 60 each time to check what the exact value is (like if a state has spaces or not). If theres a way to clean this dataframe and get rid of extra spaces that would be helpful. 
 
 ```{r}
-#Load in necessary libraries
-library(tidyverse)
+# Renaming columns 
+colnames(gdp.state.df) <- c("State", "Y2017", "Y2018", "Y2019", "Y2020", "Rank-Y2020")
+
+# Result 
+head(gdp.state.df)
 ```
 
-## GDP by State
-This data shows the GDP change for each state or region in the United States from 2017 to 2020
+### Cleaning and organizing GDP-Industry dataframe 
+TODO 2: The columns in this dataset are really weirdly written "word.word.word..word" I think that just happens when R takes the CSV with spaces in. Here is the list of of the industries: (below), if you could use line 32 from above to rename the columns it would probably look much better i visualizations. 
+
+Agriculture, forestry, fishing, and hunting	
+Mining, quarrying, and oil and gas extraction	
+Utilities	
+Construction	
+Durable goods manufacturing	
+Nondurable goods manufacturing	
+Wholesale trade	
+Retail trade	
+Transportation and warehousing	
+Information	
+Finance and insurance	
+Real estate and rental and leasing	
+Professional, scientific, and technical services	
+Management of companies and enterprises	
+Administrative and support and waste management and remediation services	
+Educational services	
+Health care and social assistance	
+Arts, entertainment, and recreation	
+Accomodation and food services	
+Other services (except government and government enterprises)	
+Government and government enterprises	
+
+```{r}
+# Renaming columns
+# Columns do need to be renamed, they have .s instead of spaces currently 
+
+# Result 
+head(gdp.industry.df)
+```
+
+### Cleaning and organizing COVID-19 Health Dataframe 
+```{r}
+# Dropping unused columns 
+covh.cleaned <- subset(covid19.health, select = c(submission_date, state, tot_cases, new_case, tot_death, new_death))
+
+# Renaming columns 
+colnames(covh.cleaned) <- c("Date_Reported", "State", "Total_Cases", "New_Cases", "Total_Death", "New_Death")
+
+# Result 
+head(covh.cleaned)
+```
+
+### Creating dataframes for each state 
+```{r}
+as.vector((gdp.state.df$State))
+
+# California Subset 
+ca.gdp <- gdp.state.df[(gdp.state.df$State == "California "), ]
+
+# CA Result 
+head(ca.gdp)
+
+# Texas Subset 
+tx.gdp <- gdp.state.df[(gdp.state.df$State == "Texas"), ]
+
+# TX Result 
+head(tx.gdp)
+```
+
+
+------- 
+
 ```{r}
 gdp_state <- read.csv("C:/Users/Rinija/Documents/UMass/JR-S2/INFO 248/Project/Data/gdp_change.csv", check.names=FALSE)
 dim(gdp_state)
@@ -26,6 +110,16 @@ gdp_state
 
 ## Visualization of GDP in CA vs. TX, RI vs. UT
 ##################### FOR SOME REASON THE VALUES ARE EMPTY ##########################
+
+Hey its Disha leaving a note - so if you are trying to get Texas's percent change for 2020 you could use the dataframes I made above "tx.gdp$Y2020" and that should get Texas' percent change in that specific year. 
+
+This is the output of tx.gdp:
+
+   State Y2017 Y2018 Y2019 Y2020 Rank-Y2020
+39 Texas   2.8   3.9   2.9  -3.5         23
+
+Hope that helps! 
+
 ```{r}
 TX <- gdp_state %>% 
   filter(Name == "Texas") 

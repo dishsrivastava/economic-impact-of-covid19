@@ -1,7 +1,7 @@
 ---
 title: "Analysis of COVID-19's Impact on Unemployment Rates in the U.S."
 output: html_document
-author: Disha Srivastava 
+author: "Disha Srivastava" 
 editor_options: 
   chunk_output_type: console
 ---
@@ -39,16 +39,6 @@ covh.cleaned <- subset(covid19.health, select = c(submission_date, state, tot_ca
 
 # Renaming columns 
 colnames(covh.cleaned) <- c("Date_Reported", "State", "Total_Cases", "New_Cases", "Total_Death", "New_Death")
-
-# Gathering monthly data 
-covh.cleaned$Date_Reported <- as.Date(covh.cleaned$Date_Reported, 
-                                     format = "%m-%d-%y")
-dfff <- covh.cleaned[(date >= "04/01/2021" & date <= "04/01/2021")]
-
-covh.cleaned$Date_Reported = 04/01/2021
-
-
-head(covh.cleaned) 
 ```
 
 
