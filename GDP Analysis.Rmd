@@ -4,65 +4,55 @@ output: html_document
 author: "Rinija Raja"
 date: "4/16/2021"
 editor_options: 
-  chunk_output_type: console
+  chunk_output_type: inline
 ---
 
 ### Load libraries 
 ```{r libraries}
 # Load in necessary libraries
 library(tidyverse) 
+library(leaflet)
+library(maptools)
+library(rgeos)
+library(rgdal)
 ```
 
 ### Load datasets  
 ```{r dataset}
 # This dataset shows the percent change in GDP for each state in the United States from 2017 to 2020.
-gdp.state.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
+gdp.state.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
 
 # This dataset shows the percent change in GDP for each industry in each state in the United States from 2019 to 2020.
-gdp.industry.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-Industry.csv")
+gdp.industry.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-Industry.csv")
 
-covid19.health <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
+# This dataset shows the death count of COVID-19 for each state
+covid19.health <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
+
+# This is the shapefile for each state 
+states <- readOGR(dsn = "C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets", layer = "cb_2018_us_state_500k")
 ```
 
 ### Cleaning and organizing GDP-State dataframe 
-TODO: It looks like some states have extra spaces or no spaces at all, this makes it really difficult to filter and you'll need to check the output of line 60 each time to check what the exact value is (like if a state has spaces or not). If theres a way to clean this dataframe and get rid of extra spaces that would be helpful. 
-
 ```{r}
 # Renaming columns 
 colnames(gdp.state.df) <- c("State", "Y2017", "Y2018", "Y2019", "Y2020", "Rank-Y2020")
 
-# Result 
+# Removing spaces from all rows and pivoting the data to be in long format
+gdp.state.df <- gdp.state.df %>% 
+  mutate(across(where(is.character), str_remove_all, pattern = fixed(" "))) %>% 
+  pivot_longer(cols = Y2017:Y2020, names_to = "Year", values_to = "Change")
+
 head(gdp.state.df)
 ```
 
 ### Cleaning and organizing GDP-Industry dataframe 
-TODO 2: The columns in this dataset are really weirdly written "word.word.word..word" I think that just happens when R takes the CSV with spaces in. Here is the list of of the industries: (below), if you could use line 32 from above to rename the columns it would probably look much better i visualizations. 
-
-Agriculture, forestry, fishing, and hunting	
-Mining, quarrying, and oil and gas extraction	
-Utilities	
-Construction	
-Durable goods manufacturing	
-Nondurable goods manufacturing	
-Wholesale trade	
-Retail trade	
-Transportation and warehousing	
-Information	
-Finance and insurance	
-Real estate and rental and leasing	
-Professional, scientific, and technical services	
-Management of companies and enterprises	
-Administrative and support and waste management and remediation services	
-Educational services	
-Health care and social assistance	
-Arts, entertainment, and recreation	
-Accomodation and food services	
-Other services (except government and government enterprises)	
-Government and government enterprises	
-
 ```{r}
 # Renaming columns
-# Columns do need to be renamed, they have .s instead of spaces currently 
+colnames(gdp.industry.df) <- c("Name", "Agriculture", "Mining", "Utilities", "Construction", "Durable_Goods", "Nondurable_Goods", "Wholesale_Trade", "Retail_Trade", "Transportation", "Information", "Finance", "Real_Estate", "Technical", "Management", "Waste_Management", "Education", "Health", "Arts", "Food", "Other", "Government", "Unknown")
+
+# Pivot columns so that data is in a long format
+gdp.industry.df <- gdp.industry.df %>% 
+  pivot_longer(cols = !Name, names_to = "Industry", values_to = "Percent_Change")
 
 # Result 
 head(gdp.industry.df)
@@ -82,65 +72,87 @@ head(covh.cleaned)
 
 ### Creating dataframes for each state 
 ```{r}
-as.vector((gdp.state.df$State))
+#as.vector((gdp.state.df$State))
 
 # California Subset 
-ca.gdp <- gdp.state.df[(gdp.state.df$State == "California "), ]
-
-# CA Result 
+ca.gdp <- gdp.state.df[(gdp.state.df$State == "California"), ]
 head(ca.gdp)
 
 # Texas Subset 
 tx.gdp <- gdp.state.df[(gdp.state.df$State == "Texas"), ]
-
-# TX Result 
 head(tx.gdp)
+
+# Rhode Island Subset
+ri.gdp <- gdp.state.df[(gdp.state.df$State == "RhodeIsland"), ]
+head(ri.gdp)
+
+# Utah Subset
+ut.gdp <- gdp.state.df[(gdp.state.df$State == "Utah"), ]
+head(ut.gdp)
+```
+
+## Visualization of GDP Percent Changes from 2017-2020
+```{r}
+CA <- ggplot(ca.gdp %>%  mutate(fill = ifelse(Change > 0, "Good", "Bad")), aes(x = Year, y = Change))+
+  geom_col(aes(y=Change, fill=fill))+
+  geom_bar(stat="identity")+
+  scale_fill_manual(values=c("Good" = "darkolivegreen3","Bad"= "brown1"))+
+  ggtitle("Percent Change in GDP from 2017-2020 in California")+
+  geom_hline(yintercept = 0)
+CA
+
+ggplotly(CA)
+```
+
+```{r}
+# Plotting the initial outline of the shapefile for the states
+plot(states)
+```
+
+```{r}
+# Plotting the United States 
+states@data$LabelText <- paste0(
+  "<b>Name:</b> ", states$NAME, "<br>",
+  "<b>2017:</b> ", gdp.state.df$X2017, "<br>"
+)
+paletteBins <- c(-2, -1, 0, 1, 2, 3, 4, 5, 6)
+colorPalette <- colorBin(palette = "Greens", domain = gdp.state.df$X2017, na.color = "transparent", bins = paletteBins)
+
+leaflet(states) %>% 
+  addTiles() %>% 
+  setView(lat = 39.8097, lng = -98.5556, zoom=4) %>%
+  addPolygons(
+    stroke = TRUE, 
+    fillColor = ~colorPalette(gdp.state.df$X2017),
+    color = 'Black', 
+    weight = 1.5, 
+    label = ~lapply(LabelText, htmltools::HTML)) %>% 
+  addLegend(pal = colorPalette, values = gdp.state.df$X2017, opacity = 0.9, title = "GDP Percent Change in 2017", position="bottomleft")
+```
+
+## Visualization of GDP per Industry
+
+```{r fig.height=10, fig.width=17}
+# Filtering data so that only CA, TX, RI, and UT are included
+fltr_industry <- gdp.industry.df %>% 
+  filter(Name == "California " | Name == "Texas"| Name == "Utah "| Name == "Rhode Island ") %>% 
+  filter(Industry == "Health" | Industry == "Education" | Industry == "Arts" | Industry == "Food" | Industry == "Real_Estate")
+
+industry_plot <- ggplot(data = fltr_industry, aes(x = Name, y = Percent_Change))+
+  geom_bar(stat="identity")+
+  facet_wrap(~Industry, nrow=1)+
+  ggtitle("Percent Change in GDP across Industries")
+industry_plot
+#ggplotly(industry_plot)
 ```
 
 
-------- 
-
 ```{r}
-gdp_state <- read.csv("C:/Users/Rinija/Documents/UMass/JR-S2/INFO 248/Project/Data/gdp_change.csv", check.names=FALSE)
-dim(gdp_state)
-#Change the name of the first column
-names(gdp_state)[1] <- "Name"
-gdp_state
-```
-
-## Visualization of GDP in CA vs. TX, RI vs. UT
-##################### FOR SOME REASON THE VALUES ARE EMPTY ##########################
-
-Hey its Disha leaving a note - so if you are trying to get Texas's percent change for 2020 you could use the dataframes I made above "tx.gdp$Y2020" and that should get Texas' percent change in that specific year. 
-
-This is the output of tx.gdp:
-
-   State Y2017 Y2018 Y2019 Y2020 Rank-Y2020
-39 Texas   2.8   3.9   2.9  -3.5         23
-
-Hope that helps! 
-
-```{r}
-TX <- gdp_state %>% 
+TX <- gdp.state.df %>% 
   filter(Name == "Texas") 
 
 barplot(TX$Percent_Change, ylim=c(-4,4), col=ifelse(TX$Percent_Change>0,"darkolivegreen3","brown1"))
 abline(h=0)
 title(main="Texas Percent Change in GDP from 2017 to 2020", ylab="Percent Change (%)", xlab("Year"))
-```
-## GDP per Industry
-This data file lists the gdp change from 2019 to 2020 in each inustry by state or region
-```{r}
-gdp_industry <- read.csv("C:/Users/Rinija/Documents/UMass/JR-S2/INFO 248/Project/Data/gdp_industry.csv", check.names=FALSE)
-glimpse(gdp_industry)
-#Change the name of the first column
-names(gdp_industry)[1] <- "Name"
-gdp_industry
-```
-We are looking into industries that had drastic changes since the pandemic
-```{r}
-industries <- gdp_industry %>% 
-  filter(Name == "California")
-industries
 ```
 
