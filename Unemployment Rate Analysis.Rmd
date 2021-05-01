@@ -14,6 +14,9 @@ library(magrittr)
 library(dplyr) 
 library(ggplot2)
 library(lubridate)
+library(grid)
+library(gridExtra)
+library("tidyverse")
 ```
 
 ### Load datasets  
@@ -29,7 +32,7 @@ covid19.health <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-imp
 ur.cleaned.df <- subset(ur.df, select = -c(Series.ID, Year, Period))
 
 # Renaming columns 
-colnames(ur.cleaned.df) <- c("Time_Label", "Unemployment_Rate", "Monthly_Change")
+colnames(ur.cleaned.df) <- c("Time_Period", "Unemployment_Rate", "Monthly_Change")
 
 #Result 
 ur.cleaned.df
@@ -190,23 +193,114 @@ newcases <- c(jan20.newcases, feb20.newcases, mar20.newcases, apr20.newcases, ma
 # Creating a variable for deaths 
 deaths <- c(jan20.deaths, feb20.deaths, mar20.deaths, apr20.deaths, may20.deaths, jun20.deaths, jul20.deaths, aug20.deaths, sep20.deaths, oct20.deaths, nov20.deaths, dec20.deaths, jan21.deaths, feb21.deaths, mar21.deaths)
 
-# New Cases per Month Dataframe
-monthly.covid.df <- data.frame(months,newcases,deaths)
+# Time series 
+dates <- c("01/01/2020", "02/01/2020", "03/01/2020","04/01/2020", "05/01/2020","06/01/2020", "07/01/2020", "08/01/2020", "09/01/2020", "10/01/2020","11/01/2020", "12/01/2020", "01/01/2021", "02/01/2021", "03/01/2021")
+
+# COVID-19 health per month dataframe
+monthly.covid.df <- data.frame(months, dates, newcases, deaths)
+
+monthly.covid.df <- monthly.covid.df %>%
+  mutate(dates = as.Date(dates, format = "%m/%d/%y"))
 
 # Result
+grid.draw(tableGrob(monthly.covid.df, theme=ttheme_default(base_size = 6) ))
 head(monthly.covid.df)
 ```
 
-# Visualize COVID-19 Health Data Timeline 
+### Visualize COVID-19 New Cases Timeline 
 ```{r}
-monthly.covid.df$newcases <- as.numeric(monthly.covid.df$newcases)
-monthly.covid.df$deaths <- as.numeric(monthly.covid.df$deaths)
+# Find the top 5 highest months
+head(arrange(monthly.covid.df,desc(newcases)), n = 5)
 
-counts <- table(monthly.covid.df$months, monthly.covid.df$newcases)
+# Color labels 
+top5.cases <- c("#69b3a2","#69b3a2","#69b3a2","#69b3a2","#69b3a2","#69b3a2",
+          "#B20000","#69b3a2","#69b3a2","#B20000","#B20000","#B20000","#B20000","#B20000","#69b3a2")
 
-barplot(counts)
-barplot(newcases)
+# Case labels 
+num.cases.mils <- c("7", "32", "188,138", "875,947", "725,178","847,821", "1.9 mil", "1.4 mil", "1.2 mil", "1.9 mil", "4.4 mil", "6.3 mil", "6 mil", "2.3 mil", "1.7 mil")
 
-monthly.covid.df$newcases
+# Visualize 
+b <- barplot(newcases, yaxp=c(0, max(newcases), 15), 
+        ylim=range(pretty(c(0, newcases))), names=months, xlab = "Time Period", ylab = "Number of New Recorded Cases", main = "Number of Newly Recorded COVID-19 Cases per Month in the U.S. 2020-21", col = top5.cases)  
+
+y<-as.matrix(newcases)
+text(b,y+100000,labels=num.cases.mils)
 ```
 
+### Visualize COVID-19 Deaths Timeline 
+```{r}
+# Find the top 5 highest months
+head(arrange(monthly.covid.df,desc(deaths)), n = 5)
+
+# Color labels 
+deaths.top5 <- c("#90bcff","#90bcff","#90bcff","#B20000","#B20000","#90bcff",
+          "#90bcff","#90bcff","#90bcff","#90bcff","#90bcff","#B20000","#B20000","#B20000","#90bcff")
+
+# Case labels 
+num.deaths.mils <- c(0, 0, '3,680', '55,007', '42,053,', '21,634', '28,249', '29,184', '22,327', '24,012', '39,397', '79,189', '97,095', '63,431', '33,041')
+
+# Visualize 
+b <- barplot(deaths, yaxp=c(0, max(deaths), 15), 
+        ylim=range(pretty(c(0, deaths))), names=months, xlab = "Time Period", ylab = "Number of New Recorded Deaths", main = "Number of Newly Recorded COVID-19 Deaths per Month in the U.S. 2020-21", col = deaths.top5)  
+
+y<-as.matrix(deaths)
+text(b,y+1000,labels=num.deaths.mils)
+```
+
+### Visualize Unemployment Rates' Timeline 
+```{r}
+# Create a new unemployment dataframe 
+ur.viz <- ur.cleaned.df
+
+# Renaming columns 
+colnames(ur.viz) <- c("Date", "Unemployment_Rate", "Monthly_Change")
+
+# Cleaning and wrangling time/date data   
+ur.viz$Date <- months
+
+ur.viz$Date <- factor(ur.viz$Date, levels = c("JAN20", "FEB20", "MAR20", "APR20", "MAY20", "JUN20", "JUL20", "AUG20", "SEPT20", "OCT20", "NOV20", "DEC20", "JAN21", "FEB21", "MAR21"))
+
+# Add COVID-19 cases data, calculate contribution percentage from each month to  total cases 
+options(scipen = 999)
+vector = c()
+for (i in 1:length(newcases)) {
+  vector <- c(vector, (newcases[i]/sum(newcases)*100))
+  formatC(vector[i], digits = 1)
+
+}
+ur.viz$percentcases <- vector
+
+# Add COVID-19 deaths data, calculate contribution percentage from each month to total deaths 
+vector.d = c()
+for (i in 1:length(deaths)) {
+  vector.d <- c(vector.d, (deaths[i]/sum(deaths)*100))
+  formatC(vector.d[i], digits = 1)
+}
+ur.viz$percentdeaths <- vector.d
+
+# Result 
+head(ur.viz)
+
+# Creating the graph
+
+xyz <- ggplot(ur.viz, aes(x=Date, group = 1)) + 
+  geom_line(aes(y = Unemployment_Rate, group = 1), color = "darkred") +
+  geom_line(aes(y = percentcases, group = 1), color="steelblue", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Unemployment Rate Trends in the U.S. 2020-21")  
+
+xyz
+```
+
+### Visualize Monthly Change Timeline 
+```{r}
+library(ggplot2)
+library(plotly)
+library(gapminder)
+
+p <- ur.viz %>%
+  ggplot(aes(Date, Monthly_Change, size = 1, color="blue")) + 
+  geom_point() +
+  geom_line(aes(y = percentcases, group = 1), color="steelblue", linetype="twodash") + 
+  theme_bw()
+
+ggplotly(p)
+````
