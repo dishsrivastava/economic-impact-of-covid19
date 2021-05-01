@@ -296,6 +296,8 @@ library(ggplot2)
 library(plotly)
 library(gapminder)
 
+
+````
 p <- ur.viz %>%
   ggplot(aes(Date, Monthly_Change, size = 1, color="blue")) + 
   geom_point() +
@@ -303,4 +305,3 @@ p <- ur.viz %>%
   theme_bw()
 
 ggplotly(p)
-````
