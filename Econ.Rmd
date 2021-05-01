@@ -1,0 +1,33 @@
+---
+title: "Economic Impact of COVID-19 in the U.S."
+author: "Disha Srivastava and Rinija Raja"
+date: "5/1/2021"
+output: 
+html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    smooth_scroll: false
+    number_sections: true
+    df_print: paged
+
+---
+
+## Economic Impact of COVID-19 in the U.S.
+
+## Quarterly Results {.tabset .tabset-fade .tabset-pills}
+
+### By Product
+
+```{r }
+print(v)
+```
+
+### By Region
+
+```{r }
+v = "himynameis"
+```
+
+(tab content)
+
