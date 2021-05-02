@@ -1,0 +1,90 @@
+---
+title: "Twitter Conversation Data"
+author: "Disha Srivastava"
+date: "5/1/2021"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+Twitter Conversation Data
+
+### Load libraries 
+```{r}
+# load twitter library 
+library(rtweet)
+
+# plotting and pipes - tidyverse!
+library(ggplot2)
+library(dplyr)
+
+# text mining library
+library(tidytext)
+```
+
+### Setting up the API 
+```{r}
+# whatever name you assigned to your created app
+appname <- "economic-impact-of-covid19"
+
+## api key (example below is not a real key)
+key <- "LDVYl0gTvhvYbNnsiJd3IrTMk"
+
+## api secret (example below is not a real key)
+secret <- "HnBymm96BOg1SYZKxvgURKc7ULJ8MKE0Fnj0ZjFfWqey7e34FQ"
+
+# create token named "twitter_token"
+twitter_token <- create_token(
+  app = appname,
+  consumer_key = key,
+  consumer_secret = secret,
+  access_token = '2620473211-WWfgOYF0UiZM0yLw3K0T3WxlG5a2cyH5heHimhC',
+  access_secret = 'Z6LWeugQ0mi7ANivINfUvWndSkT0ic3gceF0YQn2MC4jY')
+```
+
+### Gather up Tweets 
+```{r}
+rstats_tweets <- search_tweets("#economy", n = 600,
+                             include_rts = FALSE)
+```
+
+### Display Tweets 
+```{r}
+head(rstats_tweets$text)
+```
+
+## Creating a word cloud 
+```{r}
+# Load libraries 
+library(wordcloud)
+library(RColorBrewer)
+library(wordcloud2)
+library(tm)
+
+#Create a vector containing only the text
+text <- rstats_tweets$text
+
+# Create a corpus  
+docs <- Corpus(VectorSource(text))
+
+# Clean tweets 
+docs <- docs %>%
+  tm_map(removeNumbers) %>%
+  tm_map(removePunctuation) %>%
+  tm_map(stripWhitespace)
+docs <- tm_map(docs, content_transformer(tolower))
+docs <- tm_map(docs, removeWords, stopwords("english"))
+
+# Create a document-term-matrix
+tweets_words <-  tweets %>%
+ select(text) %>%
+ unnest_tokens(word, text)
+words <- tweets_words %>% count(word, sort=TRUE)
+```
+
+### Generating the word cloud 
+```{r}
+# Generate the word cloud
+set.seed(1234) # for reproducibility 
+wordcloud(words = df$word, freq = df$freq, min.freq = 1,           max.words=200, random.order=FALSE, rot.per=0.35,colors=brewer.pal(8, "Dark2"))
+```

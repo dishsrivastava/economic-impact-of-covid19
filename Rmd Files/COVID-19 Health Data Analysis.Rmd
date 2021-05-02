@@ -1,15 +1,12 @@
 ---
-title: "Analysis of COVID-19's Impact on Unemployment Rates in the U.S."
+title: "COVID-19 Health Data"
+author: "Disha Srivastava"
+date: "5/1/2021"
 output: html_document
-author: "Disha Srivastava" 
-editor_options: 
-  chunk_output_type: console
 ---
 
 ### Load libraries 
 ```{r libraries}
-# install.packages('dplyr')
-# install.packages("magrittr")
 library(magrittr) 
 library(dplyr) 
 library(ggplot2)
@@ -21,21 +18,7 @@ library("tidyverse")
 
 ### Load datasets  
 ```{r dataset}
-ur.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/Unemployment-Monthly.csv")
-
 covid19.health <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
-```
-
-### Cleaning and organizing unemployment rate dataframe 
-```{r}
-# Dropping unused columns 
-ur.cleaned.df <- subset(ur.df, select = -c(Series.ID, Year, Period))
-
-# Renaming columns 
-colnames(ur.cleaned.df) <- c("Time_Period", "Unemployment_Rate", "Monthly_Change")
-
-#Result 
-ur.cleaned.df
 ```
 
 ### Cleaning and organizing COVID-19 Health Dataframe 
@@ -246,62 +229,3 @@ b <- barplot(deaths, yaxp=c(0, max(deaths), 15),
 y<-as.matrix(deaths)
 text(b,y+1000,labels=num.deaths.mils)
 ```
-
-### Visualize Unemployment Rates' Timeline 
-```{r}
-# Create a new unemployment dataframe 
-ur.viz <- ur.cleaned.df
-
-# Renaming columns 
-colnames(ur.viz) <- c("Date", "Unemployment_Rate", "Monthly_Change")
-
-# Cleaning and wrangling time/date data   
-ur.viz$Date <- months
-
-ur.viz$Date <- factor(ur.viz$Date, levels = c("JAN20", "FEB20", "MAR20", "APR20", "MAY20", "JUN20", "JUL20", "AUG20", "SEPT20", "OCT20", "NOV20", "DEC20", "JAN21", "FEB21", "MAR21"))
-
-# Add COVID-19 cases data, calculate contribution percentage from each month to  total cases 
-options(scipen = 999)
-vector = c()
-for (i in 1:length(newcases)) {
-  vector <- c(vector, (newcases[i]/sum(newcases)*100))
-  formatC(vector[i], digits = 1)
-
-}
-ur.viz$percentcases <- vector
-
-# Add COVID-19 deaths data, calculate contribution percentage from each month to total deaths 
-vector.d = c()
-for (i in 1:length(deaths)) {
-  vector.d <- c(vector.d, (deaths[i]/sum(deaths)*100))
-  formatC(vector.d[i], digits = 1)
-}
-ur.viz$percentdeaths <- vector.d
-
-# Result 
-head(ur.viz)
-
-# Creating the graph
-
-xyz <- ggplot(ur.viz, aes(x=Date, group = 1)) + 
-  geom_line(aes(y = Unemployment_Rate, group = 1), color = "darkred") +
-  geom_line(aes(y = percentcases, group = 1), color="steelblue", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Unemployment Rate Trends in the U.S. 2020-21")  
-
-xyz
-```
-
-### Visualize Monthly Change Timeline 
-```{r}
-library(ggplot2)
-library(plotly)
-library(gapminder)
-
-
-````
-p <- ur.viz %>%
-  ggplot(aes(Date, Monthly_Change, size = 1, color="blue")) + 
-  geom_point() +
-  geom_line(aes(y = percentcases, group = 1), color="steelblue", linetype="twodash") + 
-  theme_bw()
-
-ggplotly(p)
