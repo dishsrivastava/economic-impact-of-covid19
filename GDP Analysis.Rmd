@@ -21,6 +21,7 @@ library(rgdal)
 ```{r dataset}
 # This dataset shows the percent change in GDP for each state in the United States from 2017 to 2020.
 gdp.state.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
+state.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
 
 # This dataset shows the percent change in GDP for each industry in each state in the United States from 2019 to 2020.
 gdp.industry.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-Industry.csv")
@@ -92,42 +93,80 @@ head(ut.gdp)
 ```
 
 ## Visualization of GDP Percent Changes from 2017-2020
+
 ```{r}
-CA <- ggplot(ca.gdp %>%  mutate(fill = ifelse(Change > 0, "Good", "Bad")), aes(x = Year, y = Change))+
-  geom_col(aes(y=Change, fill=fill))+
+CA <- ggplot(ca.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
   geom_bar(stat="identity")+
-  scale_fill_manual(values=c("Good" = "darkolivegreen3","Bad"= "brown1"))+
+  scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
   ggtitle("Percent Change in GDP from 2017-2020 in California")+
   geom_hline(yintercept = 0)
 CA
 
-ggplotly(CA)
+TX <- ggplot(tx.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
+  geom_bar(stat="identity")+
+  scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
+  ggtitle("Percent Change in GDP from 2017-2020 in Texas")+
+  geom_hline(yintercept = 0)
+TX
+
+RI <- ggplot(ri.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
+  geom_bar(stat="identity")+
+  scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
+  ggtitle("Percent Change in GDP from 2017-2020 in Rhode Island")+
+  geom_hline(yintercept = 0)
+RI
+
+UT <- ggplot(ut.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
+  geom_bar(stat="identity")+
+  scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
+  ggtitle("Percent Change in GDP from 2017-2020 in Utah")+
+  geom_hline(yintercept = 0)
+UT
 ```
 
+## Visualization of GDP Percent Changes in 2020 and 2019 in all of the states
 ```{r}
 # Plotting the initial outline of the shapefile for the states
 plot(states)
 ```
 
 ```{r}
-# Plotting the United States 
-states@data$LabelText <- paste0(
-  "<b>Name:</b> ", states$NAME, "<br>",
-  "<b>2017:</b> ", gdp.state.df$X2017, "<br>"
+# Plotting the United States on a map showing the Change in gdp for 2020 
+label_2020 <- paste0(
+  "<b>2020:</b> ", state.df$X2020, "<br>"
 )
-paletteBins <- c(-2, -1, 0, 1, 2, 3, 4, 5, 6)
-colorPalette <- colorBin(palette = "Greens", domain = gdp.state.df$X2017, na.color = "transparent", bins = paletteBins)
+paletteBins <- c(-8, -6, -4, -2, 0)
+colorPalette <- colorBin(palette = "RdYlGn", domain = state.df$X2020, na.color = "transparent", bins = paletteBins)
 
 leaflet(states) %>% 
   addTiles() %>% 
   setView(lat = 39.8097, lng = -98.5556, zoom=4) %>%
   addPolygons(
     stroke = TRUE, 
-    fillColor = ~colorPalette(gdp.state.df$X2017),
+    fillColor = ~colorPalette(state.df$X2020),
     color = 'Black', 
     weight = 1.5, 
-    label = ~lapply(LabelText, htmltools::HTML)) %>% 
-  addLegend(pal = colorPalette, values = gdp.state.df$X2017, opacity = 0.9, title = "GDP Percent Change in 2017", position="bottomleft")
+    label = ~lapply(label_2020, htmltools::HTML)) %>% 
+  addLegend(pal = colorPalette, values = state.df$X2020, opacity = 0.9, title = "GDP Percent Change in 2020", position="bottomleft")
+```
+```{r}
+# Plotting the United States on a map showing the Change in gdp for 2019
+label_2019 <- paste0(
+  "<b>2019:</b> ", state.df$X2019, "<br>"
+)
+paletteBins <- c(0, 1, 2, 3, 4, 5)
+colorPalette <- colorBin(palette = "Greens", domain = state.df$X2019, na.color = "transparent", bins = paletteBins)
+
+leaflet(states) %>% 
+  addTiles() %>% 
+  setView(lat = 39.8097, lng = -98.5556, zoom=4) %>%
+  addPolygons(
+    stroke = TRUE, 
+    fillColor = ~colorPalette(state.df$X2019),
+    color = 'Black', 
+    weight = 1.5, 
+    label = ~lapply(label_2019, htmltools::HTML)) %>% 
+  addLegend(pal = colorPalette, values = state.df$X2019, opacity = 0.9, title = "GDP Percent Change in 2019", position="bottomleft")
 ```
 
 ## Visualization of GDP per Industry
@@ -136,23 +175,11 @@ leaflet(states) %>%
 # Filtering data so that only CA, TX, RI, and UT are included
 fltr_industry <- gdp.industry.df %>% 
   filter(Name == "California " | Name == "Texas"| Name == "Utah "| Name == "Rhode Island ") %>% 
-  filter(Industry == "Health" | Industry == "Education" | Industry == "Arts" | Industry == "Food" | Industry == "Real_Estate")
+  filter(Industry == "Health" | Industry == "Arts" | Industry == "Food" | Industry == "Technical" | Industry == "Real_Estate")
 
 industry_plot <- ggplot(data = fltr_industry, aes(x = Name, y = Percent_Change))+
   geom_bar(stat="identity")+
   facet_wrap(~Industry, nrow=1)+
   ggtitle("Percent Change in GDP across Industries")
 industry_plot
-#ggplotly(industry_plot)
 ```
-
-
-```{r}
-TX <- gdp.state.df %>% 
-  filter(Name == "Texas") 
-
-barplot(TX$Percent_Change, ylim=c(-4,4), col=ifelse(TX$Percent_Change>0,"darkolivegreen3","brown1"))
-abline(h=0)
-title(main="Texas Percent Change in GDP from 2017 to 2020", ylab="Percent Change (%)", xlab("Year"))
-```
-
