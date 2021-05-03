@@ -690,7 +690,7 @@ y<-as.matrix(deaths)
 text(b.deaths ,y+2000, labels=num.deaths.mils)
 ```
 
-$nbsp; 
+&nbsp; 
 
 ### Part 3: Unemployment Data Analysis {.tabset .tabset-fade}
 ***
@@ -737,7 +737,12 @@ ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Unemployment_Rate, gr
 ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Change Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Monthly Change in Unemployment Rates in the U.S. 2020-21")
 ```
 
-#### Unemployment Analysis and Visualizations  
+#### Unemployment Analysis and Visualizations 
+
+##### Data 
+
+The table below summarizes the unemployment rates and monthly change in unemployment per month from Jan '20 to Mar '21. New cases and deaths per month have been calcuated as a proportion of the total cases and deaths from Jan '20 to Mar '21 in order to create a line chart with all three variables. 
+
 ```{r echo=FALSE}
 # Create a new unemployment dataframe 
 ur.viz <- ur.cleaned.df
@@ -773,16 +778,22 @@ ur.viz$percentdeaths <- vector.d
 ur.viz
 ```
 
+Now let's take a look at correlations between unemployment rates, cases, and deaths: 
+
 ##### Visualize Unemployment Rates' Timeline 
 ```{r echo=FALSE}
 # Creating the graph
 ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Unemployment_Rate, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Unemployment Rate Trends in the U.S. 2020-21")  
 ```
 
+SUMMARY 
+
 ##### Visualize Monthly Change Timeline 
 ```{r echo=FALSE}
 ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Change Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Monthly Change in Unemployment Rates in the U.S. 2020-21")
-````
+```
+
+SUMMARY
 
 #### Code 
 ##### Wrangle data for visualizations 
@@ -804,8 +815,7 @@ vector = c()
 for (i in 1:length(newcases)) {
   vector <- c(vector, (newcases[i]/sum(newcases)*100))
   formatC(vector[i], digits = 1)
-
-}
+  } 
 ur.viz$percentcases <- vector
 
 # Add COVID-19 deaths data, calculate contribution percentage from each month to total deaths 
@@ -813,7 +823,7 @@ vector.d = c()
 for (i in 1:length(deaths)) {
   vector.d <- c(vector.d, (deaths[i]/sum(deaths)*100))
   formatC(vector.d[i], digits = 1)
-}
+  } 
 ur.viz$percentdeaths <- vector.d
 
 # Result 
@@ -829,9 +839,9 @@ ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Unemployment_Rate, gr
 ##### Visualize Monthly Change Timeline 
 ```{r eval=FALSE}
 ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Change Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Monthly Change in Unemployment Rates in the U.S. 2020-21")
-````
+```
 
-$nbsp;
+&nbsp;
 
 ### Part 4: GDP Data Analysis {.tabset .tabset-fade}
 ***
@@ -872,6 +882,7 @@ $nbsp;
 
 #### Part 7: Further Information 
 ***
+
 We have created a [**GitHub Repository**](https://github.com/dishsrivastava/economic-impact-of-covid19) with our entire codebase and data sets for future reference.
 
 _Please note_: a few of our graphs may get cut off once we knit the Rmd file due to spacing limits, however, we have saved PNG images of our graphs and added them to the 'Graph-Images' folder in our GitHub Repository so you can see the entire image! 
