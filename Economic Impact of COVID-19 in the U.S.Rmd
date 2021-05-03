@@ -115,7 +115,7 @@ variable         | description
 `U.S. COVID-19 Deaths` | Number of deaths from COVID-19 recorded each day in each state; this data has been wrangled into monthly national data from January 2020 to March 2021. 
 `U.S. Unemployment Rate per Month` | National recorded unemployment rates on a monthly basis from January 2020 to March 2021. 
 `U.S. GDP Percent Change per Year` | National monthly change in unemployment rates on a monthly basis from January 2020 to March 2021. 
-`Industry` | Arts, Health, Technical 
+`Industry` | Arts, Health, Food, Eeal Estate, and Technical. 
 `States` | California, Texas, Utah, and Rhode Island. 
 
 #### Code
@@ -694,10 +694,142 @@ $nbsp;
 
 ### Part 3: Unemployment Data Analysis {.tabset .tabset-fade}
 ***
+```{r include=FALSE}
+# Create a new unemployment dataframe 
+ur.viz <- ur.cleaned.df
+
+# Renaming columns 
+colnames(ur.viz) <- c("Date", "Unemployment_Rate", "Monthly_Change")
+
+# Cleaning and wrangling time/date data   
+ur.viz$Date <- months
+
+ur.viz$Date <- factor(ur.viz$Date, levels = c("JAN20", "FEB20", "MAR20", "APR20", "MAY20", "JUN20", "JUL20", "AUG20", "SEPT20", "OCT20", "NOV20", "DEC20", "JAN21", "FEB21", "MAR21"))
+
+# Add COVID-19 cases data, calculate contribution percentage from each month to  total cases 
+options(scipen = 999)
+vector = c()
+for (i in 1:length(newcases)) {
+  vector <- c(vector, (newcases[i]/sum(newcases)*100))
+  formatC(vector[i], digits = 1)
+
+}
+ur.viz$percentcases <- vector
+
+# Add COVID-19 deaths data, calculate contribution percentage from each month to total deaths 
+vector.d = c()
+for (i in 1:length(deaths)) {
+  vector.d <- c(vector.d, (deaths[i]/sum(deaths)*100))
+  formatC(vector.d[i], digits = 1)
+}
+ur.viz$percentdeaths <- vector.d
+
+# Result 
+head(ur.viz)
+```
+
+```{r include=FALSE}
+# Creating the graph
+ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Unemployment_Rate, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Unemployment Rate Trends in the U.S. 2020-21")  
+```
+
+```{r include=FALSE}
+ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Change Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Monthly Change in Unemployment Rates in the U.S. 2020-21")
+```
 
 #### Unemployment Analysis and Visualizations  
+```{r echo=FALSE}
+# Create a new unemployment dataframe 
+ur.viz <- ur.cleaned.df
+
+# Renaming columns 
+colnames(ur.viz) <- c("Date", "Unemployment_Rate", "Monthly_Change")
+
+# Cleaning and wrangling time/date data   
+ur.viz$Date <- months
+
+ur.viz$Date <- factor(ur.viz$Date, levels = c("JAN20", "FEB20", "MAR20", "APR20", "MAY20", "JUN20", "JUL20", "AUG20", "SEPT20", "OCT20", "NOV20", "DEC20", "JAN21", "FEB21", "MAR21"))
+
+# Add COVID-19 cases data, calculate contribution percentage from each month to  total cases 
+options(scipen = 999)
+vector = c()
+for (i in 1:length(newcases)) {
+  vector <- c(vector, (newcases[i]/sum(newcases)*100))
+  formatC(vector[i], digits = 1)
+
+}
+ur.viz$percentcases <- vector
+
+# Add COVID-19 deaths data, calculate contribution percentage from each month to total deaths 
+vector.d = c()
+for (i in 1:length(deaths)) {
+  vector.d <- c(vector.d, (deaths[i]/sum(deaths)*100))
+  formatC(vector.d[i], digits = 1)
+}
+ur.viz$percentdeaths <- vector.d
+
+# Result 
+# head(ur.viz)
+ur.viz
+```
+
+##### Visualize Unemployment Rates' Timeline 
+```{r echo=FALSE}
+# Creating the graph
+ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Unemployment_Rate, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Unemployment Rate Trends in the U.S. 2020-21")  
+```
+
+##### Visualize Monthly Change Timeline 
+```{r echo=FALSE}
+ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Change Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Monthly Change in Unemployment Rates in the U.S. 2020-21")
+````
 
 #### Code 
+##### Wrangle data for visualizations 
+```{r}
+# Create a new unemployment dataframe 
+ur.viz <- ur.cleaned.df
+
+# Renaming columns 
+colnames(ur.viz) <- c("Date", "Unemployment_Rate", "Monthly_Change")
+
+# Cleaning and wrangling time/date data   
+ur.viz$Date <- months
+
+ur.viz$Date <- factor(ur.viz$Date, levels = c("JAN20", "FEB20", "MAR20", "APR20", "MAY20", "JUN20", "JUL20", "AUG20", "SEPT20", "OCT20", "NOV20", "DEC20", "JAN21", "FEB21", "MAR21"))
+
+# Add COVID-19 cases data, calculate contribution percentage from each month to  total cases 
+options(scipen = 999)
+vector = c()
+for (i in 1:length(newcases)) {
+  vector <- c(vector, (newcases[i]/sum(newcases)*100))
+  formatC(vector[i], digits = 1)
+
+}
+ur.viz$percentcases <- vector
+
+# Add COVID-19 deaths data, calculate contribution percentage from each month to total deaths 
+vector.d = c()
+for (i in 1:length(deaths)) {
+  vector.d <- c(vector.d, (deaths[i]/sum(deaths)*100))
+  formatC(vector.d[i], digits = 1)
+}
+ur.viz$percentdeaths <- vector.d
+
+# Result 
+head(ur.viz)
+```
+
+##### Visualize Unemployment Rates' Timeline 
+```{r eval=FALSE}
+# Creating the graph
+ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Unemployment_Rate, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Unemployment Rate Trends in the U.S. 2020-21")  
+```
+
+##### Visualize Monthly Change Timeline 
+```{r eval=FALSE}
+ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Change Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Monthly Change in Unemployment Rates in the U.S. 2020-21")
+````
 
 $nbsp;
 
@@ -708,8 +840,12 @@ $nbsp;
 
 #### Code 
 
+&nbsp; 
+
 ### Part 5: Summary of Findings
 ***
+
+&nbsp; 
 
 #### Part 6: Resources and Tutorials 
 ***
@@ -731,6 +867,8 @@ $nbsp;
 [Lesson 2. Twitter Data in R Using Rtweet: Analyze and Download Twitter Data](https://www.earthdatascience.org/courses/earth-analytics/get-data-using-apis/use-twitter-api-r/) from EarthLab. 
 
 [How to Generate Word Clouds in R](https://towardsdatascience.com/create-a-word-cloud-with-r-bde3e7422e8a) from Towardsdatascience. 
+
+&nbsp; 
 
 #### Part 7: Further Information 
 ***
