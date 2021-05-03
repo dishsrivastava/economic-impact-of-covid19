@@ -18,7 +18,8 @@ editor_options:
 ***
 
 ##### Project Goal 
-Our project examines the impact of the COVID-19 pandemic on different aspects of the economy such as GDP and unemployment rate. We decided to focus our analysis on four states that had varying coronavirus restrictions.   
+
+Our data science project examines the impact of COVID-19 on integral aspects of the U.S. economy such as GDP and unemployment. We chose to focus our GDP analysis on four states that had varying responses to the pandemic and different sized populations. We specifically examined California, Rhode Island, Texas, and Utah. In our analysis of GDP, we created an interactive map with data from 2019 and 2020 in order to compare the changes in GDP from before the pandemic began. We additionally created barplots that displayed the change in GDP from 2017 to 2020 for the four chosen states. We also explored the GDP changes between various industries such as art, health, technical professions, real estate, and food. For unemployment, we mapped a time line of increase/decrease in cases and deaths, in order to infer a correlation 
 
 #### `#Economy` Visualization
 
@@ -51,8 +52,7 @@ twitter_token <- create_token(
 ```
 
 ```{r include=FALSE}
-data <- search_tweets("#economy", n = 600,
-                             include_rts = FALSE)
+data <- search_tweets("#economy", n = 600, include_rts = FALSE)
 ```
 
 ```{r include=FALSE}
@@ -89,7 +89,7 @@ words <- sort(rowSums(matrix),decreasing=TRUE)
 df <- data.frame(word = names(words),freq=words)
 ```
 
-```{r echo=FALSE}
+```{r echo=FALSE, fig.align = 'center'}
 # Generate the word cloud
 set.seed(1234) # for reproducibility 
 wordcloud(words = df$word, freq = df$freq, min.freq = 1,           max.words=200, random.order=FALSE, rot.per=0.35,            colors=brewer.pal(8, "Dark2"))
@@ -117,6 +117,8 @@ variable         | description
 `U.S. GDP Percent Change per Year` | National monthly change in unemployment rates on a monthly basis from January 2020 to March 2021. 
 `Industry` | Arts, Health, Food, Eeal Estate, and Technical. 
 `States` | California, Texas, Utah, and Rhode Island. 
+
+&nbsp;
 
 #### Code
 
@@ -215,9 +217,9 @@ library("tidyverse")
 ```
 
 ```{r include=FALSE}
-ur.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/Unemployment-Monthly.csv")
+ur.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/Unemployment-Monthly.csv")
 
-covid19.health <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
+covid19.health <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
 ```
 
 ```{r include=FALSE}
@@ -399,10 +401,12 @@ monthly.covid.df <- monthly.covid.df %>%
 monthly.covid.df
 ```
 
+&nbsp;
+
 Now, let's look at how counts of new cases per month arose and fell from Jan '20 to Mar '21: 
 
 ##### New COVID-19 Cases per Month 
-```{r echo=FALSE}
+```{r echo=FALSE, fig.height=10, fig.width=17}
 # Find the top 5 highest months
 # head(arrange(monthly.covid.df,desc(newcases)), n = 5)
 
@@ -423,10 +427,12 @@ text(b.cases, y+300000,labels=num.cases.mils)
 
 This bar plot helps us visually time line the spread COVID-19. The red bars denote the top five months which experienced the highest number of recorded cases, often referred to as peaks or "second, third" waves. We can infer that July '20, Oct '20, Nov '20, Dec '20, Jan '21, and Feb '21 had the highest number of recorded cases; from this data, we might predict that unemployment rates would be higher during these months and GDP would be lower. 
 
+&nbsp;
+
 Now, let's look at how counts of new deaths due to COVID-19 per month arose and fell from Jan '20 to Mar '21:  
 
 ##### New COVID-19 Deaths per Month 
-```{r echo=FALSE}
+```{r echo=FALSE, fig.height=10, fig.width=17}
 # Find the top 5 highest months
 # head(arrange(monthly.covid.df,desc(deaths)), n = 5)
 
@@ -464,9 +470,9 @@ library("tidyverse")
 
 ##### Load datasets  
 ```{r dataset}
-ur.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/Unemployment-Monthly.csv")
+ur.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/Unemployment-Monthly.csv")
 
-covid19.health <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
+covid19.health <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
 ```
 
 ##### Cleaning and organizing unemployment rate dataframe 
@@ -730,11 +736,11 @@ head(ur.viz)
 
 ```{r include=FALSE}
 # Creating the graph
-ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Unemployment_Rate, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Unemployment Rate Trends in the U.S. 2020-21")  
+ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Unemployment_Rate, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="darkblue", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Unemployment Rate Trends in the U.S. 2020-21")  
 ```
 
 ```{r include=FALSE}
-ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Change Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Monthly Change in Unemployment Rates in the U.S. 2020-21")
+ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="darkblue", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Change Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Monthly Change in Unemployment Rates in the U.S. 2020-21")
 ```
 
 #### Unemployment Analysis and Visualizations 
@@ -778,22 +784,32 @@ ur.viz$percentdeaths <- vector.d
 ur.viz
 ```
 
-Now let's take a look at correlations between unemployment rates, cases, and deaths: 
+&nbsp;
+
+Now, let's take a look at correlations between unemployment rates, cases, and deaths: 
 
 ##### Visualize Unemployment Rates' Timeline 
-```{r echo=FALSE}
+```{r echo=FALSE, fig.height=10, fig.width=17}
 # Creating the graph
-ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Unemployment_Rate, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Unemployment Rate Trends in the U.S. 2020-21")  
+ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Unemployment_Rate, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="darkblue", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Unemployment Rate Trends in the U.S. 2020-21")  
 ```
 
-SUMMARY 
+In this line chart, <span style="color: darkred;">dark red</span> represents <span style="color: darkred;">**unemployment rate**</span>,  <span style="color: darkblue;">dark blue</span> represents <span style="color: darkblue;"> percent contribution of **new cases** </span>, and finally,  <span style="color: darkgreen;">dark green</span> represents <span style="color: darkgreen;"> percent contribution of new **deaths**</span>. 
+
+This graph helps us visualize the correlation between unemployment rates and the spread of COVID-19 in terms of newly recorded cases and deaths each month from Jan ‘20 to Mar ‘21. In the beginning of the timeline, we see stagnancy in unemployment during Jan ‘20 through Feb ‘20, as the pandemic had not yet reached the United States (although we had 39 cases, it had not reached major headlines yet and people were mostly unaware of the gravity of the virus, and we were at 0 deaths). Mar ‘20 is when COVID-19 hit the news headlines, cases shot up, and we experienced our first brutal month of deaths from this pandemic. The graph visualizes this categorial phenomenon, as Apr ‘20 had the highest recorded unemployment rate of 14.8% due to lockdowns and quarantine orders affecting businesses nationwide. We have studied which industries were hit the hardest further down in our analysis. Apr ‘20 through Jul ‘20 we experienced a fluctuating increase and decrease in the number of new cases and deaths, with unemployment numbers climbing and falling in sync. The timeline from Sept ‘20 to Jan ‘21 is especially surprising, as the number of cases and deaths hit their highest peaks yet unemployment rates increased slightly and stayed mostly continuous on a downward slope. This may be due to most local and state governments easing lockdown restrictions and as a result most businesses reopening with a better understanding of how to operate safely (outdoor dining, sanitization routines, plexiglass dividers, etc.). Overall, we can infer from this line chart that in the early stages of the pandemic there was a correlation between number of cases and deaths and unemployment rate, as cases/deaths informed decisions by government officials for safety procedures such as lockdowns; however, in the late stages of the pandemic, we learned how to live with the virus and our business adapted new ways to keep customers safe in order to reopen after a devastating year of closures which lowered unemployment rates although cases/deaths were still climbing. This might also infer that we opened our economy too soon, as Oct ‘20 to Jan ‘21 is when lockdown restrictions eased and cases/deaths climbed drastically, but that is a debate for another day. 
+
+&nbsp;
+ 
+Now, let's take a look at correlations between monthly percent change in unemployment rates, cases, and deaths to confirm our graph from above: 
 
 ##### Visualize Monthly Change Timeline 
-```{r echo=FALSE}
-ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Change Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Monthly Change in Unemployment Rates in the U.S. 2020-21")
+```{r echo=FALSE, fig.height=10, fig.width=17}
+ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="darkblue", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Change Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Monthly Change in Unemployment Rates in the U.S. 2020-21")
 ```
 
-SUMMARY
+SUMMARY It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+&nbsp;
 
 #### Code 
 ##### Wrangle data for visualizations 
@@ -831,7 +847,7 @@ head(ur.viz)
 ```
 
 ##### Visualize Unemployment Rates' Timeline 
-```{r eval=FALSE}
+```{r eval=FALSE, fig.height=10, fig.width=17}
 # Creating the graph
 ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Unemployment_Rate, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Unemployment Rate Trends in the U.S. 2020-21")  
 ```
@@ -858,17 +874,18 @@ library(rgdal)
 
 ```{r include=FALSE}
 # This dataset shows the percent change in GDP for each state in the United States from 2017 to 2020.
-gdp.state.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
-state.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
+gdp.state.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
+
+state.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
 
 # This dataset shows the percent change in GDP for each industry in each state in the United States from 2019 to 2020.
-gdp.industry.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-Industry.csv")
+gdp.industry.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-Industry.csv")
 
 # This dataset shows the death count of COVID-19 for each state
-covid19.health <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
+covid19.health <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
 
 # This is the shapefile for each state 
-states <- readOGR(dsn = "C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets", layer = "cb_2018_us_state_500k")
+states <- readOGR(dsn = "/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets", layer = "cb_2018_us_state_500k")
 ```
 
 ```{r include=FALSE}
@@ -906,9 +923,12 @@ ri.gdp <- gdp.state.df[(gdp.state.df$State == "RhodeIsland"), ]
 # Utah Subset
 ut.gdp <- gdp.state.df[(gdp.state.df$State == "Utah"), ]
 ```
-##### Visualize the Yearly GDP Change for each state 
+
+##### Explore Yearly Change in GDP by State 
+
 This is a set of four bar plots that display the percent change in GDP for California, Texas, Rhode Island, and Utah. Each graph includes data from one of the states mentioned above and displays the change in GDP from 2017 to 2020. Each bar in the chart has been filled with red or green to indicate whether there was an increase or decrease in GDP percentage. 
-```{r echo=FALSE}
+
+```{r echo=FALSE, fig.align = 'center'}
 CA <- ggplot(ca.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
   geom_bar(stat="identity")+
   scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
@@ -919,7 +939,7 @@ CA
 
 This bar plot displays the change in GDP for the state of California. We can conclude that the state had a very high starting percentage and the value dropped slighlty in 2018 and 2019. However, the most drastic drop in GDP percentage happened in 2020 with a value of -2.3%. 
 
-```{r echo=FALSE}
+```{r echo=FALSE, fig.align='center'}
 TX <- ggplot(tx.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
   geom_bar(stat="identity")+
   scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
@@ -930,7 +950,7 @@ TX
 
 This bar plot illustrates the GDP percent change in Texas. There is a starting percent change of roughly 2.5% and it significantly increased in 2018, but then dropped in 2019. Texas also had a significant decrease in 2020 with a value of -4.5%. This value is almost twice as low as California. 
 
-```{r echo=FALSE}
+```{r echo=FALSE, fig.align = 'center'}
 RI <- ggplot(ri.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
   geom_bar(stat="identity")+
   scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
@@ -941,7 +961,7 @@ RI
 
 This graph displays the GDP change in Rhode Island from 2017 to 2020. This visualization is unique because there already was a GDP decline in 2017. Also, the GDP values for 2018 and 2019 were not as high as the other states. Lastly, Rhode Island had the highest drop in GDP for 2020 with a value of -4.5%. 
 
-```{r echo=FALSE}
+```{r echo=FALSE, fig.align = 'center'}
 UT <- ggplot(ut.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
   geom_bar(stat="identity")+
   scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
@@ -952,8 +972,15 @@ UT
 
 This last graph shows the change in GDP for the state of Utah. This state had the highest GDP values for 2017, 2018, and 2019. It is also important to note that there was a very small decrease in 2020. 
 
-##### Visualize the 2019 Percent Change in GDP for every state
-```{r echo=FALSE}
+&nbsp;
+
+##### Mapping Percent Change Visualizations {.tabset .tabset-pills}
+
+###### 2019
+
+***Explore the Percent Change in GDP by State in 2019***
+
+```{r echo=FALSE, fig.align = 'center'}
 label_2019 <- paste0(
   "<b>2019:</b> ", state.df$X2019, "<br>"
 )
@@ -972,10 +999,15 @@ leaflet(states) %>%
   addLegend(pal = colorPalette, values = state.df$X2019, opacity = 0.9, title = "GDP Percent Change in 2019", position="bottomleft")
 ```
 
-SUMMARY
+SUMMARY It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+&nbsp;
  
-##### Visualize the 2020 Percent Change in GDP for every state
-```{r echo=FALSE}
+###### 2020
+
+***Explore the Percent Change in GDP by State in 2020***
+
+```{r echo=FALSE, fig.align = 'center'}
 label_2020 <- paste0(
   "<b>2020:</b> ", state.df$X2020, "<br>"
 )
@@ -994,10 +1026,12 @@ leaflet(states) %>%
   addLegend(pal = colorPalette, values = state.df$X2020, opacity = 0.9, title = "GDP Percent Change in 2020", position="bottomleft")
 ```
 
-SUMMARY
+SUMMARY It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
 
-##### Visualize the Percent Change in GDP for every state by Industry
-```{r echo=FALSE}
+&nbsp;
+
+##### Visualize the GDP Change by State and Idustry
+```{r, echo=FALSE, fig.height=10, fig.width=17}
 # Filtering data so that only CA, TX, RI, and UT are included
 fltr_industry <- gdp.industry.df %>% 
   filter(Name == "California " | Name == "Texas"| Name == "Utah "| Name == "Rhode Island ") %>% 
@@ -1009,6 +1043,10 @@ industry_plot <- ggplot(data = fltr_industry, aes(x = Name, y = Percent_Change))
   ggtitle("Percent Change in GDP across Industries")
 industry_plot
 ```
+
+SUMMARY It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+&nbsp;
 
 #### Code 
 
@@ -1024,14 +1062,15 @@ library(rgdal)
 ##### Load in datasets  
 ```{r}
 # This dataset shows the percent change in GDP for each state in the United States from 2017 to 2020.
-gdp.state.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
-state.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
+gdp.state.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
+
+state.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
 
 # This dataset shows the percent change in GDP for each industry in each state in the United States from 2019 to 2020.
-gdp.industry.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-Industry.csv")
+gdp.industry.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-Industry.csv")
 
 # This is the shapefile for each state 
-states <- readOGR(dsn = "C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets", layer = "cb_2018_us_state_500k")
+states <- readOGR(dsn = "/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets", layer = "cb_2018_us_state_500k")
 ```
 
 ##### Cleaning and organizing GDP-Industry dataframe 
@@ -1074,7 +1113,7 @@ ut.gdp <- gdp.state.df[(gdp.state.df$State == "Utah"), ]
 ```
 
 ##### Visualization of GDP Percent Changes from 2017-2020
-```{r}
+```{r, eval=FALSE}
 CA <- ggplot(ca.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
   geom_bar(stat="identity")+
   scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
@@ -1101,7 +1140,7 @@ UT <- ggplot(ut.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP
 ```
 
 ##### Visualize United States Change in GDP for 2020
-```{r}
+```{r, eval=FALSE}
 label_2020 <- paste0(
   "<b>2020:</b> ", state.df$X2020, "<br>"
 )
@@ -1121,7 +1160,7 @@ leaflet(states) %>%
 ```
 
 ##### Visualize United States Change in GDP for 2019
-```{r}
+```{r, eval=FALSE}
 label_2019 <- paste0(
   "<b>2019:</b> ", state.df$X2019, "<br>"
 )
@@ -1141,7 +1180,7 @@ leaflet(states) %>%
 ```
 
 ##### Visualize the GDP Change for each state by Idustry
-```{r fig.height=10, fig.width=17}
+```{r, eval=FALSE}
 # Filtering data so that only CA, TX, RI, and UT are included
 fltr_industry <- gdp.industry.df %>% 
   filter(Name == "California " | Name == "Texas"| Name == "Utah "| Name == "Rhode Island ") %>% 
@@ -1190,3 +1229,5 @@ industry_plot
 We have created a [**GitHub Repository**](https://github.com/dishsrivastava/economic-impact-of-covid19) with our entire codebase and data sets for future reference.
 
 _Please note_: a few of our graphs may get cut off once we knit the Rmd file due to spacing limits, however, we have saved PNG images of our graphs and added them to the 'Graph-Images' folder in our GitHub Repository so you can see the entire image! 
+
+$nbsp;

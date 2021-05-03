@@ -281,11 +281,11 @@ ur.viz$percentdeaths <- vector.d
 head(ur.viz)
 
 # Creating the graph
-ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Unemployment_Rate, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Unemployment Rate Trends in the U.S. 2020-21")  
+ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Unemployment_Rate, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="darkblue", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Unemployment Rate Trends in the U.S. 2020-21")  
 ```
 
 ### Visualize Monthly Change Timeline 
 ```{r}
-ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="orange", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Change Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Monthly Change in Unemployment Rates in the U.S. 2020-21")
+ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="darkblue", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Change Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Monthly Change in Unemployment Rates in the U.S. 2020-21")
 ````
 
