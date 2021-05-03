@@ -149,6 +149,7 @@ leaflet(states) %>%
     label = ~lapply(label_2020, htmltools::HTML)) %>% 
   addLegend(pal = colorPalette, values = state.df$X2020, opacity = 0.9, title = "GDP Percent Change in 2020", position="bottomleft")
 ```
+
 ```{r}
 # Plotting the United States on a map showing the Change in gdp for 2019
 label_2019 <- paste0(
@@ -178,7 +179,7 @@ fltr_industry <- gdp.industry.df %>%
   filter(Industry == "Health" | Industry == "Arts" | Industry == "Food" | Industry == "Technical" | Industry == "Real_Estate")
 
 industry_plot <- ggplot(data = fltr_industry, aes(x = Name, y = Percent_Change))+
-  geom_bar(stat="identity")+
+  geom_bar(stat="identity", fill = "skyblue2")+
   facet_wrap(~Industry, nrow=1)+
   ggtitle("Percent Change in GDP across Industries")
 industry_plot

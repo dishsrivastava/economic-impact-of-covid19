@@ -215,9 +215,9 @@ library("tidyverse")
 ```
 
 ```{r include=FALSE}
-ur.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/Unemployment-Monthly.csv")
+ur.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/Unemployment-Monthly.csv")
 
-covid19.health <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
+covid19.health <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
 ```
 
 ```{r include=FALSE}
@@ -464,9 +464,9 @@ library("tidyverse")
 
 ##### Load datasets  
 ```{r dataset}
-ur.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/Unemployment-Monthly.csv")
+ur.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/Unemployment-Monthly.csv")
 
-covid19.health <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
+covid19.health <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
 ```
 
 ##### Cleaning and organizing unemployment rate dataframe 
@@ -846,9 +846,246 @@ ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group
 ### Part 4: GDP Data Analysis {.tabset .tabset-fade}
 ***
 
-#### GDP Analysis and Visualizations  
+#### GDP Analysis and Visualizations 
+```{r include=FALSE}
+# Load in necessary libraries
+library(tidyverse) 
+library(leaflet)
+library(maptools)
+library(rgeos)
+library(rgdal)
+```
+
+```{r include=FALSE}
+# This dataset shows the percent change in GDP for each state in the United States from 2017 to 2020.
+gdp.state.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
+state.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
+
+# This dataset shows the percent change in GDP for each industry in each state in the United States from 2019 to 2020.
+gdp.industry.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-Industry.csv")
+
+# This dataset shows the death count of COVID-19 for each state
+covid19.health <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
+
+# This is the shapefile for each state 
+states <- readOGR(dsn = "C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets", layer = "cb_2018_us_state_500k")
+```
+
+```{r include=FALSE}
+# Renaming columns 
+colnames(gdp.state.df) <- c("State", "Y2017", "Y2018", "Y2019", "Y2020", "Rank-Y2020")
+
+# Removing spaces from all rows and pivoting the data to be in long format
+gdp.state.df <- gdp.state.df %>% 
+  mutate(across(where(is.character), str_remove_all, pattern = fixed(" "))) %>% 
+  pivot_longer(cols = Y2017:Y2020, names_to = "Year", values_to = "Change")
+```
+
+```{r include=FALSE}
+# California Subset 
+ca.gdp <- gdp.state.df[(gdp.state.df$State == "California"), ]
+
+# Texas Subset 
+tx.gdp <- gdp.state.df[(gdp.state.df$State == "Texas"), ]
+
+# Rhode Island Subset
+ri.gdp <- gdp.state.df[(gdp.state.df$State == "RhodeIsland"), ]
+
+# Utah Subset
+ut.gdp <- gdp.state.df[(gdp.state.df$State == "Utah"), ]
+```
+
+```{r echo=FALSE}
+CA <- ggplot(ca.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
+  geom_bar(stat="identity")+
+  scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
+  ggtitle("Percent Change in GDP from 2017-2020 in California")+
+  geom_hline(yintercept = 0)
+CA
+
+TX <- ggplot(tx.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
+  geom_bar(stat="identity")+
+  scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
+  ggtitle("Percent Change in GDP from 2017-2020 in Texas")+
+  geom_hline(yintercept = 0)
+TX
+
+RI <- ggplot(ri.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
+  geom_bar(stat="identity")+
+  scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
+  ggtitle("Percent Change in GDP from 2017-2020 in Rhode Island")+
+  geom_hline(yintercept = 0)
+RI
+
+UT <- ggplot(ut.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
+  geom_bar(stat="identity")+
+  scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
+  ggtitle("Percent Change in GDP from 2017-2020 in Utah")+
+  geom_hline(yintercept = 0)
+UT
+```
+
+SUMMARY
+```{r echo=FALSE}
+label_2020 <- paste0(
+  "<b>2020:</b> ", state.df$X2020, "<br>"
+)
+paletteBins <- c(-8, -6, -4, -2, 0)
+colorPalette <- colorBin(palette = "RdYlGn", domain = state.df$X2020, na.color = "transparent", bins = paletteBins)
+
+leaflet(states) %>% 
+  addTiles() %>% 
+  setView(lat = 39.8097, lng = -98.5556, zoom=4) %>%
+  addPolygons(
+    stroke = TRUE, 
+    fillColor = ~colorPalette(state.df$X2020),
+    color = 'Black', 
+    weight = 1.5, 
+    label = ~lapply(label_2020, htmltools::HTML)) %>% 
+  addLegend(pal = colorPalette, values = state.df$X2020, opacity = 0.9, title = "GDP Percent Change in 2020", position="bottomleft")
+```
+
+SUMMARY
+
+```{r echo=FALSE}
+label_2019 <- paste0(
+  "<b>2019:</b> ", state.df$X2019, "<br>"
+)
+paletteBins <- c(-1, 0, 1, 2, 3, 4, 5, 6)
+colorPalette <- colorBin(palette = "Greens", domain = state.df$X2019, na.color = "transparent", bins = paletteBins)
+
+leaflet(states) %>% 
+  addTiles() %>% 
+  setView(lat = 39.8097, lng = -98.5556, zoom=4) %>%
+  addPolygons(
+    stroke = TRUE, 
+    fillColor = ~colorPalette(state.df$X2019),
+    color = 'Black', 
+    weight = 1.5, 
+    label = ~lapply(label_2019, htmltools::HTML)) %>% 
+  addLegend(pal = colorPalette, values = state.df$X2019, opacity = 0.9, title = "GDP Percent Change in 2019", position="bottomleft")
+```
+
+SUMMARY 
+
 
 #### Code 
+
+##### Load in libraries 
+```{r}
+# Load in necessary libraries
+library(leaflet)
+library(maptools)
+library(rgeos)
+library(rgdal)
+```
+
+##### Load in datasets  
+```{r}
+# This dataset shows the percent change in GDP for each state in the United States from 2017 to 2020.
+gdp.state.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
+state.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-State.csv")
+
+# This dataset shows the percent change in GDP for each industry in each state in the United States from 2019 to 2020.
+gdp.industry.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets/GDP-Industry.csv")
+
+# This is the shapefile for each state 
+states <- readOGR(dsn = "C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets", layer = "cb_2018_us_state_500k")
+```
+
+##### Cleaning and organizing GDP-State dataframe 
+```{r}
+# Renaming columns 
+colnames(gdp.state.df) <- c("State", "Y2017", "Y2018", "Y2019", "Y2020", "Rank-Y2020")
+
+# Removing spaces from all rows and pivoting the data to be in long format
+gdp.state.df <- gdp.state.df %>% 
+  mutate(across(where(is.character), str_remove_all, pattern = fixed(" "))) %>% 
+  pivot_longer(cols = Y2017:Y2020, names_to = "Year", values_to = "Change")
+```
+
+##### Creating dataframes for each state 
+```{r}
+# California Subset 
+ca.gdp <- gdp.state.df[(gdp.state.df$State == "California"), ]
+
+# Texas Subset 
+tx.gdp <- gdp.state.df[(gdp.state.df$State == "Texas"), ]
+
+# Rhode Island Subset
+ri.gdp <- gdp.state.df[(gdp.state.df$State == "RhodeIsland"), ]
+
+# Utah Subset
+ut.gdp <- gdp.state.df[(gdp.state.df$State == "Utah"), ]
+```
+
+##### Visualization of GDP Percent Changes from 2017-2020
+```{r}
+CA <- ggplot(ca.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
+  geom_bar(stat="identity")+
+  scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
+  ggtitle("Percent Change in GDP from 2017-2020 in California")+
+  geom_hline(yintercept = 0)
+
+TX <- ggplot(tx.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
+  geom_bar(stat="identity")+
+  scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
+  ggtitle("Percent Change in GDP from 2017-2020 in Texas")+
+  geom_hline(yintercept = 0)
+
+RI <- ggplot(ri.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
+  geom_bar(stat="identity")+
+  scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
+  ggtitle("Percent Change in GDP from 2017-2020 in Rhode Island")+
+  geom_hline(yintercept = 0)
+
+UT <- ggplot(ut.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
+  geom_bar(stat="identity")+
+  scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
+  ggtitle("Percent Change in GDP from 2017-2020 in Utah")+
+  geom_hline(yintercept = 0)
+```
+
+##### Visualize United States Change in GDP for 2020
+```{r}
+label_2020 <- paste0(
+  "<b>2020:</b> ", state.df$X2020, "<br>"
+)
+paletteBins <- c(-8, -6, -4, -2, 0)
+colorPalette <- colorBin(palette = "RdYlGn", domain = state.df$X2020, na.color = "transparent", bins = paletteBins)
+
+leaflet(states) %>% 
+  addTiles() %>% 
+  setView(lat = 39.8097, lng = -98.5556, zoom=4) %>%
+  addPolygons(
+    stroke = TRUE, 
+    fillColor = ~colorPalette(state.df$X2020),
+    color = 'Black', 
+    weight = 1.5, 
+    label = ~lapply(label_2020, htmltools::HTML)) %>% 
+  addLegend(pal = colorPalette, values = state.df$X2020, opacity = 0.9, title = "GDP Percent Change in 2020", position="bottomleft")
+```
+
+##### Visualize United States Change in GDP for 2019
+```{r}
+label_2019 <- paste0(
+  "<b>2019:</b> ", state.df$X2019, "<br>"
+)
+paletteBins <- c(-1, 0, 1, 2, 3, 4, 5, 6)
+colorPalette <- colorBin(palette = "Greens", domain = state.df$X2019, na.color = "transparent", bins = paletteBins)
+
+leaflet(states) %>% 
+  addTiles() %>% 
+  setView(lat = 39.8097, lng = -98.5556, zoom=4) %>%
+  addPolygons(
+    stroke = TRUE, 
+    fillColor = ~colorPalette(state.df$X2019),
+    color = 'Black', 
+    weight = 1.5, 
+    label = ~lapply(label_2019, htmltools::HTML)) %>% 
+  addLegend(pal = colorPalette, values = state.df$X2019, opacity = 0.9, title = "GDP Percent Change in 2019", position="bottomleft")
+```
+
 
 &nbsp; 
 
