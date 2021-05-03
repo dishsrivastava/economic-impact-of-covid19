@@ -44,16 +44,16 @@ twitter_token <- create_token(
 
 ### Gather up Tweets 
 ```{r}
-rstats_tweets <- search_tweets("#economy", n = 600,
+data <- search_tweets("#economy", n = 600,
                              include_rts = FALSE)
 ```
 
 ### Display Tweets 
 ```{r}
-head(rstats_tweets$text)
+head(data$text)
 ```
 
-## Creating a word cloud 
+## Cleaning the data 
 ```{r}
 # Load libraries 
 library(wordcloud)
@@ -62,29 +62,31 @@ library(wordcloud2)
 library(tm)
 
 #Create a vector containing only the text
-text <- rstats_tweets$text
+text <- data$text
 
 # Create a corpus  
 docs <- Corpus(VectorSource(text))
 
-# Clean tweets 
 docs <- docs %>%
   tm_map(removeNumbers) %>%
   tm_map(removePunctuation) %>%
   tm_map(stripWhitespace)
 docs <- tm_map(docs, content_transformer(tolower))
 docs <- tm_map(docs, removeWords, stopwords("english"))
-
-# Create a document-term-matrix
-tweets_words <-  tweets %>%
- select(text) %>%
- unnest_tokens(word, text)
-words <- tweets_words %>% count(word, sort=TRUE)
 ```
+
+# Organizing the text data 
+```{r}
+dtm <- TermDocumentMatrix(docs) 
+matrix <- as.matrix(dtm) 
+words <- sort(rowSums(matrix),decreasing=TRUE) 
+df <- data.frame(word = names(words),freq=words)
+```
+
 
 ### Generating the word cloud 
 ```{r}
 # Generate the word cloud
 set.seed(1234) # for reproducibility 
-wordcloud(words = df$word, freq = df$freq, min.freq = 1,           max.words=200, random.order=FALSE, rot.per=0.35,colors=brewer.pal(8, "Dark2"))
+wordcloud(words = df$word, freq = df$freq, min.freq = 1,           max.words=200, random.order=FALSE, rot.per=0.35,            colors=brewer.pal(8, "Dark2"))
 ```

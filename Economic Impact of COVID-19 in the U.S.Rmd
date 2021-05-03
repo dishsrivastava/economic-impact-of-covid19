@@ -1,0 +1,739 @@
+---
+title: "Economic Impact of COVID-19 in the U.S."
+author: "Disha Srivastava and Rinija Raja"
+date: May 4th, 2021
+output: 
+html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    smooth_scroll: false
+    number_sections: true
+    df_print: paged
+editor_options: 
+  chunk_output_type: console
+---
+
+### Part 1: Introduction {.tabset .tabset-fade}
+***
+
+##### Project Goal 
+Our project examines the impact of the COVID-19 pandemic on different aspects of the economy such as GDP and unemployment rate. We decided to focus our analysis on four states that had varying coronavirus restrictions.   
+
+#### `#Economy` Visualization
+
+```{r include=FALSE}
+# load twitter library, and others 
+library(rtweet)
+library(ggplot2)
+library(dplyr)
+library(tidytext)
+library(rmarkdown)
+```
+
+```{r include = FALSE}
+# name assigned to created app
+appname <- "economic-impact-of-covid19"
+
+## api key 
+key <- "LDVYl0gTvhvYbNnsiJd3IrTMk"
+
+## api secret
+secret <- "HnBymm96BOg1SYZKxvgURKc7ULJ8MKE0Fnj0ZjFfWqey7e34FQ"
+
+# token named "twitter_token"
+twitter_token <- create_token(
+  app = appname,
+  consumer_key = key,
+  consumer_secret = secret,
+  access_token = '2620473211-WWfgOYF0UiZM0yLw3K0T3WxlG5a2cyH5heHimhC',
+  access_secret = 'Z6LWeugQ0mi7ANivINfUvWndSkT0ic3gceF0YQn2MC4jY')
+```
+
+```{r include=FALSE}
+data <- search_tweets("#economy", n = 600,
+                             include_rts = FALSE)
+```
+
+```{r include=FALSE}
+head(data$text)
+```
+
+```{r include=FALSE}
+# Load libraries 
+library(wordcloud)
+library(RColorBrewer)
+library(wordcloud2)
+library(tm)
+
+# Create a vector containing only the text
+text <- data$text
+
+# Create a corpus  
+docs <- Corpus(VectorSource(text))
+
+# Clean text
+docs <- docs %>%
+  tm_map(removeNumbers) %>%
+  tm_map(removePunctuation) %>%
+  tm_map(stripWhitespace)
+docs <- tm_map(docs, content_transformer(tolower))
+docs <- tm_map(docs, removeWords, stopwords("english"))
+```
+
+```{r include=FALSE}
+# Organizing the text data 
+dtm <- TermDocumentMatrix(docs) 
+matrix <- as.matrix(dtm) 
+words <- sort(rowSums(matrix),decreasing=TRUE) 
+df <- data.frame(word = names(words),freq=words)
+```
+
+```{r echo=FALSE}
+# Generate the word cloud
+set.seed(1234) # for reproducibility 
+wordcloud(words = df$word, freq = df$freq, min.freq = 1,           max.words=200, random.order=FALSE, rot.per=0.35,            colors=brewer.pal(8, "Dark2"))
+```
+
+The global pandemic this past year has impacted many aspects of our normalcy and daily lives. We utilized the Twitter Developer API to better understand how people across the world were thinking about the current state of our economy, by gathering the 600 most recent tweets published with #economy and creating a word cloud to visualize our findings. The top words in the word cloud are “covid”, “business”, followed by “jobs”, “government”, and “globalhealth” to name a few. 
+
+&nbsp;
+
+##### Hypothesis 
+
+We predict a linear correlation between unemployment rates and number of cases. As the number of COVID-19 cases increased, local and state governments entered lockdowns and further quarantine restrictions which impacted business and services, leading to higher levels of unemployment. In contrast, we hypothesize that an increasing number of deaths may not have had an equivalently strong correlation with unemployment rates. There are a few reasons for this: (1) cases spread and are recorded more quickly,  (2) the number of cases is drastically higher than number of deaths, (3) there seemed to be a long-term misconception that only the elderly and immunocompromised (who might represent a smaller subset of the general population) were at high risk for severe loss due to the virus. 
+
+In terms of GDP per State, we have chosen California, Texas, Rhode Island, and Utah to examine in detail. We predict that California might have experienced an increase in GDP, due to the number of technology companies residing in the State of California who reported record amounts of sales during the shift to a remote, virtual world. We briefly researched this topic with the [California State Assembly](https://ajed.assembly.ca.gov/keyinsightsintoinnovation). California and Texas each have large populations and were at the top of the charts at distinct points of time for cases/deaths, but followed drastically contrasting responses to the pandemic in terms of lockdowns, mask mandates, etc. We hypothesize that California would have seen an increase or at least continuation of GDP from previous years whereas Texas might have experienced a decline. Rhode Island and Utah are closely related in population amounts, however, Utah was the one of the only states to not issue a lockdown order. Specific counties in Utah with larger populations or tourist sites did issue lockdown orders, whereas Rhode Island’s governor issued a stay at home order in late March itself. We briefly researched stay at home orders through the [New York Times](https://www.nytimes.com/interactive/2020/us/coronavirus-stay-at-home-order.html). We predict that Rhode Island will experience a steady GDP in 2020 whereas Utah might experience a decline due to tourist locations and highly populated areas (with the highest job density) were the only ones experiencing lockdowns. 
+
+&nbsp;
+
+##### Variables 
+
+variable         | description
+---------------- | -----------
+`U.S. COVID-19 Cases` | Number of COVID-19 positive cases recorded each day in each state; this data has been wrangled into monthly national data from January 2020 to March 2021. 
+`U.S. COVID-19 Deaths` | Number of deaths from COVID-19 recorded each day in each state; this data has been wrangled into monthly national data from January 2020 to March 2021. 
+`U.S. Unemployment Rate per Month` | National recorded unemployment rates on a monthly basis from January 2020 to March 2021. 
+`U.S. GDP Percent Change per Year` | National monthly change in unemployment rates on a monthly basis from January 2020 to March 2021. 
+`Industry` | Arts, Health, Technical 
+`States` | California, Texas, Utah, and Rhode Island. 
+
+#### Code
+
+##### Load libraries 
+```{r}
+# load twitter library, and all other libraries 
+library(rtweet)
+library(ggplot2)
+library(dplyr)
+library(tidytext)
+```
+
+##### Setting up the API 
+```{r}
+# name of created app
+appname <- "economic-impact-of-covid19"
+
+## api key 
+key <- "LDVYl0gTvhvYbNnsiJd3IrTMk"
+
+## api secret
+secret <- "HnBymm96BOg1SYZKxvgURKc7ULJ8MKE0Fnj0ZjFfWqey7e34FQ"
+
+# create token named "twitter_token"
+twitter_token <- create_token(
+  app = appname,
+  consumer_key = key,
+  consumer_secret = secret,
+  access_token = '2620473211-WWfgOYF0UiZM0yLw3K0T3WxlG5a2cyH5heHimhC',
+  access_secret = 'Z6LWeugQ0mi7ANivINfUvWndSkT0ic3gceF0YQn2MC4jY')
+```
+
+##### Gather up Tweets 
+```{r}
+data <- search_tweets("#economy", n = 600, include_rts = FALSE)
+```
+
+##### Display Tweets 
+```{r}
+head(data$text)
+```
+
+##### Cleaning the data 
+```{r}
+# Load libraries 
+library(wordcloud)
+library(RColorBrewer)
+library(wordcloud2)
+library(tm)
+
+# Create a vector containing only the text
+text <- data$text
+
+# Create a corpus  
+docs <- Corpus(VectorSource(text))
+
+# Clean data 
+docs <- docs %>%
+  tm_map(removeNumbers) %>%
+  tm_map(removePunctuation) %>%
+  tm_map(stripWhitespace)
+docs <- tm_map(docs, content_transformer(tolower))
+docs <- tm_map(docs, removeWords, stopwords("english"))
+```
+
+#####  Organizing the text data 
+```{r}
+dtm <- TermDocumentMatrix(docs) 
+matrix <- as.matrix(dtm) 
+words <- sort(rowSums(matrix),decreasing=TRUE) 
+df <- data.frame(word = names(words),freq=words)
+```
+
+##### Generating the word cloud 
+```{r eval=FALSE}
+# Generate the word cloud
+set.seed(1234)  
+wordcloud(words = df$word, freq = df$freq, min.freq = 1, max.words=200, random.order=FALSE, rot.per=0.35, colors=brewer.pal(8, "Dark2"))
+```
+
+&nbsp; 
+
+### Part 2: COVID-19 Data Analysis {.tabset .tabset-fade}
+***
+
+#### Visualization 
+```{r include=FALSE}
+library(magrittr) 
+library(dplyr) 
+library(ggplot2)
+library(plotly)
+library(lubridate)
+library(grid)
+library(gridExtra)
+library("tidyverse")
+```
+
+```{r include=FALSE}
+ur.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/Unemployment-Monthly.csv")
+
+covid19.health <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
+```
+
+```{r include=FALSE}
+# Dropping unused columns 
+ur.cleaned.df <- subset(ur.df, select = -c(Series.ID, Year, Period))
+
+# Renaming columns 
+colnames(ur.cleaned.df) <- c("Time_Period", "Unemployment_Rate", "Monthly_Change")
+
+#Result 
+ur.cleaned.df
+```
+
+```{r include=FALSE}
+# Dropping unused columns 
+covh.cleaned <- subset(covid19.health, select = c(submission_date, state, tot_cases, new_case, tot_death, new_death))
+
+# Renaming columns 
+colnames(covh.cleaned) <- c("Date_Reported", "State", "Total_Cases", "New_Cases", "Total_Death", "New_Death")
+```
+
+```{r include=FALSE}
+# https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html
+
+covh.cleaned$Date_Reported <- mdy(covh.cleaned$Date_Reported) # returns year/month/day 
+
+# Result 
+head(covh.cleaned$Date_Reported) 
+```
+
+```{r include=FALSE}
+# JANUARY 2020 
+jan20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported <= as.Date("2020-01-31")))
+
+jan20.newcases <- sum(jan20.covid.df$New_Cases)
+jan20.deaths <- sum(jan20.covid.df$New_Death)
+
+# FEBRUARY 2020 
+feb20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-02-01") & Date_Reported <= as.Date("2020-02-28")))
+
+feb20.newcases <- sum(feb20.covid.df$New_Cases)
+feb20.deaths <- sum(feb20.covid.df$New_Death)
+
+# MARCH 2020 
+mar20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-03-01") & Date_Reported <= as.Date("2020-03-31")))
+
+mar20.newcases <- sum(mar20.covid.df$New_Cases)
+mar20.deaths <- sum(mar20.covid.df$New_Death)
+
+# APRIL 2020 
+apr20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-04-01") & Date_Reported <= as.Date("2020-04-30")))
+
+apr20.newcases <- sum(apr20.covid.df$New_Cases)
+apr20.deaths <- sum(apr20.covid.df$New_Death)
+
+# MAY 2020 
+may20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-05-01") & Date_Reported <= as.Date("2020-05-31")))
+
+may20.newcases <- sum(may20.covid.df$New_Cases)
+may20.deaths <- sum(may20.covid.df$New_Death)
+
+# JUNE 2020 
+jun20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-06-01") & Date_Reported <= as.Date("2020-06-30")))
+
+jun20.newcases <- sum(jun20.covid.df$New_Cases)
+jun20.deaths <- sum(jun20.covid.df$New_Death)
+
+# JULY 2020 
+jul20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-07-01") & Date_Reported <= as.Date("2020-07-31")))
+
+jul20.newcases <- sum(jul20.covid.df$New_Cases)
+jul20.deaths <- sum(jul20.covid.df$New_Death)
+
+# AUGUST 2020 
+aug20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-08-01") & Date_Reported <= as.Date("2020-08-31")))
+
+aug20.newcases <- sum(aug20.covid.df$New_Cases)
+aug20.deaths <- sum(aug20.covid.df$New_Death)
+
+# SEPTEMBER 2020 
+sep20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-09-01") & Date_Reported <= as.Date("2020-09-30")))
+
+sep20.newcases <- sum(sep20.covid.df$New_Cases)
+sep20.deaths <- sum(sep20.covid.df$New_Death)
+
+# OCTOBER 2020 
+oct20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-10-01") & Date_Reported <= as.Date("2020-10-31")))
+
+oct20.newcases <- sum(oct20.covid.df$New_Cases)
+oct20.deaths <- sum(oct20.covid.df$New_Death)
+
+# NOVEMBER 2020 
+nov20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-11-01") & Date_Reported <= as.Date("2020-11-30")))
+
+nov20.newcases <- sum(nov20.covid.df$New_Cases)
+nov20.deaths <- sum(nov20.covid.df$New_Death)
+
+# DECEMBER 2020 
+dec20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-12-01") & Date_Reported <= as.Date("2020-12-31")))
+
+dec20.newcases <- sum(dec20.covid.df$New_Cases)
+dec20.deaths <- sum(dec20.covid.df$New_Death)
+
+# JANUARY 2021
+jan21.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2021-01-01") & Date_Reported <= as.Date("2021-01-31")))
+
+jan21.newcases <- sum(jan21.covid.df$New_Cases)
+jan21.deaths <- sum(jan21.covid.df$New_Death)
+
+# FEBRUARY 2021
+feb21.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2021-02-01") & Date_Reported <= as.Date("2021-02-28")))
+
+feb21.newcases <- sum(feb21.covid.df$New_Cases)
+feb21.deaths <- sum(feb21.covid.df$New_Death)
+
+# MARCH 2021
+mar21.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2021-03-01") & Date_Reported <= as.Date("2021-03-31")))
+
+mar21.newcases <- sum(mar21.covid.df$New_Cases)
+mar21.deaths <- sum(mar21.covid.df$New_Death)
+```
+
+##### Data 
+
+Let's take a look at the total counts of new COVID-19 cases and deaths recorded each month in the U.S. This data has been reported by the U.S. Center for Disease Control in their data set: ["United States COVID-19 Cases and Deaths by State over TimeCase Surveillance"](https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36). We have cleaned and organized daily COVID-19 reported data by state into national data by month.  
+
+```{r echo=FALSE}
+# Creating a variable for months  
+months <- c("JAN20", "FEB20", "MAR20", "APR20", "MAY20", "JUN20", "JUL20", "AUG20", "SEPT20", "OCT20", "NOV20", "DEC20", "JAN21", "FEB21", "MAR21")
+
+# Creating a variable for new cases 
+newcases <- c(jan20.newcases, feb20.newcases, mar20.newcases, apr20.newcases, may20.newcases, jun20.newcases, jul20.newcases, aug20.newcases, sep20.newcases, oct20.newcases, nov20.newcases, dec20.newcases, jan21.newcases, feb21.newcases, mar21.newcases)
+
+# Creating a variable for deaths 
+deaths <- c(jan20.deaths, feb20.deaths, mar20.deaths, apr20.deaths, may20.deaths, jun20.deaths, jul20.deaths, aug20.deaths, sep20.deaths, oct20.deaths, nov20.deaths, dec20.deaths, jan21.deaths, feb21.deaths, mar21.deaths)
+
+# Time series 
+dates <- c("01/01/2020", "02/01/2020", "03/01/2020","04/01/2020", "05/01/2020","06/01/2020", "07/01/2020", "08/01/2020", "09/01/2020", "10/01/2020","11/01/2020", "12/01/2020", "01/01/2021", "02/01/2021", "03/01/2021")
+
+# COVID-19 health per month dataframe
+monthly.covid.df <- data.frame(months, dates, newcases, deaths)
+
+monthly.covid.df <- monthly.covid.df %>%
+  mutate(dates = as.Date(dates, format = "%m/%d/%y"))
+
+# Result
+# grid.draw(tableGrob(monthly.covid.df, theme=ttheme_default(base_size = 6) ))
+# head(monthly.covid.df)
+monthly.covid.df
+```
+
+Now, let's look at how counts of new cases per month arose and fell from Jan '20 to Mar '21: 
+
+##### New COVID-19 Cases per Month 
+```{r echo=FALSE}
+# Find the top 5 highest months
+# head(arrange(monthly.covid.df,desc(newcases)), n = 5)
+
+# Color labels 
+top5.cases <- c("#69b3a2","#69b3a2","#69b3a2","#69b3a2","#69b3a2","#69b3a2",
+          "#B20000","#69b3a2","#69b3a2","#B20000","#B20000","#B20000","#B20000","#B20000","#69b3a2")
+
+# Case labels 
+num.cases.mils <- c("7", "32", "188K", "875K", "725K","847K", "1.9m", "1.4m", "1.2m", "1.9m", "4.4m", "6.3m", "6m", "2.3m", "1.7m")
+
+# Visualize 
+b.cases <- barplot(newcases, yaxp=c(0, max(newcases), 15), 
+        ylim=range(pretty(c(0, newcases))), names=months, xlab = "Time Period", ylab = "Number of New Recorded Cases", main = "Number of Newly Recorded COVID-19 Cases per Month in the U.S. 20-21", col = top5.cases)  
+
+y<-as.matrix(newcases)
+text(b.cases, y+300000,labels=num.cases.mils)
+```
+
+This bar plot helps us visually time line the spread COVID-19. The red bars denote the top five months which experienced the highest number of recorded cases, often referred to as peaks or "second, third" waves. We can infer that July '20, Oct '20, Nov '20, Dec '20, Jan '21, and Feb '21 had the highest number of recorded cases; from this data, we might predict that unemployment rates would be higher during these months and GDP would be lower. 
+
+Now, let's look at how counts of new deaths due to COVID-19 per month arose and fell from Jan '20 to Mar '21:  
+
+##### New COVID-19 Deaths per Month 
+```{r echo=FALSE}
+# Find the top 5 highest months
+# head(arrange(monthly.covid.df,desc(deaths)), n = 5)
+
+# Color labels 
+deaths.top5 <- c("#90bcff","#90bcff","#90bcff","#B20000","#B20000","#90bcff",
+          "#90bcff","#90bcff","#90bcff","#90bcff","#90bcff","#B20000","#B20000","#B20000","#90bcff")
+
+# Case labels 
+num.deaths.mils <- c(0, 0, '3,680', '55K', '42K,', '21K', '28K', '29K', '22K', '24K', '39K', '79K', '97K', '63K', '33K')
+
+# Visualize 
+b.deaths <- barplot(deaths, yaxp=c(0, max(deaths), 15), 
+        ylim=range(pretty(c(0, deaths))), names=months, xlab = "Time Period", ylab = "Number of New Recorded Deaths", main = "Number of Newly Recorded COVID-19 Deaths per Month in the U.S. 20-21", col = deaths.top5) 
+
+y<-as.matrix(deaths)
+text(b.deaths ,y+2000, labels=num.deaths.mils)
+```
+
+This bar plot reports the months which recorded the highest number of deaths due to COVID-19; the bars in red signify the top five months with the highest amount of deaths. These months include: Apr '20, May '20, Dec '20, Jan '21, and Feb '21. In correlation with the highest number of cases recorded, the months of Dec '20 through Feb '21 had both the highest number of cases and deaths. It is surprising that April and May of 2020 had two of the highest number of deaths although they didn't have a peak in cases. However, Apr/May were early months of the pandemic where we had little knowledge about the virus, and their average case count is around 800K which might have propelled the peak in July of 1.9 million cases. 
+
+&nbsp; 
+
+#### Code 
+##### Load libraries 
+```{r libraries}
+library(magrittr) 
+library(dplyr) 
+library(ggplot2)
+library(plotly)
+library(lubridate)
+library(grid)
+library(gridExtra)
+library("tidyverse")
+```
+
+##### Load datasets  
+```{r dataset}
+ur.df <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/Unemployment-Monthly.csv")
+
+covid19.health <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
+```
+
+##### Cleaning and organizing unemployment rate dataframe 
+```{r}
+# Dropping unused columns 
+ur.cleaned.df <- subset(ur.df, select = -c(Series.ID, Year, Period))
+
+# Renaming columns 
+colnames(ur.cleaned.df) <- c("Time_Period", "Unemployment_Rate", "Monthly_Change")
+
+#Result 
+ur.cleaned.df
+```
+
+##### Cleaning and organizing COVID-19 Health Dataframe 
+```{r}
+# Dropping unused columns 
+covh.cleaned <- subset(covid19.health, select = c(submission_date, state, tot_cases, new_case, tot_death, new_death))
+
+# Renaming columns 
+colnames(covh.cleaned) <- c("Date_Reported", "State", "Total_Cases", "New_Cases", "Total_Death", "New_Death")
+```
+
+##### Transforming the format of dates 
+```{r}
+# https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html
+
+covh.cleaned$Date_Reported <- mdy(covh.cleaned$Date_Reported) # returns year/month/day 
+
+# Result 
+head(covh.cleaned$Date_Reported) 
+```
+
+##### Creating dataframes for each month 
+```{r}
+# https://blog.exploratory.io/filter-with-date-function-ce8e84be680
+
+# JANUARY 2020 
+jan20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported <= as.Date("2020-01-31")))
+
+jan20.newcases <- sum(jan20.covid.df$New_Cases)
+jan20.deaths <- sum(jan20.covid.df$New_Death)
+
+# FEBRUARY 2020 
+feb20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-02-01") & Date_Reported <= as.Date("2020-02-28")))
+
+feb20.newcases <- sum(feb20.covid.df$New_Cases)
+feb20.deaths <- sum(feb20.covid.df$New_Death)
+
+# MARCH 2020 
+mar20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-03-01") & Date_Reported <= as.Date("2020-03-31")))
+
+mar20.newcases <- sum(mar20.covid.df$New_Cases)
+mar20.deaths <- sum(mar20.covid.df$New_Death)
+
+# APRIL 2020 
+apr20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-04-01") & Date_Reported <= as.Date("2020-04-30")))
+
+apr20.newcases <- sum(apr20.covid.df$New_Cases)
+apr20.deaths <- sum(apr20.covid.df$New_Death)
+
+# MAY 2020 
+may20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-05-01") & Date_Reported <= as.Date("2020-05-31")))
+
+may20.newcases <- sum(may20.covid.df$New_Cases)
+may20.deaths <- sum(may20.covid.df$New_Death)
+
+# JUNE 2020 
+jun20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-06-01") & Date_Reported <= as.Date("2020-06-30")))
+
+jun20.newcases <- sum(jun20.covid.df$New_Cases)
+jun20.deaths <- sum(jun20.covid.df$New_Death)
+
+# JULY 2020 
+jul20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-07-01") & Date_Reported <= as.Date("2020-07-31")))
+
+jul20.newcases <- sum(jul20.covid.df$New_Cases)
+jul20.deaths <- sum(jul20.covid.df$New_Death)
+
+# AUGUST 2020 
+aug20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-08-01") & Date_Reported <= as.Date("2020-08-31")))
+
+aug20.newcases <- sum(aug20.covid.df$New_Cases)
+aug20.deaths <- sum(aug20.covid.df$New_Death)
+
+# SEPTEMBER 2020 
+sep20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-09-01") & Date_Reported <= as.Date("2020-09-30")))
+
+sep20.newcases <- sum(sep20.covid.df$New_Cases)
+sep20.deaths <- sum(sep20.covid.df$New_Death)
+
+# OCTOBER 2020 
+oct20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-10-01") & Date_Reported <= as.Date("2020-10-31")))
+
+oct20.newcases <- sum(oct20.covid.df$New_Cases)
+oct20.deaths <- sum(oct20.covid.df$New_Death)
+
+# NOVEMBER 2020 
+nov20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-11-01") & Date_Reported <= as.Date("2020-11-30")))
+
+nov20.newcases <- sum(nov20.covid.df$New_Cases)
+nov20.deaths <- sum(nov20.covid.df$New_Death)
+
+# DECEMBER 2020 
+dec20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-12-01") & Date_Reported <= as.Date("2020-12-31")))
+
+dec20.newcases <- sum(dec20.covid.df$New_Cases)
+dec20.deaths <- sum(dec20.covid.df$New_Death)
+
+# JANUARY 2021
+jan21.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2021-01-01") & Date_Reported <= as.Date("2021-01-31")))
+
+jan21.newcases <- sum(jan21.covid.df$New_Cases)
+jan21.deaths <- sum(jan21.covid.df$New_Death)
+
+# FEBRUARY 2021
+feb21.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2021-02-01") & Date_Reported <= as.Date("2021-02-28")))
+
+feb21.newcases <- sum(feb21.covid.df$New_Cases)
+feb21.deaths <- sum(feb21.covid.df$New_Death)
+
+# MARCH 2021
+mar21.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2021-03-01") & Date_Reported <= as.Date("2021-03-31")))
+
+mar21.newcases <- sum(mar21.covid.df$New_Cases)
+mar21.deaths <- sum(mar21.covid.df$New_Death)
+```
+
+##### Creating COVID-19 health dataframes (monthly)
+```{r}
+# Creating a variable for months  
+months <- c("JAN20", "FEB20", "MAR20", "APR20", "MAY20", "JUN20", "JUL20", "AUG20", "SEPT20", "OCT20", "NOV20", "DEC20", "JAN21", "FEB21", "MAR21")
+
+# Creating a variable for new cases 
+newcases <- c(jan20.newcases, feb20.newcases, mar20.newcases, apr20.newcases, may20.newcases, jun20.newcases, jul20.newcases, aug20.newcases, sep20.newcases, oct20.newcases, nov20.newcases, dec20.newcases, jan21.newcases, feb21.newcases, mar21.newcases)
+
+# Creating a variable for deaths 
+deaths <- c(jan20.deaths, feb20.deaths, mar20.deaths, apr20.deaths, may20.deaths, jun20.deaths, jul20.deaths, aug20.deaths, sep20.deaths, oct20.deaths, nov20.deaths, dec20.deaths, jan21.deaths, feb21.deaths, mar21.deaths)
+
+# Time series 
+dates <- c("01/01/2020", "02/01/2020", "03/01/2020","04/01/2020", "05/01/2020","06/01/2020", "07/01/2020", "08/01/2020", "09/01/2020", "10/01/2020","11/01/2020", "12/01/2020", "01/01/2021", "02/01/2021", "03/01/2021")
+
+# COVID-19 health per month dataframe
+monthly.covid.df <- data.frame(months, dates, newcases, deaths)
+
+monthly.covid.df <- monthly.covid.df %>%
+  mutate(dates = as.Date(dates, format = "%m/%d/%y"))
+
+# Result
+# grid.draw(tableGrob(monthly.covid.df, theme=ttheme_default(base_size = 6) ))
+head(monthly.covid.df)
+```
+
+##### Visualize COVID-19 New Cases Timeline 
+```{r eval=FALSE}
+# Find the top 5 highest months
+head(arrange(monthly.covid.df,desc(newcases)), n = 5)
+
+# Color labels 
+top5.cases <- c("#69b3a2","#69b3a2","#69b3a2","#69b3a2","#69b3a2","#69b3a2",
+          "#B20000","#69b3a2","#69b3a2","#B20000","#B20000","#B20000","#B20000","#B20000","#69b3a2")
+
+# Case labels 
+num.cases.mils <- c("7", "32", "188K", "875K", "725K","847K", "1.9m", "1.4m", "1.2m", "1.9m", "4.4m", "6.3m", "6m", "2.3m", "1.7m")
+
+# Visualize 
+b.cases <- barplot(newcases, yaxp=c(0, max(newcases), 15), 
+        ylim=range(pretty(c(0, newcases))), names=months, xlab = "Time Period", ylab = "Number of New Recorded Cases", main = "Number of Newly Recorded COVID-19 Cases per Month in the U.S. 20-21", col = top5.cases)  
+
+y<-as.matrix(newcases)
+text(b.cases, y+300000,labels=num.cases.mils)
+```
+
+##### Visualize COVID-19 Deaths Timeline 
+```{r eval=FALSE}
+# Find the top 5 highest months
+head(arrange(monthly.covid.df,desc(deaths)), n = 5)
+
+# Color labels 
+deaths.top5 <- c("#90bcff","#90bcff","#90bcff","#B20000","#B20000","#90bcff",
+          "#90bcff","#90bcff","#90bcff","#90bcff","#90bcff","#B20000","#B20000","#B20000","#90bcff")
+
+# Case labels 
+num.deaths.mils <- c(0, 0, '3,680', '55K', '42K,', '21K', '28K', '29K', '22K', '24K', '39K', '79K', '97K', '63K', '33K')
+
+# Visualize 
+b.deaths <- barplot(deaths, yaxp=c(0, max(deaths), 15), 
+        ylim=range(pretty(c(0, deaths))), names=months, xlab = "Time Period", ylab = "Number of New Recorded Deaths", main = "Number of Newly Recorded COVID-19 Deaths per Month in the U.S. 20-21", col = deaths.top5) 
+
+y<-as.matrix(deaths)
+text(b.deaths ,y+2000, labels=num.deaths.mils)
+```
+
+$nbsp; 
+
+### Part 3: Unemployment Data Analysis {.tabset .tabset-fade}
+***
+
+#### Unemployment Analysis and Visualizations  
+
+#### Code 
+
+$nbsp;
+
+### Part 4: GDP Data Analysis {.tabset .tabset-fade}
+***
+
+#### GDP Analysis and Visualizations  
+
+#### Code 
+
+### Part 5: Summary of Findings
+***
+
+#### Part 6: Resources and Tutorials 
+***
+
+[United States COVID-19 Cases and Deaths by State over Time Dataset](https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36) from the U.S. Center for Disease Control and Prevention.
+
+[Labor Force Statistics from the Current Population Survey Dataset](https://beta.bls.gov/dataViewer/view/timeseries/LNS14000000;jsessionid=C58F68E9140FE3B07E16AFFA7F77786E) from the U.S. Bureau of Labor Statistics.  
+
+[Gross Domestic Product by State, 4th Quarter 2020 and Annual 2020 (Preliminary)](https://www.bea.gov/data/gdp/gdp-state) from U.S. Bureau of Economic Analysis.
+
+[Interactive Choropleth Maps](https://learn.r-journalism.com/en/mapping/census_maps/census-maps/) from R Journalism.
+
+[R and Leaflet to create interactive choropleth maps](https://towardsdatascience.com/r-and-leaflet-to-create-interactive-choropleth-maps-8515ef83e275) from Towardsdatascience. 
+
+[Filter with Date data](https://blog.exploratory.io/filter-with-date-function-ce8e84be680) from Exploratory.io. 
+
+[R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown) from Bookdown. 
+
+[Lesson 2. Twitter Data in R Using Rtweet: Analyze and Download Twitter Data](https://www.earthdatascience.org/courses/earth-analytics/get-data-using-apis/use-twitter-api-r/) from EarthLab. 
+
+[How to Generate Word Clouds in R](https://towardsdatascience.com/create-a-word-cloud-with-r-bde3e7422e8a) from Towardsdatascience. 
+
+#### Part 7: Further Information 
+***
+We have created a [**GitHub Repository**](https://github.com/dishsrivastava/economic-impact-of-covid19) with our entire codebase and data sets for future reference.
+
+_Please note_: a few of our graphs may get cut off once we knit the Rmd file due to spacing limits, however, we have saved PNG images of our graphs and added them to the 'Graph-Images' folder in our GitHub Repository so you can see the entire image! 
