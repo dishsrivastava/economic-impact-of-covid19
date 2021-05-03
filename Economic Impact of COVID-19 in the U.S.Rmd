@@ -872,6 +872,18 @@ states <- readOGR(dsn = "C:/Users/Rinija/Documents/GitHub/economic-impact-of-cov
 ```
 
 ```{r include=FALSE}
+# Renaming columns
+colnames(gdp.industry.df) <- c("Name", "Agriculture", "Mining", "Utilities", "Construction", "Durable_Goods", "Nondurable_Goods", "Wholesale_Trade", "Retail_Trade", "Transportation", "Information", "Finance", "Real_Estate", "Technical", "Management", "Waste_Management", "Education", "Health", "Arts", "Food", "Other", "Government", "Unknown")
+
+# Pivot columns so that data is in a long format
+gdp.industry.df <- gdp.industry.df %>% 
+  pivot_longer(cols = !Name, names_to = "Industry", values_to = "Percent_Change")
+
+# Result 
+head(gdp.industry.df)
+```
+
+```{r include=FALSE}
 # Renaming columns 
 colnames(gdp.state.df) <- c("State", "Y2017", "Y2018", "Y2019", "Y2020", "Rank-Y2020")
 
@@ -894,7 +906,8 @@ ri.gdp <- gdp.state.df[(gdp.state.df$State == "RhodeIsland"), ]
 # Utah Subset
 ut.gdp <- gdp.state.df[(gdp.state.df$State == "Utah"), ]
 ```
-
+##### Visualize the Yearly GDP Change for each state 
+This is a set of four bar plots that display the percent change in GDP for California, Texas, Rhode Island, and Utah. Each graph includes data from one of the states mentioned above and displays the change in GDP from 2017 to 2020. Each bar in the chart has been filled with red or green to indicate whether there was an increase or decrease in GDP percentage. 
 ```{r echo=FALSE}
 CA <- ggplot(ca.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
   geom_bar(stat="identity")+
@@ -902,21 +915,33 @@ CA <- ggplot(ca.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP
   ggtitle("Percent Change in GDP from 2017-2020 in California")+
   geom_hline(yintercept = 0)
 CA
+```
 
+This bar plot displays the change in GDP for the state of California. We can conclude that the state had a very high starting percentage and the value dropped slighlty in 2018 and 2019. However, the most drastic drop in GDP percentage happened in 2020 with a value of -2.3%. 
+
+```{r echo=FALSE}
 TX <- ggplot(tx.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
   geom_bar(stat="identity")+
   scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
   ggtitle("Percent Change in GDP from 2017-2020 in Texas")+
   geom_hline(yintercept = 0)
 TX
+```
 
+This bar plot illustrates the GDP percent change in Texas. There is a starting percent change of roughly 2.5% and it significantly increased in 2018, but then dropped in 2019. Texas also had a significant decrease in 2020 with a value of -4.5%. This value is almost twice as low as California. 
+
+```{r echo=FALSE}
 RI <- ggplot(ri.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
   geom_bar(stat="identity")+
   scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
   ggtitle("Percent Change in GDP from 2017-2020 in Rhode Island")+
   geom_hline(yintercept = 0)
 RI
+```
 
+This graph displays the GDP change in Rhode Island from 2017 to 2020. This visualization is unique because there already was a GDP decline in 2017. Also, the GDP values for 2018 and 2019 were not as high as the other states. Lastly, Rhode Island had the highest drop in GDP for 2020 with a value of -4.5%. 
+
+```{r echo=FALSE}
 UT <- ggplot(ut.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP", "Decrease in GDP")), aes(x = Year, y = Change, fill = fill_value))+
   geom_bar(stat="identity")+
   scale_fill_manual(values=c("Increase in GDP" = "darkolivegreen3","Decrease in GDP"= "brown1"))+
@@ -925,7 +950,31 @@ UT <- ggplot(ut.gdp %>%  mutate(fill_value = ifelse(Change > 0, "Increase in GDP
 UT
 ```
 
+This last graph shows the change in GDP for the state of Utah. This state had the highest GDP values for 2017, 2018, and 2019. It is also important to note that there was a very small decrease in 2020. 
+
+##### Visualize the 2019 Percent Change in GDP for every state
+```{r echo=FALSE}
+label_2019 <- paste0(
+  "<b>2019:</b> ", state.df$X2019, "<br>"
+)
+paletteBins <- c(-1, 0, 1, 2, 3, 4, 5, 6)
+colorPalette <- colorBin(palette = "Greens", domain = state.df$X2019, na.color = "transparent", bins = paletteBins)
+
+leaflet(states) %>% 
+  addTiles() %>% 
+  setView(lat = 39.8097, lng = -98.5556, zoom=4) %>%
+  addPolygons(
+    stroke = TRUE, 
+    fillColor = ~colorPalette(state.df$X2019),
+    color = 'Black', 
+    weight = 1.5, 
+    label = ~lapply(label_2019, htmltools::HTML)) %>% 
+  addLegend(pal = colorPalette, values = state.df$X2019, opacity = 0.9, title = "GDP Percent Change in 2019", position="bottomleft")
+```
+
 SUMMARY
+ 
+##### Visualize the 2020 Percent Change in GDP for every state
 ```{r echo=FALSE}
 label_2020 <- paste0(
   "<b>2020:</b> ", state.df$X2020, "<br>"
@@ -947,27 +996,19 @@ leaflet(states) %>%
 
 SUMMARY
 
+##### Visualize the Percent Change in GDP for every state by Industry
 ```{r echo=FALSE}
-label_2019 <- paste0(
-  "<b>2019:</b> ", state.df$X2019, "<br>"
-)
-paletteBins <- c(-1, 0, 1, 2, 3, 4, 5, 6)
-colorPalette <- colorBin(palette = "Greens", domain = state.df$X2019, na.color = "transparent", bins = paletteBins)
+# Filtering data so that only CA, TX, RI, and UT are included
+fltr_industry <- gdp.industry.df %>% 
+  filter(Name == "California " | Name == "Texas"| Name == "Utah "| Name == "Rhode Island ") %>% 
+  filter(Industry == "Health" | Industry == "Arts" | Industry == "Food" | Industry == "Technical" | Industry == "Real_Estate")
 
-leaflet(states) %>% 
-  addTiles() %>% 
-  setView(lat = 39.8097, lng = -98.5556, zoom=4) %>%
-  addPolygons(
-    stroke = TRUE, 
-    fillColor = ~colorPalette(state.df$X2019),
-    color = 'Black', 
-    weight = 1.5, 
-    label = ~lapply(label_2019, htmltools::HTML)) %>% 
-  addLegend(pal = colorPalette, values = state.df$X2019, opacity = 0.9, title = "GDP Percent Change in 2019", position="bottomleft")
+industry_plot <- ggplot(data = fltr_industry, aes(x = Name, y = Percent_Change))+
+  geom_bar(stat="identity", fill = "skyblue2")+
+  facet_wrap(~Industry, nrow=1)+
+  ggtitle("Percent Change in GDP across Industries")
+industry_plot
 ```
-
-SUMMARY 
-
 
 #### Code 
 
@@ -991,6 +1032,19 @@ gdp.industry.df <- read.csv("C:/Users/Rinija/Documents/GitHub/economic-impact-of
 
 # This is the shapefile for each state 
 states <- readOGR(dsn = "C:/Users/Rinija/Documents/GitHub/economic-impact-of-covid19/Datasets", layer = "cb_2018_us_state_500k")
+```
+
+##### Cleaning and organizing GDP-Industry dataframe 
+```{r}
+# Renaming columns
+colnames(gdp.industry.df) <- c("Name", "Agriculture", "Mining", "Utilities", "Construction", "Durable_Goods", "Nondurable_Goods", "Wholesale_Trade", "Retail_Trade", "Transportation", "Information", "Finance", "Real_Estate", "Technical", "Management", "Waste_Management", "Education", "Health", "Arts", "Food", "Other", "Government", "Unknown")
+
+# Pivot columns so that data is in a long format
+gdp.industry.df <- gdp.industry.df %>% 
+  pivot_longer(cols = !Name, names_to = "Industry", values_to = "Percent_Change")
+
+# Result 
+head(gdp.industry.df)
 ```
 
 ##### Cleaning and organizing GDP-State dataframe 
@@ -1086,6 +1140,19 @@ leaflet(states) %>%
   addLegend(pal = colorPalette, values = state.df$X2019, opacity = 0.9, title = "GDP Percent Change in 2019", position="bottomleft")
 ```
 
+##### Visualize the GDP Change for each state by Idustry
+```{r fig.height=10, fig.width=17}
+# Filtering data so that only CA, TX, RI, and UT are included
+fltr_industry <- gdp.industry.df %>% 
+  filter(Name == "California " | Name == "Texas"| Name == "Utah "| Name == "Rhode Island ") %>% 
+  filter(Industry == "Health" | Industry == "Arts" | Industry == "Food" | Industry == "Technical" | Industry == "Real_Estate")
+
+industry_plot <- ggplot(data = fltr_industry, aes(x = Name, y = Percent_Change))+
+  geom_bar(stat="identity", fill = "skyblue2")+
+  facet_wrap(~Industry, nrow=1)+
+  ggtitle("Percent Change in GDP across Industries")
+industry_plot
+```
 
 &nbsp; 
 
