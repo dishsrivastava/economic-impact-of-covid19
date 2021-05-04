@@ -1,0 +1,231 @@
+---
+title: "COVID-19 Health Data"
+author: "Disha Srivastava"
+date: "5/1/2021"
+output: html_document
+---
+
+### Load libraries 
+```{r libraries}
+library(magrittr) 
+library(dplyr) 
+library(ggplot2)
+library(lubridate)
+library(grid)
+library(gridExtra)
+library("tidyverse")
+```
+
+### Load datasets  
+```{r dataset}
+covid19.health <- read.csv("/Users/dishasrivastava/Documents/GitHub/economic-impact-of-covid19/Datasets/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
+```
+
+### Cleaning and organizing COVID-19 Health Dataframe 
+```{r}
+# Dropping unused columns 
+covh.cleaned <- subset(covid19.health, select = c(submission_date, state, tot_cases, new_case, tot_death, new_death))
+
+# Renaming columns 
+colnames(covh.cleaned) <- c("Date_Reported", "State", "Total_Cases", "New_Cases", "Total_Death", "New_Death")
+```
+
+### Transforming the format of dates 
+```{r}
+# https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html
+
+covh.cleaned$Date_Reported <- mdy(covh.cleaned$Date_Reported) # returns year/month/day 
+
+# Result 
+head(covh.cleaned$Date_Reported) 
+```
+
+### Creating dataframes for each month 
+```{r}
+# https://blog.exploratory.io/filter-with-date-function-ce8e84be680
+
+# JANUARY 2020 
+jan20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported <= as.Date("2020-01-31")))
+
+jan20.newcases <- sum(jan20.covid.df$New_Cases)
+jan20.deaths <- sum(jan20.covid.df$New_Death)
+
+# FEBRUARY 2020 
+feb20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-02-01") & Date_Reported <= as.Date("2020-02-28")))
+
+feb20.newcases <- sum(feb20.covid.df$New_Cases)
+feb20.deaths <- sum(feb20.covid.df$New_Death)
+
+# MARCH 2020 
+mar20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-03-01") & Date_Reported <= as.Date("2020-03-31")))
+
+mar20.newcases <- sum(mar20.covid.df$New_Cases)
+mar20.deaths <- sum(mar20.covid.df$New_Death)
+
+# APRIL 2020 
+apr20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-04-01") & Date_Reported <= as.Date("2020-04-30")))
+
+apr20.newcases <- sum(apr20.covid.df$New_Cases)
+apr20.deaths <- sum(apr20.covid.df$New_Death)
+
+# MAY 2020 
+may20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-05-01") & Date_Reported <= as.Date("2020-05-31")))
+
+may20.newcases <- sum(may20.covid.df$New_Cases)
+may20.deaths <- sum(may20.covid.df$New_Death)
+
+# JUNE 2020 
+jun20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-06-01") & Date_Reported <= as.Date("2020-06-30")))
+
+jun20.newcases <- sum(jun20.covid.df$New_Cases)
+jun20.deaths <- sum(jun20.covid.df$New_Death)
+
+# JULY 2020 
+jul20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-07-01") & Date_Reported <= as.Date("2020-07-31")))
+
+jul20.newcases <- sum(jul20.covid.df$New_Cases)
+jul20.deaths <- sum(jul20.covid.df$New_Death)
+
+# AUGUST 2020 
+aug20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-08-01") & Date_Reported <= as.Date("2020-08-31")))
+
+aug20.newcases <- sum(aug20.covid.df$New_Cases)
+aug20.deaths <- sum(aug20.covid.df$New_Death)
+
+# SEPTEMBER 2020 
+sep20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-09-01") & Date_Reported <= as.Date("2020-09-30")))
+
+sep20.newcases <- sum(sep20.covid.df$New_Cases)
+sep20.deaths <- sum(sep20.covid.df$New_Death)
+
+# OCTOBER 2020 
+oct20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-10-01") & Date_Reported <= as.Date("2020-10-31")))
+
+oct20.newcases <- sum(oct20.covid.df$New_Cases)
+oct20.deaths <- sum(oct20.covid.df$New_Death)
+
+# NOVEMBER 2020 
+nov20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-11-01") & Date_Reported <= as.Date("2020-11-30")))
+
+nov20.newcases <- sum(nov20.covid.df$New_Cases)
+nov20.deaths <- sum(nov20.covid.df$New_Death)
+
+# DECEMBER 2020 
+dec20.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2020-12-01") & Date_Reported <= as.Date("2020-12-31")))
+
+dec20.newcases <- sum(dec20.covid.df$New_Cases)
+dec20.deaths <- sum(dec20.covid.df$New_Death)
+
+# JANUARY 2021
+jan21.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2021-01-01") & Date_Reported <= as.Date("2021-01-31")))
+
+jan21.newcases <- sum(jan21.covid.df$New_Cases)
+jan21.deaths <- sum(jan21.covid.df$New_Death)
+
+# FEBRUARY 2021
+feb21.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2021-02-01") & Date_Reported <= as.Date("2021-02-28")))
+
+feb21.newcases <- sum(feb21.covid.df$New_Cases)
+feb21.deaths <- sum(feb21.covid.df$New_Death)
+
+# MARCH 2021
+mar21.covid.df <- (covh.cleaned %>%
+  select(Date_Reported, State, Total_Cases, New_Cases, Total_Death, New_Death) %>%
+  filter(Date_Reported >= as.Date("2021-03-01") & Date_Reported <= as.Date("2021-03-31")))
+
+mar21.newcases <- sum(mar21.covid.df$New_Cases)
+mar21.deaths <- sum(mar21.covid.df$New_Death)
+```
+
+### Creating COVID-19 health dataframes (monthly)
+```{r}
+# Creating a variable for months  
+months <- c("JAN20", "FEB20", "MAR20", "APR20", "MAY20", "JUN20", "JUL20", "AUG20", "SEPT20", "OCT20", "NOV20", "DEC20", "JAN21", "FEB21", "MAR21")
+
+# Creating a variable for new cases 
+newcases <- c(jan20.newcases, feb20.newcases, mar20.newcases, apr20.newcases, may20.newcases, jun20.newcases, jul20.newcases, aug20.newcases, sep20.newcases, oct20.newcases, nov20.newcases, dec20.newcases, jan21.newcases, feb21.newcases, mar21.newcases)
+
+# Creating a variable for deaths 
+deaths <- c(jan20.deaths, feb20.deaths, mar20.deaths, apr20.deaths, may20.deaths, jun20.deaths, jul20.deaths, aug20.deaths, sep20.deaths, oct20.deaths, nov20.deaths, dec20.deaths, jan21.deaths, feb21.deaths, mar21.deaths)
+
+# Time series 
+dates <- c("01/01/2020", "02/01/2020", "03/01/2020","04/01/2020", "05/01/2020","06/01/2020", "07/01/2020", "08/01/2020", "09/01/2020", "10/01/2020","11/01/2020", "12/01/2020", "01/01/2021", "02/01/2021", "03/01/2021")
+
+# COVID-19 health per month dataframe
+monthly.covid.df <- data.frame(months, dates, newcases, deaths)
+
+monthly.covid.df <- monthly.covid.df %>%
+  mutate(dates = as.Date(dates, format = "%m/%d/%y"))
+
+# Result
+grid.draw(tableGrob(monthly.covid.df, theme=ttheme_default(base_size = 6) ))
+head(monthly.covid.df)
+```
+
+### Visualize COVID-19 New Cases Timeline 
+```{r}
+# Find the top 5 highest months
+head(arrange(monthly.covid.df,desc(newcases)), n = 5)
+
+# Color labels 
+top5.cases <- c("#69b3a2","#69b3a2","#69b3a2","#69b3a2","#69b3a2","#69b3a2",
+          "#B20000","#69b3a2","#69b3a2","#B20000","#B20000","#B20000","#B20000","#B20000","#69b3a2")
+
+# Case labels 
+num.cases.mils <- c("7", "32", "188,138", "875,947", "725,178","847,821", "1.9 mil", "1.4 mil", "1.2 mil", "1.9 mil", "4.4 mil", "6.3 mil", "6 mil", "2.3 mil", "1.7 mil")
+
+# Visualize 
+b <- barplot(newcases, yaxp=c(0, max(newcases), 15), 
+        ylim=range(pretty(c(0, newcases))), names=months, xlab = "Time Period", ylab = "Number of New Recorded Cases", main = "Number of Newly Recorded COVID-19 Cases per Month in the U.S. 2020-21", col = top5.cases)  
+
+y<-as.matrix(newcases)
+text(b,y+100000,labels=num.cases.mils)
+```
+
+### Visualize COVID-19 Deaths Timeline 
+```{r}
+# Find the top 5 highest months
+head(arrange(monthly.covid.df,desc(deaths)), n = 5)
+
+# Color labels 
+deaths.top5 <- c("#90bcff","#90bcff","#90bcff","#B20000","#B20000","#90bcff",
+          "#90bcff","#90bcff","#90bcff","#90bcff","#90bcff","#B20000","#B20000","#B20000","#90bcff")
+
+# Case labels 
+num.deaths.mils <- c(0, 0, '3,680', '55,007', '42,053,', '21,634', '28,249', '29,184', '22,327', '24,012', '39,397', '79,189', '97,095', '63,431', '33,041')
+
+# Visualize 
+b <- barplot(deaths, yaxp=c(0, max(deaths), 15), 
+        ylim=range(pretty(c(0, deaths))), names=months, xlab = "Time Period", ylab = "Number of New Recorded Deaths", main = "Number of Newly Recorded COVID-19 Deaths per Month in the U.S. 2020-21", col = deaths.top5)  
+
+y<-as.matrix(deaths)
+text(b,y+1000,labels=num.deaths.mils)
+```

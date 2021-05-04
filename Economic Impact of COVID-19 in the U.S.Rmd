@@ -42,21 +42,23 @@ library(rmarkdown)
 
 ```{r include = FALSE}
 # name assigned to created app
-appname <- "economic-impact-of-covid19"
+appname <- "x"
+
+# Note we have removed the api keys and tokens as this code is published in GitHub. Hence, the wordcloud may not be working at the moment. 
 
 ## api key 
-key <- "LDVYl0gTvhvYbNnsiJd3IrTMk"
+key <- "x"
 
 ## api secret
-secret <- "HnBymm96BOg1SYZKxvgURKc7ULJ8MKE0Fnj0ZjFfWqey7e34FQ"
+secret <- "x"
 
 # token named "twitter_token"
 twitter_token <- create_token(
   app = appname,
   consumer_key = key,
   consumer_secret = secret,
-  access_token = '2620473211-WWfgOYF0UiZM0yLw3K0T3WxlG5a2cyH5heHimhC',
-  access_secret = 'Z6LWeugQ0mi7ANivINfUvWndSkT0ic3gceF0YQn2MC4jY')
+  access_token = 'x',
+  access_secret = 'x')
 ```
 
 ```{r include=FALSE}
