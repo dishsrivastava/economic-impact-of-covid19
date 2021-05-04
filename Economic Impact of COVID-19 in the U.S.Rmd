@@ -17,9 +17,17 @@ editor_options:
 ### Part 1: Introduction {.tabset .tabset-fade}
 ***
 
-##### Project Goal 
+##### Project Overview and Goal 
 
-Our data science project examines the impact of COVID-19 on integral aspects of the U.S. economy such as GDP and unemployment. We chose to focus our GDP analysis on four states that had varying responses to the pandemic and different sized populations. We specifically examined California, Rhode Island, Texas, and Utah. In our analysis of GDP, we created an interactive map with data from 2019 and 2020 in order to compare the changes in GDP from before the pandemic began. We additionally created barplots that displayed the change in GDP from 2017 to 2020 for the four chosen states. We also explored the GDP changes between various industries such as art, health, technical professions, real estate, and food. For unemployment, we mapped a time line of increase/decrease in cases and deaths, in order to infer a correlation 
+Our project goal is to examine and understand the impact of COVID-19 on integral aspects of the U.S. economy such as GDP and Unemployment Rates; we chose these parameters as they are often used by economists to measure the current state of an economy. 
+
+We have first gathered COVID-19 health data recorded daily by the U.S. Center for Disease Control to to understand which months of the pandemic faced the highest number of new cases and deaths. We utilized R to wrangle this data into monthly, national data and created bar plots to help us visualize the peaks and troughs in the pandemic timeline beginning with Jan ‘20 through Mar ‘21. 
+
+To study unemployment rates, we gathered Labor Force Statistics from the Current Population Survey Dataset from the U.S. Bureau of Labor Statistics. This dataset helped us understand the shifts in unemployment rates and the 1-monthly change in rates from Jan ‘20 to Mar ‘21. We mapped a timeline of the increase/decrease in cases and deaths along with the change in unemployment rates in order to infer a correlation. In creating these line charts, we calculated new cases and deaths as a proportional of the total (from Jan ‘20 to Mar ‘21) in order to place all three variables (unemployment rates, new cases, and deaths) on one axis. 
+
+In order to further understand the economic impacts in specific regions in the U.S., we have focused our GDP analysis on four states with contrasting population sizes and responses to the pandemic. We specifically examined California (strong response to the pandemic, large population size), Texas (relaxed response to the pandemic, large population size), Rhode Island (strong response to the pandemic, small population size), and Utah (relaxed response to the pandemic, small population size). We also explored the GDP changes between various industries such as art, health, technical professions, real estate, and food to better understand which contributors to state GDP were impacted the most. In our analysis of GDP, we created an interactive map with data from 2019 and 2020 in order to compare the changes in GDP from before the pandemic began. We additionally created barplots that displayed the change in GDP from 2017 to 2020 for the four chosen states.
+
+It has been saddening to study this data, quantifying the rise in cases and deaths and amount of individuals who lost their employment or seeing the downward slope of GDP, however, we hope our findings will help inform how government responses to the pandemic impacted local and state economies and the health of residents in the economy.
 
 #### `#Economy` Visualization
 
@@ -425,7 +433,7 @@ y<-as.matrix(newcases)
 text(b.cases, y+300000,labels=num.cases.mils)
 ```
 
-This bar plot helps us visually time line the spread COVID-19. The red bars denote the top five months which experienced the highest number of recorded cases, often referred to as peaks or "second, third" waves. We can infer that July '20, Oct '20, Nov '20, Dec '20, Jan '21, and Feb '21 had the highest number of recorded cases; from this data, we might predict that unemployment rates would be higher during these months and GDP would be lower. 
+This bar plot helps us visually time line the spread COVID-19. The red bars denote the top six months which experienced the highest number of recorded cases, often referred to as peaks or "second, third" waves. We can infer that July '20, Oct '20, Nov '20, Dec '20, Jan '21, and Feb '21 had the highest number of recorded cases; from this data, we might predict that unemployment rates would be higher during these months and GDP would be lower. 
 
 &nbsp;
 
@@ -807,7 +815,9 @@ Now, let's take a look at correlations between monthly percent change in unemplo
 ggplot(ur.viz, aes(x=Date, group = 1)) + geom_line(aes(y = Monthly_Change, group = 1), color = "darkred") + geom_line(aes(y = percentcases, group = 1), color="darkblue", linetype="twodash") + geom_line(aes(y = percentdeaths, group = 1), color="darkgreen", linetype="twodash") + labs(x = "Time Period", y = "Change Percentage", caption="Source: Center for Disease Control (CDC) and U.S. Bureau of Economic Analysis (BEA)") + ggtitle("Monthly Change in Unemployment Rates in the U.S. 2020-21")
 ```
 
-SUMMARY It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+In this line chart as well, <span style="color: darkred;">dark red</span> represents <span style="color: darkred;">**unemployment rate**</span>,  <span style="color: darkblue;">dark blue</span> represents <span style="color: darkblue;"> percent contribution of **new cases** </span>, and finally,  <span style="color: darkgreen;">dark green</span> represents <span style="color: darkgreen;"> percent contribution of new **deaths**</span>. 
+
+From the timeline developed by this line chart we can infer three notable changes: first, the initial spike in unemployment from Feb ‘20 to Mar ‘20; second, the peak of unemployment change from Mar ‘20 to Apr ‘20; and finally, third, the period of constant fluctuation in changes to unemployment levels from May ‘20 to Mar ‘21. Looking at the monthly changes in unemployment helps us confirm our earlier findings: unemployment rates are directly correlated with new cases and deaths in the early stage of the pandemic, but are unstable in later stages. In Apr ‘20 almost every local and state government in the U.S. entered lockdowns, creating the initial spike in unemployment rates and the large monthly change from Mar ‘20 to Apr ‘20. In the period of May ‘20 through Mar ‘21, individual local and state governments have had varying responses to the pandemic in terms of lockdowns, mask mandates, and reopening guidelines, which makes it difficult to map a constant pattern in unemployment rates during this time period (which we might consider the later stages of the pandemic). In order to look in more detail at the economic impact of COVID-19 on specific regions with specific pandemic responses, let’s now take a look at GDP by state and industry. 
 
 &nbsp;
 
@@ -924,6 +934,27 @@ ri.gdp <- gdp.state.df[(gdp.state.df$State == "RhodeIsland"), ]
 ut.gdp <- gdp.state.df[(gdp.state.df$State == "Utah"), ]
 ```
 
+##### Data
+
+```{r, echo=FALSE}
+State_Name_Col <- c(ca.gdp$State, tx.gdp$State, ri.gdp$State, 
+                        ut.gdp$State)
+
+State_2020_Rank <- c(ca.gdp$`Rank-Y2020`,tx.gdp$`Rank-Y2020`,
+                        ri.gdp$`Rank-Y2020`,ut.gdp$`Rank-Y2020`)
+
+Year_Col <- c(ca.gdp$Year, tx.gdp$Year, ri.gdp$Year, ut.gdp$Year)
+
+GDP_Change_Col <- c(ca.gdp$Change, tx.gdp$Change, ri.gdp$Change,
+                          ut.gdp$Change)
+
+gdp.df.forviz <- data.frame(State_Name_Col, State_2020_Rank,
+                            Year_Col, GDP_Change_Col)
+gdp.df.forviz
+```
+
+&nbsp;
+
 ##### Explore Yearly Change in GDP by State 
 
 This is a set of four bar plots that display the percent change in GDP for California, Texas, Rhode Island, and Utah. Each graph includes data from one of the states mentioned above and displays the change in GDP from 2017 to 2020. Each bar in the chart has been filled with red or green to indicate whether there was an increase or decrease in GDP percentage. 
@@ -999,7 +1030,7 @@ leaflet(states) %>%
   addLegend(pal = colorPalette, values = state.df$X2019, opacity = 0.9, title = "GDP Percent Change in 2019", position="bottomleft")
 ```
 
-SUMMARY It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+This is an interactive map of the United States where each state is colored in a green gradient based on the GDP percent change. We can conclude that the majority of states had a GDP value between 2 and 5 percent. It is interesting to note that there are no states with negative percentages because this was before the pandemic happened.    
 
 &nbsp;
  
@@ -1026,17 +1057,20 @@ leaflet(states) %>%
   addLegend(pal = colorPalette, values = state.df$X2020, opacity = 0.9, title = "GDP Percent Change in 2020", position="bottomleft")
 ```
 
-SUMMARY It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+This is an interactive map that displays the GDP percentage change in the United States for 2020. We can see that the majority of states have values that are between -4 and 0. The only two states that fall within the lowest percent range are Rhode Island and Delaware. We can see that the states that previously had high percentages in 2019 had the lowest values in 2020. This could be because of a significant decrease in businesses across the country.
 
 &nbsp;
 
 ##### Visualize the GDP Change by State and Idustry
-```{r, echo=FALSE, fig.height=10, fig.width=17}
-# Filtering data so that only CA, TX, RI, and UT are included
+
+```{r include=FALSE}
 fltr_industry <- gdp.industry.df %>% 
   filter(Name == "California " | Name == "Texas"| Name == "Utah "| Name == "Rhode Island ") %>% 
   filter(Industry == "Health" | Industry == "Arts" | Industry == "Food" | Industry == "Technical" | Industry == "Real_Estate")
+```
 
+```{r, echo=FALSE, fig.height=10, fig.width=17}
+# Filtering data so that only CA, TX, RI, and UT are included
 industry_plot <- ggplot(data = fltr_industry, aes(x = Name, y = Percent_Change))+
   geom_bar(stat="identity", fill = "skyblue2")+
   facet_wrap(~Industry, nrow=1)+
@@ -1044,7 +1078,12 @@ industry_plot <- ggplot(data = fltr_industry, aes(x = Name, y = Percent_Change))
 industry_plot
 ```
 
-SUMMARY It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+##### Data
+```{r, echo=FALSE}
+fltr_industry
+```
+
+This bar plot has been faceted to show the GDP percent change by each industry. The industries that had the lowest values were arts and food. The pandemic caused a lot of businesses to shut down and the arts industry was hit the hardest. It was interesting that California did not have a lower value because the majority of media/content is created in that state. The food industry was also significantly hit because many restaurants have closed or they have reduced their customer limits. It is interesting that Texas had a lower percent change because it is a largely population state. This could be attributed to the lower coronavirus restrictions resulting in less restaurants being closed. We can also observe that the real estate industry was doing significantly better than the other industries. Utah had the highest value so this means that a lot of people were buying properties in Utah when compared to the rest of the states. The technical industry was also interesting because California and Utah were the only states with an increase in value. It is surprising that the percentage change in GDP is very low because the technology hub of the country is located in California. During the pandemic, the major technology companies made impressive profits, so it is surprising as to why it is not reflected in this bar chart. 
 
 &nbsp;
 
@@ -1179,7 +1218,7 @@ leaflet(states) %>%
   addLegend(pal = colorPalette, values = state.df$X2019, opacity = 0.9, title = "GDP Percent Change in 2019", position="bottomleft")
 ```
 
-##### Visualize the GDP Change for each state by Idustry
+##### Visualize the GDP Change for each state by Industry
 ```{r, eval=FALSE}
 # Filtering data so that only CA, TX, RI, and UT are included
 fltr_industry <- gdp.industry.df %>% 
@@ -1197,6 +1236,14 @@ industry_plot
 
 ### Part 5: Summary of Findings
 ***
+
+***GDP by State*** We were able to conclude that all states had a decline in their GDP during 2020. However, there were significant differences between the four states that we chose to examine. We found that Rhode Island had the largest GDP decline of -8% whereas Utah had a very minor difference of -1.7%. When we compared the heavily populated states, we found that California had a -2.3% decrease and Texas had a -4.5% decrease. It was surprising to see that there was such a low decrease in GDP for Utah in comparison to the other states, however, Utah was one of the only states in the U.S. which did not enforce a statewide lockdown. As we briefly studied earlier, in the resource published by the New York Times: [“See Which States and Cities Have Told Residents to Stay at Home”](https://www.nytimes.com/interactive/2020/us/coronavirus-stay-at-home-order.html) only three counties in the state issued stay at home orders. Of those counties, Summit County is a popular tourist destination and Salt Lake City houses 1.2 million of Utah’s 3.2 million residents. We can assume that most businesses and services were able to remain open throughout the pandemic in Utah, with the exception of tourist locations and their largest city, which is why they had the smallest decrease in GDP. California issued a stay at home order on Mar 19th whereas Texas waited until Apr 2nd, which might have caused the difference of almost a double in GDP declines. In terms of industries impacted by COVID-19, we were thoroughly surprised that real estate had soared during the pandemic in all states. All states saw an increase in arts and food, with only Utah seeing an increase in health services. We also noticed that California experienced an increase in the tech sector, which is most likely brought forth by Silicon Valley; california also experienced an increase in real estate, which might be due to tech workers looking to work from home full time and hence, looking for more spacious homes. 
+
+***GDP Nationally*** When we analyzed the GDP changes for the United States, we were able to infer that state which experienced high amounts of growth in 2019 experienced high amounts of GDP loss in 2020. This may be due to construction projects and/or business and services which were pioneered in 2019 or booming in 2019 coming to a sharp halt in 2020 with unknown plans for reopening. 
+
+***Unemployment Rate Timeline*** Unemployment Rate has been directly impacted by the COVID-19 pandemic, however, by creating line charts to help us visualize the timeline of unemployment rates, new cases, and new deaths, we were able to see a stark difference the early half of 2020 and the mid/latter of 2020 and early parts of 2021. In the beginning of the pandemic, most local and state governments had strong responses which enforced lockdowns and closures of businesses that were at high risk for spreading the disease (salons, preschools, restaurants, and more). In this time period the unemployment rate and monthly change in the first month of the pandemic (Mar-Apr ‘20) skyrocketed. As cases and deaths rose, more businesses shut down and more individuals were laid off (Airbnb, Tripadvisor layoffs). There was a compounding shift, however, towards the beginning of the summer of 2020 where unemployment rates began to consistently decrease regardless of cases and deaths increasing or decreasing. This may be due to businesses reopening under new CDC safety guidelines such as outdoor dining, plexiglass separations, the rise in demand for jobs such as delivery persons and other essential services. As we learned more about how to keep ourselves safe, more individuals were able to return to work or find new work, which decreases unemployment rates. In Oct ‘20 to Jan ‘21, the unemployment rate continues to cruise downward whereas cases and deaths reach an all time high. This may be due to state and local governments reopening too soon, providing individuals with unemployment again but with a higher risk of being infected with the virus (as cases and death rates were climbing during this period. 
+
+***Conclusion*** Overall, this was an extremely interesting data science project to work on. We learned a tremendous amount about how to organize data into usable formats, especially how to work with different types of data such as time data, categorical reports, and connecting visualizations to reasons behind the trend lines. We hope our findings can help inform how the U.S. economy was impacted by COVID-19 specifically in terms of unemployment and GDP at a state and national level. 
 
 &nbsp; 
 
@@ -1228,6 +1275,10 @@ industry_plot
 
 We have created a [**GitHub Repository**](https://github.com/dishsrivastava/economic-impact-of-covid19) with our entire codebase and data sets for future reference.
 
-_Please note_: a few of our graphs may get cut off once we knit the Rmd file due to spacing limits, however, we have saved PNG images of our graphs and added them to the 'Graph-Images' folder in our GitHub Repository so you can see the entire image! 
+_Please note_: we have also saved PNG images of our graphs and added them to the 'Graph-Images' folder in our GitHub Repository! 
 
-$nbsp;
+&nbsp;
+
+&nbsp;
+
+&nbsp;
