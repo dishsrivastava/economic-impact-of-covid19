@@ -21,13 +21,13 @@ editor_options:
 
 Our project goal is to examine and understand the impact of COVID-19 on integral aspects of the U.S. economy such as GDP and Unemployment Rates; we chose these parameters as they are often used by economists to measure the current state of an economy. 
 
-We have first gathered COVID-19 health data recorded daily by the U.S. Center for Disease Control to to understand which months of the pandemic faced the highest number of new cases and deaths. We utilized R to wrangle this data into monthly, national data and created bar plots to help us visualize the peaks and troughs in the pandemic timeline beginning with Jan ‘20 through Mar ‘21. 
+We have first gathered COVID-19 health data recorded daily by the U.S. Center for Disease Control to understand which months of the pandemic faced the highest number of new cases and deaths. We utilized R to wrangle this data into monthly, national data and created bar plots to help us visualize the peaks and troughs in the pandemic timeline beginning with Jan ‘20 through Mar ‘21. 
 
 To study unemployment rates, we gathered Labor Force Statistics from the Current Population Survey Dataset from the U.S. Bureau of Labor Statistics. This dataset helped us understand the shifts in unemployment rates and the 1-monthly change in rates from Jan ‘20 to Mar ‘21. We mapped a timeline of the increase/decrease in cases and deaths along with the change in unemployment rates in order to infer a correlation. In creating these line charts, we calculated new cases and deaths as a proportional of the total (from Jan ‘20 to Mar ‘21) in order to place all three variables (unemployment rates, new cases, and deaths) on one axis. 
 
-In order to further understand the economic impacts in specific regions in the U.S., we have focused our GDP analysis on four states with contrasting population sizes and responses to the pandemic. We specifically examined California (strong response to the pandemic, large population size), Texas (relaxed response to the pandemic, large population size), Rhode Island (strong response to the pandemic, small population size), and Utah (relaxed response to the pandemic, small population size). We also explored the GDP changes between various industries such as art, health, technical professions, real estate, and food to better understand which contributors to state GDP were impacted the most. In our analysis of GDP, we created an interactive map with data from 2019 and 2020 in order to compare the changes in GDP from before the pandemic began. We additionally created barplots that displayed the change in GDP from 2017 to 2020 for the four chosen states.
+In order to further understand economic impacts in specific regions of the U.S., we have focused our GDP analysis on four states with contrasting population sizes and responses to the pandemic. We specifically examined California (strong response to the pandemic, large population size), Texas (relaxed response to the pandemic, large population size), Rhode Island (strong response to the pandemic, small population size), and Utah (relaxed response to the pandemic, small population size). We also explored the GDP changes between various industries such as art, health, technical professions, real estate, and food to better understand which contributors to state GDP were impacted the most. In our analysis of GDP, we created an interactive map with data from 2019 and 2020 in order to compare pre and post pandemic GDP. We additionally created barplots that displayed the change in GDP from 2017 to 2020 for our four chosen states.
 
-It has been saddening to study this data, quantifying the rise in cases and deaths and amount of individuals who lost their employment or seeing the downward slope of GDP, however, we hope our findings will help inform how government responses to the pandemic impacted local and state economies and the health of residents in the economy.
+It has been saddening to study this data, quantifying the rise in cases and deaths and amount of individuals who lost their employment or seeing the downward slope of GDP, however, we hope our findings will help inform how government responses to the pandemic impacted local and state economies and the health of residents in their respective economy.
 
 #### `#Economy` Visualization
 
@@ -123,8 +123,8 @@ variable         | description
 `U.S. COVID-19 Deaths` | Number of deaths from COVID-19 recorded each day in each state; this data has been wrangled into monthly national data from January 2020 to March 2021. 
 `U.S. Unemployment Rate per Month` | National recorded unemployment rates on a monthly basis from January 2020 to March 2021. 
 `U.S. GDP Percent Change per Year` | National monthly change in unemployment rates on a monthly basis from January 2020 to March 2021. 
-`Industry` | Arts, Health, Food, Eeal Estate, and Technical. 
-`States` | California, Texas, Utah, and Rhode Island. 
+`Industry` | Arts, Health, Food, Real Estate, and Technical. 
+`States` | California, Texas, Rhode Island, and Utah. 
 
 &nbsp;
 
@@ -382,7 +382,7 @@ mar21.deaths <- sum(mar21.covid.df$New_Death)
 
 ##### Data 
 
-Let's take a look at the total counts of new COVID-19 cases and deaths recorded each month in the U.S. This data has been reported by the U.S. Center for Disease Control in their data set: ["United States COVID-19 Cases and Deaths by State over TimeCase Surveillance"](https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36). We have cleaned and organized daily COVID-19 reported data by state into national data by month.  
+Let's take a look at the total counts of new COVID-19 cases and deaths recorded each month in the U.S. This data has been reported by the U.S. Center for Disease Control in their data set: ["United States COVID-19 Cases and Deaths by State over TimeCase Surveillance"](https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36). We have cleaned and transformed daily COVID-19 reported data by state into national data organized by month.  
 
 ```{r echo=FALSE}
 # Creating a variable for months  
@@ -433,7 +433,7 @@ y<-as.matrix(newcases)
 text(b.cases, y+300000,labels=num.cases.mils)
 ```
 
-This bar plot helps us visually time line the spread COVID-19. The red bars denote the top six months which experienced the highest number of recorded cases, often referred to as peaks or "second, third" waves. We can infer that July '20, Oct '20, Nov '20, Dec '20, Jan '21, and Feb '21 had the highest number of recorded cases; from this data, we might predict that unemployment rates would be higher during these months and GDP would be lower. 
+This bar plot helps us visualize a timeline for the spread of COVID-19. The red bars denote the top six months which experienced the highest number of recorded cases, often referred to as peaks or "second, third" waves. We can infer that July '20, Oct '20, Nov '20, Dec '20, Jan '21, and Feb '21 had the highest number of recorded cases; from this data, we might predict that unemployment rates would be higher during these months and GDP would be lower. 
 
 &nbsp;
 
@@ -1063,10 +1063,15 @@ This is an interactive map that displays the GDP percentage change in the United
 
 ##### Visualize the GDP Change by State and Idustry
 
+##### Data
 ```{r include=FALSE}
 fltr_industry <- gdp.industry.df %>% 
   filter(Name == "California " | Name == "Texas"| Name == "Utah "| Name == "Rhode Island ") %>% 
   filter(Industry == "Health" | Industry == "Arts" | Industry == "Food" | Industry == "Technical" | Industry == "Real_Estate")
+```
+
+```{r, echo=FALSE}
+fltr_industry
 ```
 
 ```{r, echo=FALSE, fig.height=10, fig.width=17}
@@ -1076,11 +1081,6 @@ industry_plot <- ggplot(data = fltr_industry, aes(x = Name, y = Percent_Change))
   facet_wrap(~Industry, nrow=1)+
   ggtitle("Percent Change in GDP across Industries")
 industry_plot
-```
-
-##### Data
-```{r, echo=FALSE}
-fltr_industry
 ```
 
 This bar plot has been faceted to show the GDP percent change by each industry. The industries that had the lowest values were arts and food. The pandemic caused a lot of businesses to shut down and the arts industry was hit the hardest. It was interesting that California did not have a lower value because the majority of media/content is created in that state. The food industry was also significantly hit because many restaurants have closed or they have reduced their customer limits. It is interesting that Texas had a lower percent change because it is a largely population state. This could be attributed to the lower coronavirus restrictions resulting in less restaurants being closed. We can also observe that the real estate industry was doing significantly better than the other industries. Utah had the highest value so this means that a lot of people were buying properties in Utah when compared to the rest of the states. The technical industry was also interesting because California and Utah were the only states with an increase in value. It is surprising that the percentage change in GDP is very low because the technology hub of the country is located in California. During the pandemic, the major technology companies made impressive profits, so it is surprising as to why it is not reflected in this bar chart. 
